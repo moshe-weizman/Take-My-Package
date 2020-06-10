@@ -19,6 +19,10 @@ public class Parcel {
       ENVELOPE, SMALL_PARCEL, BIG_PARCEL
    }
 
+   public enum Status{
+      Registered, CollectionOffered, OnTheWay, Delivered
+   }
+
    /**
     * Optional weight of the package
     */
@@ -26,6 +30,8 @@ public class Parcel {
       UP_TO_500G, UP_TO_1KG, UP_TO_5KG, UP_TO_20KG
    }
 
+
+   private Status _status;
    private ParcelType _type;
    private boolean _fragile;
    private ParcelWeight _weight;
@@ -54,7 +60,7 @@ public class Parcel {
     */
    public Parcel(String recipientPhone, String recipientFirstName, String recipientLastName, String recipientAddress,
                  ParcelType type, boolean fragile, ParcelWeight weight, String parcelID,
-                 String locationOfStorage) {
+                 String locationOfStorage, Status status) {
       _type = type;
       _fragile = fragile;
       _weight = weight;
@@ -64,6 +70,7 @@ public class Parcel {
       _recipientFirstName = recipientFirstName;
       _recipientLastName = recipientLastName;
       _recipientAddress = recipientAddress;
+      _status=status;
    }
 //------------------------------Getters------------------------------------------
 
@@ -102,7 +109,14 @@ public class Parcel {
    public String getLocationOfStorage() {
       return _locationOfStorage;
    }
+   public Status get_status() {
+   return _status;
+}
 //-------------------------------Setters--------------------------------------
+
+   public void set_status(Status _status) {
+      this._status = _status;
+   }
 
    public void setRecipientAddress(String recipientAddress) {
       _recipientAddress = recipientAddress;
