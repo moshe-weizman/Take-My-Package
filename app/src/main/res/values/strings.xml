@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">Take My Package</string>
+    <string name="enter_address">Enter Address</string>
+    <string name="enter_phone">Enter Phone</string>
+    <string name="to_join_us_fill_details">To join us fill details:</string>
+    <string name="first_name">First Name</string>
+    <string name="last_name">Last Name</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="already_have_an_account_log_in">Already have an account? Log in</string>
+    <string name="enter_email">Enter Email</string>
+    <string name="log_in">Log In</string>
 </resources>
