@@ -61,7 +61,7 @@ public class Member {
         this.address = address;
     }
 
-   // @Exclude
+    @Exclude
     public String getPhone() {
         return phone;
     }
