@@ -11,6 +11,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".UI.Login.SignUp.SignUpActivity"></activity>
         <activity android:name=".UI.Login.LoginActivity.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -20,10 +21,10 @@
         </activity>
         <activity
             android:name=".UI.MainActivity.MainActivity"
-            android:parentActivityName=".UI.Login.VerifyMobileActivity.VerifyMobileActivity"></activity>
+            android:parentActivityName=".UI.Login.VerifyMobileActivity.VerifyMobileActivity" />
         <activity
             android:name=".UI.Login.VerifyMobileActivity.VerifyMobileActivity"
-            android:parentActivityName=".UI.Login.LoginActivity.LoginActivity"></activity>
+            android:parentActivityName=".UI.Login.LoginActivity.LoginActivity" />
     </application>
 
 </manifest>

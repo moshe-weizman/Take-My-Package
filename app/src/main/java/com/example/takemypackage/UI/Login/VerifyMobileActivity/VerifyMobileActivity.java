@@ -34,9 +34,7 @@ public class VerifyMobileActivity  extends AppCompatActivity {
         buttonEnter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(editTextPIN.getText().toString().equals(myIntent.getIntExtra(LoginActivity.EXTRA_PIN, 0)));
-                Intent intent = new Intent(VerifyMobileActivity.this, MainActivity.class);
-                startActivity(intent);
+
 
             }
         });

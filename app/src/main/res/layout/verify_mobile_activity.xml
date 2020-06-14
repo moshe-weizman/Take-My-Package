@@ -11,7 +11,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:hint="PIN"
+        android:hint="password"
         android:inputType="numberPassword"
         android:maxLength="4"
         app:layout_constraintBottom_toBottomOf="parent"

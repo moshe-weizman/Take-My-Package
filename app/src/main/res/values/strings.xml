@@ -9,4 +9,7 @@
     <string name="already_have_an_account_log_in">Already have an account? Log in</string>
     <string name="enter_email">Enter Email</string>
     <string name="log_in">Log In</string>
+    <string name="password">password</string>
+    <string name="to_log_in_with_your_email_press">To log in with your email press</string>
+    <string name="here">here</string>
 </resources>
