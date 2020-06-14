@@ -5,9 +5,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Process;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.example.takemypackage.Data.MembersFirebaseManager;
@@ -22,6 +24,7 @@ import com.google.android.gms.tasks.Task;
 public class SignUpActivity extends AppCompatActivity {
     private EditText editTextPIN, editTextPhone, editTextAddress, editTextEmail, editTextFirstName, editTextLastName;
     private Button buttonSignUp;
+    private ProgressBar progressBarAddMember;
     Member member;
 
     @Override
@@ -37,28 +40,29 @@ public class SignUpActivity extends AppCompatActivity {
                 member = new Member(editTextFirstName.getText().toString(), editTextLastName.getText().toString(),
                         editTextAddress.getText().toString(), editTextPhone.getText().toString(),
                         editTextEmail.getText().toString(), editTextPIN.getText().toString());
-                // try{
-                MembersFirebaseManager.addMemberToFirebase(member, new MembersFirebaseManager.Action<String>() {
+                try {
+                    MembersFirebaseManager.addMemberToFirebase(member, new MembersFirebaseManager.Action<String>() {
 
-                    @Override
-                    public void onSuccess(String obj) {
-                        Toast.makeText(getBaseContext(), "welcome " + obj, Toast.LENGTH_LONG).show();
-                    }
+                        @Override
+                        public void onSuccess(String obj) {
+                            Toast.makeText(getBaseContext(), "welcome " + obj, Toast.LENGTH_LONG).show();
+                        }
 
-                    @Override
-                    public void onFailure(Exception exception) {
-                        Toast.makeText(getBaseContext(), "Error \n", Toast.LENGTH_LONG).show();
-                    }
+                        @Override
+                        public void onFailure(Exception exception) {
+                            Toast.makeText(getBaseContext(), "Error \n", Toast.LENGTH_LONG).show();
+                        }
 
-                    @Override
-                    public void onProgress(String status, double percent) {
+                        @Override
+                        public void onProgress(String status, double percent) {
+                            if (percent != 100)
+                                progressBarAddMember.setProgress((int) percent);
+                        }
+                    });
 
-                    }
-                });
-
-//                  } catch {
-//                    Toast.makeText(getBaseContext(), "Error \n", Toast.LENGTH_LONG).show();
-//                }
+                } catch (Exception e) {
+                    Toast.makeText(getBaseContext(), "Error \n", Toast.LENGTH_LONG).show();
+                }
                 Intent intent = new Intent(SignUpActivity.this, MainActivity.class);
                 startActivity(intent);
             }
@@ -69,6 +73,7 @@ public class SignUpActivity extends AppCompatActivity {
     }
 
     private void init() {
+        progressBarAddMember = findViewById(R.id.progressBarAddMember);
         editTextPIN = findViewById(R.id.editTextPIN);
         editTextPhone = findViewById(R.id.editTextPhone);
         editTextAddress = findViewById(R.id.editTextAddress);

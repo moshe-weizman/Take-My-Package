@@ -92,6 +92,12 @@
         android:text="@string/sign_up"
         tools:layout_editor_absoluteX="10dp"
         tools:layout_editor_absoluteY="266dp" />
+
+        <ProgressBar
+            android:id="@+id/progressBarAddMember"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
