@@ -7,11 +7,9 @@ import com.google.firebase.database.Exclude;
 public class Member {
     private String fName;
     private String lName;
-    //private String id;
     private String address;
     private String email;
     private String phone;
-
     private String password;
 
     //---------------------------------------------------------------------------------------------------------------------
