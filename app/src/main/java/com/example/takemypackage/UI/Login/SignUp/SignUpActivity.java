@@ -73,7 +73,7 @@ public class SignUpActivity extends AppCompatActivity {
                 @Override
                 public void onProgress(String status, double percent) {
                     if (percent != 100)
-                        progressBarAddMember.setProgress((int) percent);
+                        progressBarAddMember.setProgress((int) percent*100);
                 }
             });
 

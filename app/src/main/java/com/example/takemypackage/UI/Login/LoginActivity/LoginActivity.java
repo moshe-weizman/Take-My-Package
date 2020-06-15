@@ -38,9 +38,6 @@ public class LoginActivity extends AppCompatActivity {
     private EditText editTextPhoneLogIn, editTextPIN, editTextEmail;
     private Button btnLogIn;
     private String password;
-    //    Random rand = new Random();
-//    public static final String EXTRA_PIN = "com.example.takemypackage.login.pin";
-//    int randPin = rand.nextInt(9999 - 1000) + 1000;
     Member member;
     Member memberLogin;
     String emailUser;
