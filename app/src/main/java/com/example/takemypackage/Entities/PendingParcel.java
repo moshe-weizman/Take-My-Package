@@ -27,10 +27,9 @@ public class PendingParcel {
       return parcelDetails;
    }
 
-   public void authorize(DeliveryPerson authorized){
-
-      int index = optionalDeliveries.indexOf(authorized);
-      authorized.setAuthorized(true);
-      optionalDeliveries.set(index, authorized);
+   public void authorize(DeliveryPerson deliveryPerson, boolean authorized){
+      int index = optionalDeliveries.indexOf(deliveryPerson);
+      deliveryPerson.setAuthorized(authorized);
+      optionalDeliveries.set(index, deliveryPerson);
    }
 }
