@@ -22,7 +22,7 @@ public class PacelsFirebaseManager {
 
         void onFailure(Exception exception);
     }
-
+//hn
     /**
      * Static reference to the parcels database
      */
