@@ -5,17 +5,32 @@ import java.util.Date;
 import java.util.Dictionary;
 import java.util.List;
 
-public class PendingParcel extends Parcel {
-   private class Deliverer{
-      private String name;
-      private String phone;
-      private boolean isAuthorized;
-   }
-   private List<Deliverer> optionalDeliverers;
+public class PendingParcel {
 
-   public PendingParcel(String recipientPhone, String recipientFirstName, String recipientLastName,
-                        String recipientAddress, ParcelType type, boolean fragile, ParcelWeight weight,
-                        String parcelID, String locationOfStorage, Status status) {
-      super(recipientPhone, recipientFirstName, recipientLastName, recipientAddress, type, fragile, weight, parcelID, locationOfStorage, status);
+   private List<DeliveryPerson> optionalDeliveries;
+   private List<DeliveryPerson> authorizedDeliveries;
+   private Parcel parcelDetails;
+
+   public PendingParcel(Parcel parcelDetails) {
+      this.parcelDetails = parcelDetails;
+   }
+
+   public List<DeliveryPerson> getOptionalDeliveries() {
+      return optionalDeliveries;
+   }
+
+   public List<DeliveryPerson> getAuthorizedDeliveries() {
+      return authorizedDeliveries;
+   }
+
+   public Parcel getParcelDetails() {
+      return parcelDetails;
+   }
+
+   public void authorize(DeliveryPerson authorized){
+
+      int index = optionalDeliveries.indexOf(authorized);
+      authorized.setAuthorized(true);
+      optionalDeliveries.set(index, authorized);
    }
 }

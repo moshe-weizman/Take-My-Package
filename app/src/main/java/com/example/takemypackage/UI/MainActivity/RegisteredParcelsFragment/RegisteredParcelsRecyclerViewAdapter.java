@@ -14,7 +14,7 @@ import com.example.takemypackage.R;
 import java.util.List;
 
 public class RegisteredParcelsRecyclerViewAdapter extends RecyclerView.Adapter<RegisteredParcelsRecyclerViewAdapter.RegisteredParcelsViewHolder> {
-   private Parcel[] _registeredParcels;
+   private List<Parcel> _registeredParcels;
    public static class RegisteredParcelsViewHolder extends RecyclerView.ViewHolder {
       // each data item is just a string in this case
       public TextView addressTextView;
@@ -31,7 +31,7 @@ public class RegisteredParcelsRecyclerViewAdapter extends RecyclerView.Adapter<R
       }
    }
 
-   public RegisteredParcelsRecyclerViewAdapter(Parcel[] registeredParcels) {
+   public RegisteredParcelsRecyclerViewAdapter(List<Parcel> registeredParcels) {
       _registeredParcels = registeredParcels;
    }
 
@@ -44,14 +44,14 @@ public class RegisteredParcelsRecyclerViewAdapter extends RecyclerView.Adapter<R
 
    @Override
    public void onBindViewHolder(@NonNull RegisteredParcelsViewHolder holder, int position) {
-      holder.addressTextView.setText(_registeredParcels[position].getRecipientAddress());
-      holder.weightTextView.setText(_registeredParcels[position].getWeight().toString());
+      holder.addressTextView.setText(_registeredParcels.get(position).getRecipientAddress());
+      holder.weightTextView.setText(_registeredParcels.get(position).getWeight().toString());
       //to do: inserting distance from me and storage time
    }
 
    @Override
    public int getItemCount() {
-      return _registeredParcels.length;
+      return _registeredParcels.size();
    }
 
 

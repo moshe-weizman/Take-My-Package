@@ -1,7 +1,5 @@
 package com.example.takemypackage.UI.MainActivity.RegisteredParcelsFragment;
 
-import android.app.Activity;
-import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,6 +14,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.takemypackage.Entities.Parcel;
 import com.example.takemypackage.R;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class RegisteredParcelsFragment extends Fragment {
    private RecyclerView _recyclerView;
 
@@ -28,10 +29,16 @@ public class RegisteredParcelsFragment extends Fragment {
       RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this.getContext());
       recyclerView.setLayoutManager(layoutManager);
 
-      Parcel[] registeredParcels = new Parcel[5];
+      List<Parcel> registeredParcels = new ArrayList<Parcel>();
       RecyclerView.Adapter adapter = new RegisteredParcelsRecyclerViewAdapter(registeredParcels);
       recyclerView.setAdapter(adapter);
 
       return view;
+   }
+
+   @Override
+   public void onCreate(@Nullable Bundle savedInstanceState) {
+      super.onCreate(savedInstanceState);
+
    }
 }
