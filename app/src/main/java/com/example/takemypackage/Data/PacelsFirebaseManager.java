@@ -9,6 +9,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.util.List;
 
 public class PacelsFirebaseManager {
+
     public interface Action<T> {
         void onSuccess(T obj);
 
