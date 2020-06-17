@@ -5,11 +5,11 @@ import com.example.takemypackage.Entities.PendingParcel;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 
 import java.util.List;
 
-public class PacelsFirebaseManager {
-
+public class PendingParcelsFirebaseManager {
     public interface Action<T> {
         void onSuccess(T obj);
 
@@ -23,7 +23,7 @@ public class PacelsFirebaseManager {
 
         void onFailure(Exception exception);
     }
-//hn
+
     /**
      * Static reference to the parcels database
      */
@@ -42,6 +42,30 @@ public class PacelsFirebaseManager {
     }
 
     public static void stopNotifyToParcelList() {
+
+    }
+//-----------------------------------------CRUD Functions----------------------------------------------------------------------------------
+    public List<Parcel> getMembersPendingParcels(String recipientPhone){
+        return null;
+    }
+
+    public List<Parcel> getPendingParcelByQuery(Query query){
+        return null;
+    }
+
+    public List<Parcel> getAllPendingParcels(){
+        return null;
+    }
+
+    public void addPendingParcel(PendingParcel pendingParcel){
+
+    }
+
+    public void updatePendingParcel(PendingParcel pendingParcel){
+
+    }
+
+    public void deletePendingParcel(PendingParcel pendingParcel){
 
     }
 
