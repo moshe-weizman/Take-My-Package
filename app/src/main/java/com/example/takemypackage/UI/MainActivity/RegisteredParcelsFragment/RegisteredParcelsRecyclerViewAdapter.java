@@ -15,6 +15,7 @@ import java.util.List;
 
 public class RegisteredParcelsRecyclerViewAdapter extends RecyclerView.Adapter<RegisteredParcelsRecyclerViewAdapter.RegisteredParcelsViewHolder> {
    private List<Parcel> _registeredParcels;
+
    public static class RegisteredParcelsViewHolder extends RecyclerView.ViewHolder {
       // each data item is just a string in this case
       public TextView addressTextView;
@@ -24,10 +25,10 @@ public class RegisteredParcelsRecyclerViewAdapter extends RecyclerView.Adapter<R
 
       public RegisteredParcelsViewHolder(@NonNull View itemView) {
          super(itemView);
-         addressTextView = (TextView)itemView.findViewById(R.id.addressTextView);
-         weightTextView = (TextView)itemView.findViewById(R.id.weightTextView);
-         distanceFromMeTextView = (TextView)itemView.findViewById(R.id.distanceFromMeTextView);
-         storageTimeTextView = (TextView)itemView.findViewById(R.id.storageTimeTextView);
+         addressTextView = (TextView) itemView.findViewById(R.id.addressTextView);
+         weightTextView = (TextView) itemView.findViewById(R.id.weightTextView);
+         distanceFromMeTextView = (TextView) itemView.findViewById(R.id.distanceFromMeTextView);
+         storageTimeTextView = (TextView) itemView.findViewById(R.id.storageTimeTextView);
       }
    }
 
@@ -38,8 +39,8 @@ public class RegisteredParcelsRecyclerViewAdapter extends RecyclerView.Adapter<R
    @NonNull
    @Override
    public RegisteredParcelsViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-     View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.listed_parcel_itemview, parent, false);
-     return new RegisteredParcelsViewHolder(view);
+      View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.listed_parcel_itemview, parent, false);
+      return new RegisteredParcelsViewHolder(view);
    }
 
    @Override
