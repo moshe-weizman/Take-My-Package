@@ -16,7 +16,6 @@ import com.example.takemypackage.Data.MembersFirebaseManager;
 import com.example.takemypackage.Entities.Member;
 import com.example.takemypackage.R;
 import com.example.takemypackage.UI.Login.LoginActivity.LoginActivity;
-import com.example.takemypackage.UI.Login.VerifyMobileActivity.VerifyMobileActivity;
 import com.example.takemypackage.UI.MainActivity.MainActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
