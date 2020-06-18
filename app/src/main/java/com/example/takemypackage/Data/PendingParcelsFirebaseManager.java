@@ -50,7 +50,6 @@ public class PendingParcelsFirebaseManager {
                 return;
             }
             pendingParcelList.clear();
-            //moshe
             parcelRefChildEventListener = new ChildEventListener() {
                 @Override
                 public void onChildAdded(DataSnapshot dataSnapshot, String s) {

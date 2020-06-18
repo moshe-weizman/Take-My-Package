@@ -122,7 +122,7 @@ public class Parcel {
     public void setRecipientFirstName(String recipientFirstName) {
         this.recipientFirstName = recipientFirstName;
     }
-
+//moshe
     public void setRecipientLastName(String recipientLastName) {
         this.recipientLastName = recipientLastName;
     }
