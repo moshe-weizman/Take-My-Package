@@ -27,6 +27,19 @@ public class PendingParcel {
       return parcelDetails;
    }
 
+
+   public void setOptionalDeliveries(List<DeliveryPerson> optionalDeliveries) {
+      this.optionalDeliveries = optionalDeliveries;
+   }
+
+   public void setAuthorizedDeliveries(List<DeliveryPerson> authorizedDeliveries) {
+      this.authorizedDeliveries = authorizedDeliveries;
+   }
+
+   public void setParcelDetails(Parcel parcelDetails) {
+      this.parcelDetails = parcelDetails;
+   }
+
    public void authorize(DeliveryPerson deliveryPerson, boolean authorized){
       int index = optionalDeliveries.indexOf(deliveryPerson);
       deliveryPerson.setAuthorized(authorized);
