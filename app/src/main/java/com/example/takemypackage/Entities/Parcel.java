@@ -32,9 +32,9 @@ public class Parcel {
     }
 
 
-    private ParcelType type;
+    private Parcel.ParcelType type;
     private boolean fragile;
-    private ParcelWeight weight;
+    private Parcel.ParcelWeight weight;
     private String locationOfStorage;
     private String parcelID;
 
@@ -59,7 +59,7 @@ public class Parcel {
      * @param locationOfStorage  the location the parcel is stored
      */
     public Parcel(String recipientPhone, String recipientFirstName, String recipientLastName, String recipientAddress,
-                  ParcelType type, boolean fragile, ParcelWeight weight, String parcelID,
+                  Parcel.ParcelType type, boolean fragile, Parcel.ParcelWeight weight, String parcelID,
                   String locationOfStorage, Status status) {
         this.type = type;
         this.fragile = fragile;
@@ -85,7 +85,7 @@ public class Parcel {
         return recipientAddress;
     }
 
-    public ParcelType getType() {
+    public Parcel.ParcelType getType() {
         return type;
     }
 
@@ -93,7 +93,7 @@ public class Parcel {
         return fragile;
     }
 
-    public ParcelWeight getWeight() {
+    public Parcel.ParcelWeight getWeight() {
         return weight;
     }
 
@@ -127,7 +127,7 @@ public class Parcel {
         this.recipientLastName = recipientLastName;
     }
 
-    public void setType(ParcelType type) {
+    public void setType(Parcel.ParcelType type) {
         this.type = type;
     }
 
@@ -135,7 +135,7 @@ public class Parcel {
         this.fragile = fragile;
     }
 
-    public void setWeight(ParcelWeight weight) {
+    public void setWeight(Parcel.ParcelWeight weight) {
         this.weight = weight;
     }
 
