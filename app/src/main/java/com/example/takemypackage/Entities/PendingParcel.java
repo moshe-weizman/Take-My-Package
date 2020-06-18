@@ -1,6 +1,7 @@
 package com.example.takemypackage.Entities;
 
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Dictionary;
 import java.util.List;
@@ -13,6 +14,8 @@ public class PendingParcel {
 
    public PendingParcel(Parcel parcelDetails) {
       this.parcelDetails = parcelDetails;
+      optionalDeliveries = new ArrayList<>();
+      authorizedDeliveries = new ArrayList<>();
    }
 
    public List<DeliveryPerson> getOptionalDeliveries() {

@@ -18,9 +18,9 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         FragmentManager fragmentManager = getSupportFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        friendsParcelsFragment = new FriendsParcelsFragment();
-        fragmentTransaction.add(R.id.fragmentContainer, friendsParcelsFragment);
-        fragmentTransaction.commit();
+        fragmentManager.beginTransaction().replace(R.id.fragmentContainer, new FriendsParcelsFragment(),"SOMETAG" ).commit();
+       // friendsParcelsFragment = new FriendsParcelsFragment();
+        //fragmentTransaction.add(R.id.fragmentContainer, friendsParcelsFragment);
+        //fragmentTransaction.commit();
     }
 }

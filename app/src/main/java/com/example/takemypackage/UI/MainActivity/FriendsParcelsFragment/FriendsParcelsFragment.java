@@ -17,6 +17,7 @@ import android.widget.Toast;
 import com.example.takemypackage.Entities.PendingParcel;
 import com.example.takemypackage.R;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -65,11 +66,7 @@ public class FriendsParcelsFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        if (getArguments() != null) {
-//            mParam1 = getArguments().getString(ARG_PARAM1);
-//            mParam2 = getArguments().getString(ARG_PARAM2);
-//        }
-
+        pendingParcels = new ArrayList<>();
     }
 
     @Override
@@ -102,10 +99,10 @@ public class FriendsParcelsFragment extends Fragment {
         return view;
     }
 
-    public void onDestroyView() {
-        super.onDestroyView();
-        PendingParcelsFirebaseManager.stopNotifyToStudentList();
-        super.onDestroy();
-    }
+//    public void onDestroyView() {
+//        super.onDestroyView();
+//        PendingParcelsFirebaseManager.stopNotifyToStudentList();
+//        super.onDestroy();
+//    }
 
 }

@@ -1,5 +1,8 @@
 package com.example.takemypackage.Data;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import com.example.takemypackage.Entities.Parcel;
 import com.example.takemypackage.Entities.PendingParcel;
 import com.google.firebase.database.ChildEventListener;
@@ -40,22 +43,22 @@ public class PendingParcelsFirebaseManager {
     public static ChildEventListener parcelRefChildEventListener;
 
 
-    public static void NotifyToParcelList(final List<PendingParcel> PendingParcelList, final NotifyDataChange<List<PendingParcel>> notifyDataChange) {
-        parcelRef.addChildEventListener(parcelRefChildEventListener);
+    public static void NotifyToParcelList(final List<PendingParcel> pendingParcelList, final NotifyDataChange<List<PendingParcel>> notifyDataChange) {
         if (notifyDataChange != null) {
             if (parcelRefChildEventListener != null) {
                 notifyDataChange.onFailure(new Exception("first unNotify student list"));
                 return;
             }
-            PendingParcelList.clear();
+            pendingParcelList.clear();
             parcelRefChildEventListener = new ChildEventListener() {
                 @Override
                 public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                    PendingParcel pendingParcel = dataSnapshot.getValue(PendingParcel.class);
-                    String id = dataSnapshot.getKey();
-                    //  pendingParcel.setId(Long.parseLong(id));
-                    PendingParcelList.add(pendingParcel);
-                    notifyDataChange.OnDataChanged(PendingParcelList);
+                    for (DataSnapshot child : dataSnapshot.getChildren()) {
+                        PendingParcel pendingParcel = new PendingParcel(child.getValue(Parcel.class));
+                        pendingParcelList.add(pendingParcel);
+                    }
+
+                    notifyDataChange.OnDataChanged(pendingParcelList);
                 }
 
                 @Override
@@ -64,13 +67,13 @@ public class PendingParcelsFirebaseManager {
                     String phone = dataSnapshot.getKey();
                     String parcelID = dataSnapshot.child(phone).getKey();
                     pendingParcel.getParcelDetails().set_parcelID(parcelID);
-                    for (int i = 0; i < PendingParcelList.size(); i++) {
-                        if (PendingParcelList.get(i).getParcelDetails().getParcelID().equals(parcelID)) {
-                            PendingParcelList.set(i, pendingParcel);
+                    for (int i = 0; i < pendingParcelList.size(); i++) {
+                        if (pendingParcelList.get(i).getParcelDetails().getParcelID().equals(parcelID)) {
+                            pendingParcelList.set(i, pendingParcel);
                             break;
                         }
                     }
-                    notifyDataChange.OnDataChanged(PendingParcelList);
+                    notifyDataChange.OnDataChanged(pendingParcelList);
                 }
 
                 @Override
@@ -79,13 +82,13 @@ public class PendingParcelsFirebaseManager {
                     String phone = dataSnapshot.getKey();
                     String parcelID = dataSnapshot.child(phone).getKey();
                     pendingParcel.getParcelDetails().set_parcelID(parcelID);
-                    for (int i = 0; i < PendingParcelList.size(); i++) {
-                        if (PendingParcelList.get(i).getParcelDetails().getParcelID().equals(parcelID)) {
-                            PendingParcelList.remove(i);
+                    for (int i = 0; i < pendingParcelList.size(); i++) {
+                        if (pendingParcelList.get(i).getParcelDetails().getParcelID().equals(parcelID)) {
+                            pendingParcelList.remove(i);
                             break;
                         }
                     }
-                    notifyDataChange.OnDataChanged(PendingParcelList);
+                    notifyDataChange.OnDataChanged(pendingParcelList);
                 }
 
                 @Override

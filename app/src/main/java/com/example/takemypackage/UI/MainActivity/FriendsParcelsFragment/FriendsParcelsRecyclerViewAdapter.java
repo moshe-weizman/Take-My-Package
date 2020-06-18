@@ -48,9 +48,9 @@ public class FriendsParcelsRecyclerViewAdapter extends RecyclerView.Adapter<Frie
 
         public FriendsParcelsViewHolder(@NonNull View itemView) {
             super(itemView);
-            textViewParcelId = (TextView) itemView.findViewById(R.id.addressTextView);
-            textViewRecipientAddress = (TextView) itemView.findViewById(R.id.weightTextView);
-            textViewLocationOfStorage = (TextView) itemView.findViewById(R.id.distanceFromMeTextView);
+            textViewParcelId = (TextView) itemView.findViewById(R.id.textViewParcelId);
+            textViewRecipientAddress = (TextView) itemView.findViewById(R.id.textViewRecipientAddress);
+            textViewLocationOfStorage = (TextView) itemView.findViewById(R.id.textViewLocationOfStorage);
         }
     }
 }
