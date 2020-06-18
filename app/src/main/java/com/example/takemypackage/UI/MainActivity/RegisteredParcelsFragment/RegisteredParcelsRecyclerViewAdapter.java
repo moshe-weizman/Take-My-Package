@@ -8,13 +8,13 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.takemypackage.Entities.Parcel;
+import com.example.takemypackage.Entities.PendingParcel;
 import com.example.takemypackage.R;
 
 import java.util.List;
 
 public class RegisteredParcelsRecyclerViewAdapter extends RecyclerView.Adapter<RegisteredParcelsRecyclerViewAdapter.RegisteredParcelsViewHolder> {
-   private List<Parcel> _registeredParcels;
+   private List<PendingParcel> _registeredParcels;
 
    public static class RegisteredParcelsViewHolder extends RecyclerView.ViewHolder {
       // each data item is just a string in this case
@@ -25,14 +25,14 @@ public class RegisteredParcelsRecyclerViewAdapter extends RecyclerView.Adapter<R
 
       public RegisteredParcelsViewHolder(@NonNull View itemView) {
          super(itemView);
-         addressTextView = (TextView) itemView.findViewById(R.id.addressTextView);
-         weightTextView = (TextView) itemView.findViewById(R.id.weightTextView);
-         distanceFromMeTextView = (TextView) itemView.findViewById(R.id.distanceFromMeTextView);
-         storageTimeTextView = (TextView) itemView.findViewById(R.id.storageTimeTextView);
+         addressTextView = (TextView) itemView.findViewById(R.id.serialNumTextView);
+         weightTextView = (TextView) itemView.findViewById(R.id.fregileTextView);
+         distanceFromMeTextView = (TextView) itemView.findViewById(R.id.parcelTypeTextView);
+         storageTimeTextView = (TextView) itemView.findViewById(R.id.parcelWeightTextView);
       }
    }
 
-   public RegisteredParcelsRecyclerViewAdapter(List<Parcel> registeredParcels) {
+   public RegisteredParcelsRecyclerViewAdapter(List<PendingParcel> registeredParcels) {
       _registeredParcels = registeredParcels;
    }
 
@@ -45,8 +45,8 @@ public class RegisteredParcelsRecyclerViewAdapter extends RecyclerView.Adapter<R
 
    @Override
    public void onBindViewHolder(@NonNull RegisteredParcelsViewHolder holder, int position) {
-      holder.addressTextView.setText(_registeredParcels.get(position).getRecipientAddress());
-      holder.weightTextView.setText(_registeredParcels.get(position).getWeight().toString());
+      holder.addressTextView.setText(_registeredParcels.get(position).getParcelDetails().getRecipientAddress());
+      holder.weightTextView.setText(_registeredParcels.get(position).getParcelDetails().getWeight().toString());
       //to do: inserting distance from me and storage time
    }
 

@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.takemypackage.Entities.Parcel;
+import com.example.takemypackage.Entities.PendingParcel;
 import com.example.takemypackage.R;
 
 import java.util.ArrayList;
@@ -29,7 +30,7 @@ public class RegisteredParcelsFragment extends Fragment {
       RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this.getContext());
       recyclerView.setLayoutManager(layoutManager);
 
-      List<Parcel> registeredParcels = new ArrayList<Parcel>();
+      List<PendingParcel> registeredParcels = new ArrayList<PendingParcel>();
       RecyclerView.Adapter adapter = new RegisteredParcelsRecyclerViewAdapter(registeredParcels);
       recyclerView.setAdapter(adapter);
 
