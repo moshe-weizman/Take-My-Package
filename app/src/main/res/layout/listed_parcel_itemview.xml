@@ -51,6 +51,12 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="@string/who_can_take_it" />
+
+            <Spinner
+                android:id="@+id/deliveryOffersListSpinner"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
         </LinearLayout>
 
     </LinearLayout>
