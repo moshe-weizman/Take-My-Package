@@ -61,7 +61,11 @@ public class LoginActivity extends AppCompatActivity {
                     query.addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                            memberLogin = dataSnapshot.child(editTextPhoneLogIn.getText().toString()).getValue(Member.class);
+                            String phone = editTextPhoneLogIn.getText().toString();
+                            memberLogin = new Member();
+                            memberLogin = dataSnapshot.child(phone).getValue(Member.class);
+                            memberLogin.setPhone(phone);
+
                             if (memberLogin != null)
                                 singIn(memberLogin.getEmail(), editTextPIN.getText().toString());
                         }
