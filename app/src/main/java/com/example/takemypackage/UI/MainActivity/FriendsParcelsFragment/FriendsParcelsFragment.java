@@ -80,7 +80,7 @@ public class FriendsParcelsFragment extends Fragment {
 
 
         View view = inflater.inflate(R.layout.fragment_friends_parcels, container, false);
-        parcelRecyclerView = (RecyclerView) view.findViewById(R.id.parcelRecyclerView);
+        parcelRecyclerView = view.findViewById(R.id.parcelRecyclerView);
         parcelRecyclerView.setHasFixedSize(true);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this.getContext());
         parcelRecyclerView.setLayoutManager(layoutManager);

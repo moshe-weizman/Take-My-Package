@@ -25,12 +25,12 @@ public class RegisteredParcelsFragment extends Fragment {
    @Override
    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
       View view = inflater.inflate(R.layout.registered_parcels_fragment, container, false);
-      RecyclerView recyclerView = (RecyclerView)view.findViewById(R.id.registeredParcelsRecyclerView);
+      RecyclerView recyclerView = view.findViewById(R.id.registeredParcelsRecyclerView);
       recyclerView.setHasFixedSize(true);
       RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this.getContext());
       recyclerView.setLayoutManager(layoutManager);
 
-      List<PendingParcel> registeredParcels = new ArrayList<PendingParcel>();
+      List<PendingParcel> registeredParcels = new ArrayList<>();
       RecyclerView.Adapter adapter = new RegisteredParcelsRecyclerViewAdapter(registeredParcels);
       recyclerView.setAdapter(adapter);
 
