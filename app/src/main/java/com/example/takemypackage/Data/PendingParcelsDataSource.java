@@ -1,9 +1,8 @@
 package com.example.takemypackage.Data;
 
 import android.app.DownloadManager;
-
-import com.example.takemypackage.Entities.Parcel;
 import com.example.takemypackage.Entities.PendingParcel;
+import com.example.takemypackage.Entities.Parcel;
 import com.google.firebase.database.Query;
 
 import java.util.List;

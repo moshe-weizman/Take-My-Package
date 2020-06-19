@@ -1,5 +1,10 @@
 package com.example.takemypackage.UI.MainActivity.FriendsParcelsFragment;
 
+import android.content.Context;
+import android.content.Intent;
+import android.location.Address;
+import android.location.Geocoder;
+import android.location.Location;
 import android.os.Bundle;
 
 import com.example.takemypackage.Data.PendingParcelsFirebaseManager;
@@ -14,9 +19,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.example.takemypackage.Entities.Member;
 import com.example.takemypackage.Entities.PendingParcel;
 import com.example.takemypackage.R;
 
+import static com.example.takemypackage.UI.Login.LoginActivity.LoginActivity.MEMBER_KEY;
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -62,6 +71,8 @@ public class FriendsParcelsFragment extends Fragment {
 // ==============================================================================================
     private RecyclerView parcelRecyclerView;
     private List<PendingParcel> pendingParcels;
+    private Member member;
+    public static float MAX_DISTANCE = 10000;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -74,7 +85,8 @@ public class FriendsParcelsFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         // return inflater.inflate(R.layout.fragment_friends_parcels, container, false);
-
+        Intent intent = getActivity().getIntent();
+        member = (Member) intent.getSerializableExtra(MEMBER_KEY);
 
         View view = inflater.inflate(R.layout.fragment_friends_parcels, container, false);
         parcelRecyclerView = view.findViewById(R.id.parcelRecyclerView);
@@ -82,15 +94,19 @@ public class FriendsParcelsFragment extends Fragment {
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this.getContext());
         parcelRecyclerView.setLayoutManager(layoutManager);
 
-        PendingParcelsFirebaseManager.NotifyToParcelList(pendingParcels, new PendingParcelsFirebaseManager.NotifyDataChange<List<PendingParcel>>() {
+        PendingParcelsFirebaseManager.NotifyToParcelList(/*pendingParcels,*/ new PendingParcelsFirebaseManager.NotifyDataChange<List<PendingParcel>>() {
             @Override
             public void OnDataChanged(List<PendingParcel> obj) {
                 if (parcelRecyclerView.getAdapter() == null) {
-                    pendingParcels = obj;
+                    String addressMember = member.getAddress();
+                    for (PendingParcel parcel : obj) {
+                        if (getDistance(getContext(), addressMember, parcel.getParcelDetails().getLocationOfStorage()) < MAX_DISTANCE)
+                            pendingParcels.add(parcel);
+                    }
                     parcelRecyclerView.setAdapter(new FriendsParcelsRecyclerViewAdapter(pendingParcels));
                 } else parcelRecyclerView.getAdapter().notifyDataSetChanged();
             }
-            //you
+
 
             @Override
             public void onFailure(Exception exception) {
@@ -105,5 +121,25 @@ public class FriendsParcelsFragment extends Fragment {
 //        PendingParcelsFirebaseManager.stopNotifyToStudentList();
 //        super.onDestroy();
 //    }
+
+    static public float getDistance(Context context, String locA, String locB) {
+        Location locationA = setLatLon(context, locA, "pointA");
+        Location locationB = setLatLon(context, locB, "pointB");
+        return locationA.distanceTo(locationB) / 1000;
+    }
+
+    static private Location setLatLon(Context context, String loc, String pnt) {
+        Geocoder geocoder = new Geocoder(context);
+        Location location = new Location(pnt);
+        List<Address> addresses = null;
+        try {
+            addresses = geocoder.getFromLocationName(loc, 5);
+            location.setLatitude(addresses.get(0).getLatitude());
+            location.setLongitude(addresses.get(0).getLongitude());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return location;
+    }
 
 }

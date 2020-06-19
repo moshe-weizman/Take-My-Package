@@ -4,7 +4,11 @@ import androidx.annotation.NonNull;
 
 import com.google.firebase.database.Exclude;
 
-public class Member {
+import java.io.Serializable;
+
+public class Member implements Serializable {
+    private static final long serialVersionUID = 1L;
+
     private String fName;
     private String lName;
     private String address;

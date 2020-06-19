@@ -32,6 +32,8 @@ import java.util.Random;
 import static com.example.takemypackage.Data.MembersFirebaseManager.memberRef;
 
 public class LoginActivity extends AppCompatActivity {
+    public final static String MEMBER_KEY = "com.example.takemypackage.Entities.Member";
+
     private FirebaseAuth mAuth;
     private TextView textViewSignUp;
     private EditText editTextPhoneLogIn, editTextPIN, editTextEmail;
@@ -40,6 +42,7 @@ public class LoginActivity extends AppCompatActivity {
     Member member;
     Member memberLogin;
     String emailUser;
+    String phoneUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,17 +57,37 @@ public class LoginActivity extends AppCompatActivity {
         btnLogIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (!TextUtils.isEmpty(editTextEmail.getText()))
-                    singIn(editTextEmail.getText().toString(), editTextPIN.getText().toString());
-                else {
+                if (!TextUtils.isEmpty(editTextEmail.getText())) {
+                    emailUser = editTextEmail.getText().toString();
+                    Query queryEmail = memberRef.orderByChild("email").equalTo(emailUser);
+                    queryEmail.addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                            memberLogin = new Member();
+                            for (DataSnapshot child : dataSnapshot.getChildren()) {
+                                memberLogin = child.getValue(Member.class);
+                                memberLogin.setPhone(child.getKey());
+                            }
+                            if (memberLogin != null)
+                                singIn(emailUser, editTextPIN.getText().toString());
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
+                            Toast.makeText(LoginActivity.this, "Failed to read value", Toast.LENGTH_SHORT).show();
+
+                        }
+                    });
+
+                } else {
                     Query query = memberRef.orderByKey().equalTo(editTextPhoneLogIn.getText().toString());
                     query.addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                            String phone = editTextPhoneLogIn.getText().toString();
+                            phoneUser = editTextPhoneLogIn.getText().toString();
                             memberLogin = new Member();
-                            memberLogin = dataSnapshot.child(phone).getValue(Member.class);
-                            memberLogin.setPhone(phone);
+                            memberLogin = dataSnapshot.child(phoneUser).getValue(Member.class);
+                            memberLogin.setPhone(phoneUser);
 
                             if (memberLogin != null)
                                 singIn(memberLogin.getEmail(), editTextPIN.getText().toString());
@@ -107,6 +130,7 @@ public class LoginActivity extends AppCompatActivity {
                     // Sign in success, update UI with the signed-in user's information
                     FirebaseUser user = mAuth.getCurrentUser();
                     Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                    intent.putExtra(MEMBER_KEY, memberLogin);
                     startActivity(intent);
                 } else {
                     // If sign in fails, display a message to the user.

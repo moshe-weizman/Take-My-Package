@@ -12,16 +12,11 @@ package com.example.takemypackage.Entities;
  */
 public class Parcel {
 
-
     /**
      * Optional types of parcel sent by the network
      */
     public enum ParcelType {
         ENVELOPE, SMALL_PARCEL, BIG_PARCEL
-    }
-
-    public enum Status {
-        Registered, CollectionOffered, OnTheWay, Delivered
     }
 
     /**
@@ -31,17 +26,20 @@ public class Parcel {
         UP_TO_500G, UP_TO_1KG, UP_TO_5KG, UP_TO_20KG
     }
 
+    private ParcelType _type;
+    private boolean _fragile;
+    private ParcelWeight _weight;
+    private String _locationOfStorage;
 
-    private Parcel.ParcelType type;
-    private boolean fragile;
-    private Parcel.ParcelWeight weight;
-    private String locationOfStorage;
-    private String parcelID;
 
-    private String recipientPhone;
-    private String recipientFirstName;
-    private String recipientLastName;
-    private String recipientAddress;
+    private String _parcelID;
+
+
+    //private String _delivers;
+    private String _recipientPhone;
+    private String _recipientFirstName;
+    private String _recipientLastName;
+    private String _recipientAddress;
 
     //---------------------------------------Constructors------------------------------------------
     public Parcel() {
@@ -59,91 +57,97 @@ public class Parcel {
      * @param locationOfStorage  the location the parcel is stored
      */
     public Parcel(String recipientPhone, String recipientFirstName, String recipientLastName, String recipientAddress,
-                  Parcel.ParcelType type, boolean fragile, Parcel.ParcelWeight weight, String parcelID,
-                  String locationOfStorage, Status status) {
-        this.type = type;
-        this.fragile = fragile;
-        this.weight = weight;
-        this.recipientPhone = recipientPhone;
-        this.parcelID = parcelID;
-        this.locationOfStorage = locationOfStorage;
-        this.recipientFirstName = recipientFirstName;
-        this.recipientLastName = recipientLastName;
-        this.recipientAddress = recipientAddress;
+                  ParcelType type, boolean fragile, ParcelWeight weight, String parcelID,
+                  String locationOfStorage) {
+        this._type = type;
+        this._fragile = fragile;
+        _weight = weight;
+        _recipientPhone = recipientPhone;
+        _parcelID = parcelID;
+        _locationOfStorage = locationOfStorage;
+        _recipientFirstName = recipientFirstName;
+        _recipientLastName = recipientLastName;
+        _recipientAddress = recipientAddress;
     }
 //------------------------------Getters------------------------------------------
 
     public String getRecipientFirstName() {
-        return recipientFirstName;
+        return _recipientFirstName;
     }
 
     public String getRecipientLastName() {
-        return recipientLastName;
+        return _recipientLastName;
     }
 
     public String getRecipientAddress() {
-        return recipientAddress;
+        return _recipientAddress;
     }
 
-    public Parcel.ParcelType getType() {
-        return type;
+    public ParcelType getType() {
+        return _type;
     }
 
     public boolean isFragile() {
-        return fragile;
+        return _fragile;
     }
 
-    public Parcel.ParcelWeight getWeight() {
-        return weight;
+    public ParcelWeight getWeight() {
+        return _weight;
     }
 
     public String getRecipientPhone() {
-        return recipientPhone;
+        return _recipientPhone;
     }
 
     public String getParcelID() {
-        return parcelID;
+        return _parcelID;
     }
 
     public String getLocationOfStorage() {
-        return locationOfStorage;
+        return _locationOfStorage;
     }
 
+//    public String get_delivers() {
+//        return _delivers;
+//    }
 //-------------------------------Setters--------------------------------------
 
+    //    public void set_delivers(String _delivers) {
+//        this._delivers = _delivers;
+//    }
     public void set_parcelID(String parcelID) {
-        this.parcelID = parcelID;
+        this._parcelID = parcelID;
     }
 
     public void setRecipientAddress(String recipientAddress) {
-        this.recipientAddress = recipientAddress;
+        _recipientAddress = recipientAddress;
     }
 
     public void setRecipientFirstName(String recipientFirstName) {
-        this.recipientFirstName = recipientFirstName;
-    }
-//moshe
-    public void setRecipientLastName(String recipientLastName) {
-        this.recipientLastName = recipientLastName;
+        _recipientFirstName = recipientFirstName;
     }
 
-    public void setType(Parcel.ParcelType type) {
-        this.type = type;
+    public void setRecipientLastName(String recipientLastName) {
+        _recipientLastName = recipientLastName;
+    }
+
+    public void setType(ParcelType type) {
+        _type = type;
     }
 
     public void setFragile(boolean fragile) {
-        this.fragile = fragile;
+        _fragile = fragile;
     }
 
-    public void setWeight(Parcel.ParcelWeight weight) {
-        this.weight = weight;
+    public void setWeight(ParcelWeight weight) {
+        _weight = weight;
     }
 
     public void setRecipientPhone(String recipientPhone) {
-        this.recipientPhone = recipientPhone;
+        _recipientPhone = recipientPhone;
     }
 
     public void setLocationOfStorage(String locationOfStorage) {
-        this.locationOfStorage = locationOfStorage;
+        _locationOfStorage = locationOfStorage;
     }
 }

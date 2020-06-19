@@ -1,10 +1,10 @@
 package com.example.takemypackage.Data;
 
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.example.takemypackage.Entities.Parcel;
-import com.example.takemypackage.Entities.PendingParcel;
+import com.example.takemypackage.Entities.*;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -12,9 +12,11 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class PendingParcelsFirebaseManager {
+    private static List<PendingParcel> pendingParcelList=new ArrayList<PendingParcel>();
 
     public interface Action<T> {
         void onSuccess(T obj);
@@ -43,7 +45,7 @@ public class PendingParcelsFirebaseManager {
     public static ChildEventListener parcelRefChildEventListener;
 
 
-    public static void NotifyToParcelList(final List<PendingParcel> pendingParcelList, final NotifyDataChange<List<PendingParcel>> notifyDataChange) {
+    public static void NotifyToParcelList(/*final List<PendingParcel> pendingParcelList*/ final NotifyDataChange<List<PendingParcel>> notifyDataChange) {
         if (notifyDataChange != null) {
             if (parcelRefChildEventListener != null) {
                 notifyDataChange.onFailure(new Exception("first unNotify student list"));
@@ -55,6 +57,7 @@ public class PendingParcelsFirebaseManager {
                 public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                     for (DataSnapshot child : dataSnapshot.getChildren()) {
                         PendingParcel pendingParcel = new PendingParcel(child.getValue(Parcel.class));
+                        pendingParcel.getParcelDetails().set_parcelID(child.getKey());
                         pendingParcelList.add(pendingParcel);
                     }
 
