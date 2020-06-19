@@ -9,22 +9,17 @@ import java.util.List;
 public class PendingParcel {
 
     private List<DeliveryPerson> optionalDeliveries;
-    private List<DeliveryPerson> authorizedDeliveries;
     private Parcel parcelDetails;
 
     public PendingParcel(Parcel _parcelDetails) {
         parcelDetails = _parcelDetails;
         optionalDeliveries = new ArrayList<>();
-        authorizedDeliveries = new ArrayList<>();
     }
 
     public List<DeliveryPerson> getOptionalDeliveries() {
         return optionalDeliveries;
     }
 
-    public List<DeliveryPerson> getAuthorizedDeliveries() {
-        return authorizedDeliveries;
-    }
 
     public Parcel getParcelDetails() {
         return parcelDetails;
@@ -33,10 +28,6 @@ public class PendingParcel {
 
     public void setOptionalDeliveries(List<DeliveryPerson> optionalDeliveries) {
         this.optionalDeliveries = optionalDeliveries;
-    }
-
-    public void setAuthorizedDeliveries(List<DeliveryPerson> authorizedDeliveries) {
-        this.authorizedDeliveries = authorizedDeliveries;
     }
 
     public void setParcelDetails(Parcel _parcelDetails) {

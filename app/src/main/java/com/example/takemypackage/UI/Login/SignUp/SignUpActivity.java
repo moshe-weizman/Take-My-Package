@@ -61,14 +61,11 @@ public class SignUpActivity extends AppCompatActivity {
                 @Override
                 public void onSuccess(String obj) {
                     Toast.makeText(getBaseContext(), "welcome " + obj, Toast.LENGTH_LONG).show();
-
                 }
-
                 @Override
                 public void onFailure(Exception exception) {
                     Toast.makeText(getBaseContext(), "Error \n", Toast.LENGTH_LONG).show();
                 }
-
                 @Override
                 public void onProgress(String status, double percent) {
                     if (percent != 100)

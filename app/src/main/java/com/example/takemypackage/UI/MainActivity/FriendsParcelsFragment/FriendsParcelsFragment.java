@@ -7,6 +7,7 @@ import android.location.Geocoder;
 import android.location.Location;
 import android.os.Bundle;
 
+import com.example.takemypackage.Data.MembersFirebaseManager;
 import com.example.takemypackage.Data.PendingParcelsFirebaseManager;
 
 import androidx.annotation.Nullable;
@@ -17,8 +18,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.Toast;
 
+import com.example.takemypackage.Entities.DeliveryPerson;
 import com.example.takemypackage.Entities.Member;
 import com.example.takemypackage.Entities.PendingParcel;
 import com.example.takemypackage.R;
@@ -73,6 +76,8 @@ public class FriendsParcelsFragment extends Fragment {
     private List<PendingParcel> pendingParcels;
     private Member member;
     public static float MAX_DISTANCE = 10000;
+    private Button buttonIWantToTake;
+    private DeliveryPerson deliveryPerson;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -93,6 +98,7 @@ public class FriendsParcelsFragment extends Fragment {
         parcelRecyclerView.setHasFixedSize(true);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this.getContext());
         parcelRecyclerView.setLayoutManager(layoutManager);
+
 
         PendingParcelsFirebaseManager.NotifyToParcelList(/*pendingParcels,*/ new PendingParcelsFirebaseManager.NotifyDataChange<List<PendingParcel>>() {
             @Override

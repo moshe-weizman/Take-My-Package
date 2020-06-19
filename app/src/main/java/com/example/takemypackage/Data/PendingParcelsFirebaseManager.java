@@ -116,6 +116,10 @@ public class PendingParcelsFirebaseManager {
     }
 
     //-----------------------------------------CRUD Functions----------------------------------------------------------------------------------
+    public static void addMemberToOptionalDeliveries(DeliveryPerson deliveryPersonfinal, final MembersFirebaseManager.Action<String> action) {
+
+
+    }
     public List<Parcel> getMembersPendingParcels(String recipientPhone) {
         return null;
     }
