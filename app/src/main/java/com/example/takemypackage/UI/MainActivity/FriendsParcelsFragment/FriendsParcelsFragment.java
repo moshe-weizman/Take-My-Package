@@ -90,6 +90,7 @@ public class FriendsParcelsFragment extends Fragment {
                     parcelRecyclerView.setAdapter(new FriendsParcelsRecyclerViewAdapter(pendingParcels));
                 } else parcelRecyclerView.getAdapter().notifyDataSetChanged();
             }
+            //you
 
             @Override
             public void onFailure(Exception exception) {
