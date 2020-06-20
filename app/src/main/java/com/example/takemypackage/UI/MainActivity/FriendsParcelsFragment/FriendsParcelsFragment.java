@@ -109,7 +109,7 @@ public class FriendsParcelsFragment extends Fragment {
                         if (getDistance(getContext(), addressMember, parcel.getParcelDetails().getLocationOfStorage()) < MAX_DISTANCE)
                             pendingParcels.add(parcel);
                     }
-                    parcelRecyclerView.setAdapter(new FriendsParcelsRecyclerViewAdapter(pendingParcels));
+                    parcelRecyclerView.setAdapter(new FriendsParcelsRecyclerViewAdapter(pendingParcels, member));
                 } else parcelRecyclerView.getAdapter().notifyDataSetChanged();
             }
 
@@ -119,6 +119,8 @@ public class FriendsParcelsFragment extends Fragment {
                 Toast.makeText(getContext(), "error to get parcel list of yours friends \n" + exception.toString(), Toast.LENGTH_LONG).show();
             }
         });
+
+
         return view;
     }
 
