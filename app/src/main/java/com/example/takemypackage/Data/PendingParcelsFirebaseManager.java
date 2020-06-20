@@ -60,7 +60,6 @@ public class PendingParcelsFirebaseManager {
                         pendingParcel.getParcelDetails().set_parcelID(child.getKey());
                         pendingParcelList.add(pendingParcel);
                     }
-
                     notifyDataChange.OnDataChanged(pendingParcelList);
                 }
 
@@ -116,7 +115,7 @@ public class PendingParcelsFirebaseManager {
     }
 
     //-----------------------------------------CRUD Functions----------------------------------------------------------------------------------
-    public static void addMemberToOptionalDeliveries(DeliveryPerson deliveryPersonfinal, final MembersFirebaseManager.Action<String> action) {
+    public static void addMemberToOptionalDeliveries(DeliveryPerson deliveryPerson, final MembersFirebaseManager.Action<String> action) {
 
 
     }

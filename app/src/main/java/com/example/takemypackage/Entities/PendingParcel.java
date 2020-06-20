@@ -34,6 +34,10 @@ public class PendingParcel {
         parcelDetails = _parcelDetails;
     }
 
+    public void addOptionalDelivery (DeliveryPerson deliveryPerson){
+        optionalDeliveries.add(deliveryPerson);
+    }
+
     public void authorize(DeliveryPerson deliveryPerson, boolean authorized) {
         int index = optionalDeliveries.indexOf(deliveryPerson);
         deliveryPerson.setAuthorized(authorized);
