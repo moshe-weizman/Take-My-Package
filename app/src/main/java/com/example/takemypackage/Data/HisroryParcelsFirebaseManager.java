@@ -18,68 +18,71 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class HisroryParcelsFirebaseManager {
-   private static List<HistoryParcel> historyParcelList = new ArrayList<HistoryParcel>();
+    private static List<HistoryParcel> historyParcelList = new ArrayList<HistoryParcel>();
 
-   public interface Action<T> {
-      void onSuccess(T obj);
+    public interface Action<T> {
+        void onSuccess(T obj);
 
-      void onFailure(Exception exception);
+        void onFailure(Exception exception);
 
-      void onProgress(String status, double percent);
-   }
+        void onProgress(String status, double percent);
+    }
 
-   //TODO implement the interface NotifyDataChange
-   public interface NotifyDataChange<T> {
-      void OnDataChanged(T obj);
+    //TODO implement the interface NotifyDataChange
+    public interface NotifyDataChange<T> {
+        void OnDataChanged(T obj);
 
-      void onFailure(Exception exception);
-   }
+        void onFailure(Exception exception);
+    }
 
-   public static DatabaseReference histortParcelsRef;
+    public static DatabaseReference histortParcelsRef;
 
-   static {
-      FirebaseDatabase database = FirebaseDatabase.getInstance();
-      histortParcelsRef = database.getReference("HistoryParcels");
-   }
+    static {
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        histortParcelsRef = database.getReference("HistoryParcels");
+    }
 
-   public static ChildEventListener historyParcelRefChildEventListener;
+    public static ChildEventListener historyParcelRefChildEventListener;
 
-   public static void addParcelToHistory(final HistoryParcel historyParcel, final Action<String> action) {
-      Parcel parcel = historyParcel.getParcelDetails();
-      histortParcelsRef.child(parcel.getRecipientPhone()).child(parcel.getParcelID()).setValue(historyParcel).addOnSuccessListener(new OnSuccessListener<Void>() {
-         @Override
-         public void onSuccess(Void aVoid) {
-            action.onSuccess("Registration was successful");
-         }
-      }).addOnFailureListener(new OnFailureListener() {
-         @Override
-         public void onFailure(@NonNull Exception e) {
-            action.onFailure(e);
-         }
-      });
-   }
-
-
-   public static void NotifyToHistoryParcelList(final String userPhone, final NotifyDataChange<List<HistoryParcel>> notifyDataChange) {
-      if (notifyDataChange != null) {
-         if (historyParcelRefChildEventListener != null) {
-            notifyDataChange.onFailure(new Exception("first unNotify history parcel list"));
-            return;
-         }
-         historyParcelList.clear();
-         historyParcelRefChildEventListener = new ChildEventListener() {
+    public static void addParcelToHistory(final HistoryParcel historyParcel, final Action<String> action) {
+        Parcel parcel = historyParcel.getParcelDetails();
+        histortParcelsRef.child(parcel.getRecipientPhone()).child(parcel.getParcelID()).setValue(historyParcel).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
-            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-               for (DataSnapshot child : dataSnapshot.getChildren()) {
-                  HistoryParcel historyParcel = child.getValue(HistoryParcel.class);
-                  historyParcel.getParcelDetails().set_parcelID(child.getKey());
-                  historyParcelList.add(historyParcel);
-               }
-               notifyDataChange.OnDataChanged(historyParcelList);
+            public void onSuccess(Void aVoid) {
+                action.onSuccess("Registration was successful");
             }
-
+        }).addOnFailureListener(new OnFailureListener() {
             @Override
-            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+            public void onFailure(@NonNull Exception e) {
+                action.onFailure(e);
+            }
+        });
+    }
+
+
+    public static void NotifyToHistoryParcelList(final String userPhone, final NotifyDataChange<List<HistoryParcel>> notifyDataChange) {
+        if (notifyDataChange != null) {
+            if (historyParcelRefChildEventListener != null) {
+                notifyDataChange.onFailure(new Exception("first unNotify history parcel list"));
+                return;
+            }
+            historyParcelList.clear();
+            historyParcelRefChildEventListener = new ChildEventListener() {
+                @Override
+                public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                    if (dataSnapshot.getKey().equals(userPhone)) {
+                        for (DataSnapshot child : dataSnapshot.getChildren()) {
+                            HistoryParcel historyParcel = child.getValue(HistoryParcel.class);
+                            historyParcel.getParcelDetails().set_parcelID(child.getKey());
+                            historyParcelList.add(historyParcel);
+                        }
+                    }
+                    notifyDataChange.OnDataChanged(historyParcelList);
+
+                }
+
+                @Override
+                public void onChildChanged(DataSnapshot dataSnapshot, String s) {
 //                    HistoryParcel historyParcel = dataSnapshot.getValue(HistoryParcel.class);
 //                    String phone = dataSnapshot.getKey();
 //                    String parcelID = dataSnapshot.child(phone).getKey();
@@ -91,42 +94,42 @@ public class HisroryParcelsFirebaseManager {
 //                        }
 //                    }
 //                    notifyDataChange.OnDataChanged(historyParcelList);
-            }
+                }
 
-            @Override
-            public void onChildRemoved(DataSnapshot dataSnapshot) {
-               HistoryParcel historyParcel = dataSnapshot.getValue(HistoryParcel.class);
-               String phone = dataSnapshot.getKey();
-               String parcelID = dataSnapshot.child(phone).getKey();
-               historyParcel.getParcelDetails().set_parcelID(parcelID);
-               for (int i = 0; i < historyParcelList.size(); i++) {
-                  if (historyParcelList.get(i).getParcelDetails().getParcelID().equals(parcelID)) {
-                     historyParcelList.remove(i);
-                     break;
-                  }
-               }
-               notifyDataChange.OnDataChanged(historyParcelList);
-            }
+                @Override
+                public void onChildRemoved(DataSnapshot dataSnapshot) {
+                    HistoryParcel historyParcel = dataSnapshot.getValue(HistoryParcel.class);
+                    String phone = dataSnapshot.getKey();
+                    String parcelID = dataSnapshot.child(phone).getKey();
+                    historyParcel.getParcelDetails().set_parcelID(parcelID);
+                    for (int i = 0; i < historyParcelList.size(); i++) {
+                        if (historyParcelList.get(i).getParcelDetails().getParcelID().equals(parcelID)) {
+                            historyParcelList.remove(i);
+                            break;
+                        }
+                    }
+                    notifyDataChange.OnDataChanged(historyParcelList);
+                }
 
-            @Override
-            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
-            }
+                @Override
+                public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+                }
 
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-               notifyDataChange.onFailure(databaseError.toException());
-            }
-         };
-         DatabaseReference userHistortParcelRef = histortParcelsRef.child(userPhone);
-         userHistortParcelRef.addChildEventListener(historyParcelRefChildEventListener);
-      }
-   }
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+                    notifyDataChange.onFailure(databaseError.toException());
+                }
+            };
+            // DatabaseReference userHistoryParcelRef = histortParcelsRef.child(userPhone);
+            histortParcelsRef.addChildEventListener(historyParcelRefChildEventListener);
+        }
+    }
 
 
-   public static void stopNotifyToStudentList() {
-      if (historyParcelRefChildEventListener != null) {
-         histortParcelsRef.removeEventListener(historyParcelRefChildEventListener);
-         historyParcelRefChildEventListener = null;
-      }
-   }
+    public static void stopNotifyToStudentList() {
+        if (historyParcelRefChildEventListener != null) {
+            histortParcelsRef.removeEventListener(historyParcelRefChildEventListener);
+            historyParcelRefChildEventListener = null;
+        }
+    }
 }

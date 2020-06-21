@@ -47,13 +47,17 @@ public class FriendsParcelsRecyclerViewAdapter extends RecyclerView.Adapter<Frie
     public void onBindViewHolder(@NonNull final FriendsParcelsViewHolder holder, int position) {
 
         final PendingParcel pendingParcel = pendingParcels.get(position);
+
         holder.textViewParcelId.setText(pendingParcel.getParcelDetails().getParcelID());
         holder.textViewLocationOfStorage.setText(pendingParcel.getParcelDetails().getLocationOfStorage());
         holder.textViewRecipientAddress.setText(pendingParcel.getParcelDetails().getRecipientAddress());
-        if (pendingParcel.getOptionalDeliveries().containsKey(member.getPhone()))
-
-            memberHasOffered(holder);
-
+        if (pendingParcel.getOptionalDeliveries().containsKey(member.getPhone())) {
+            if (pendingParcel.getOptionalDeliveries().get(member.getPhone()).isAuthorized()) {
+                holder.buttonITookIt.setEnabled(true);
+                holder.buttonIWantToTakeIt.setText("You can now to take it");
+            } else
+                memberHasOffered(holder);
+        }
         holder.buttonIWantToTakeIt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
