@@ -41,7 +41,6 @@ public class HistoryParcelsFragment extends Fragment {
         // return inflater.inflate(R.layout.fragment_friends_parcels, container, false);
         Intent intent = getActivity().getIntent();
         member = (Member) intent.getSerializableExtra(MEMBER_KEY);
-
         View view = inflater.inflate(R.layout.fragment_friends_parcels, container, false);
         parcelRecyclerView = view.findViewById(R.id.parcelRecyclerView);
         parcelRecyclerView.setHasFixedSize(true);
@@ -54,7 +53,7 @@ public class HistoryParcelsFragment extends Fragment {
             public void OnDataChanged(List<HistoryParcel> obj) {
                 if (parcelRecyclerView.getAdapter() == null) {
                     historyParcelList = obj;
-                    parcelRecyclerView.setAdapter(new HistoryParcelsRecyclerViewAdapter(historyParcelList, member));
+                    parcelRecyclerView.setAdapter(new HistoryParcelsRecyclerViewAdapter(historyParcelList));
                 } else parcelRecyclerView.getAdapter().notifyDataSetChanged();
             }
 
@@ -64,8 +63,6 @@ public class HistoryParcelsFragment extends Fragment {
                 Toast.makeText(getContext(), "error to get parcel list of yours friends \n" + exception.toString(), Toast.LENGTH_LONG).show();
             }
         });
-
-
         return view;
     }
 }

@@ -41,7 +41,6 @@ import java.util.List;
 
 public class HistoryParcelsRecyclerViewAdapter extends RecyclerView.Adapter<HistoryParcelsRecyclerViewAdapter.HistoryParcelsViewHolder> {
     private List<HistoryParcel> historyParcelList;
-    private Member member;
 
     public static class HistoryParcelsViewHolder extends RecyclerView.ViewHolder {
         TextView textViewHistoryParcelID;
@@ -58,9 +57,8 @@ public class HistoryParcelsRecyclerViewAdapter extends RecyclerView.Adapter<Hist
         }
     }
 
-    public HistoryParcelsRecyclerViewAdapter(List<HistoryParcel> _historyParcelList, Member member) {
+    public HistoryParcelsRecyclerViewAdapter(List<HistoryParcel> _historyParcelList) {
         this.historyParcelList = _historyParcelList;
-        this.member = member;
     }
 
     @NonNull
@@ -75,18 +73,13 @@ public class HistoryParcelsRecyclerViewAdapter extends RecyclerView.Adapter<Hist
     public void onBindViewHolder(@NonNull final HistoryParcelsViewHolder holder, int position) {
 
         final HistoryParcel historyParcel = historyParcelList.get(position);
-        holder.textViewHistoryParcelID.setText(pendingParcel.getParcelDetails().getParcelID());
-        holder.textViewLocationOfStorage.setText(pendingParcel.getParcelDetails().getLocationOfStorage());
-        holder.textViewRecipientAddress.setText(pendingParcel.getParcelDetails().getRecipientAddress());
-
-
+        holder.textViewHistoryParcelID.setText(historyParcel.getParcelDetails().getParcelID());
+        holder.textViewDeliveryPerson.setText(historyParcel.getDeliveryPerson().getName() + " Phone: " + historyParcel.getDeliveryPerson().getPhone());
+        holder.textViewDate.setText(historyParcel.getDateCollected().toString());
     }
-
 
     @Override
     public int getItemCount() {
         return historyParcelList.size();
     }
-
-
 }
