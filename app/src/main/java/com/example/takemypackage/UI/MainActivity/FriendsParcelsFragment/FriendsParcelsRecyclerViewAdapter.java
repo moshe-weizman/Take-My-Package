@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -16,11 +17,14 @@ import com.example.takemypackage.Entities.Member;
 import com.example.takemypackage.Entities.PendingParcel;
 import com.example.takemypackage.R;
 
+import java.util.HashMap;
 import java.util.List;
 
 public class FriendsParcelsRecyclerViewAdapter extends RecyclerView.Adapter<FriendsParcelsRecyclerViewAdapter.FriendsParcelsViewHolder> {
     private List<PendingParcel> pendingParcels;
+    private HashMap<String, DeliveryPerson> optionalDeliveries;
     private Member member;
+    DeliveryPerson deliveryPerson;
 
     public FriendsParcelsRecyclerViewAdapter(List<PendingParcel> pendingParcels, Member member) {
         this.pendingParcels = pendingParcels;
@@ -35,20 +39,55 @@ public class FriendsParcelsRecyclerViewAdapter extends RecyclerView.Adapter<Frie
     }
 
     @Override
-    public void onBindViewHolder(@NonNull FriendsParcelsViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull final FriendsParcelsViewHolder holder, int position) {
 
-        final PendingParcel pendingParcel=pendingParcels.get(position);
+        final PendingParcel pendingParcel = pendingParcels.get(position);
         holder.textViewParcelId.setText(pendingParcel.getParcelDetails().getParcelID());
         holder.textViewLocationOfStorage.setText(pendingParcel.getParcelDetails().getLocationOfStorage());
         holder.textViewRecipientAddress.setText(pendingParcel.getParcelDetails().getRecipientAddress());
         //holder.buttonIWantToTakeIt.setTag(pendingParcel);
+        if (pendingParcel.getOptionalDeliveries().containsKey(member.getPhone()))
+            memberHasOffered(holder);
+
         holder.buttonIWantToTakeIt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                pendingParcel.addOptionalDelivery(new DeliveryPerson(member));
+                deliveryPerson = new DeliveryPerson(member);
+                pendingParcel.addOptionalDelivery(deliveryPerson);
+
+                PendingParcelsFirebaseManager.addMemberToOptionalDeliveries(pendingParcel, deliveryPerson, new PendingParcelsFirebaseManager.Action<String>() {
+
+                    @Override
+                    public void onSuccess(String obj) {
+                        //TODO toast
+                        //Toast.makeText(, "welcome " + obj, Toast.LENGTH_LONG).show();
+                        memberHasOffered(holder);
+                    }
+
+                    @Override
+                    public void onFailure(Exception exception) {
+                        //TODO toast
+
+                        // Toast.makeText(getBaseContext(), "Error \n", Toast.LENGTH_LONG).show();
+                    }
+
+                    @Override
+                    public void onProgress(String status, double percent) {
+
+                    }
+                });
+
             }
         });
+
+
     }
+
+    private void memberHasOffered(FriendsParcelsViewHolder holder) {
+        holder.buttonIWantToTakeIt.setEnabled(false);
+        holder.buttonIWantToTakeIt.setText("Waiting for a Permission...");
+    }
+
 
     @Override
     public int getItemCount() {

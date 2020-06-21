@@ -4,19 +4,24 @@ package com.example.takemypackage.Entities;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Dictionary;
+import java.util.HashMap;
 import java.util.List;
 
 public class PendingParcel {
 
-    private List<DeliveryPerson> optionalDeliveries;
+    private HashMap<String, DeliveryPerson> optionalDeliveries;
     private Parcel parcelDetails;
+
+    public PendingParcel() {
+        optionalDeliveries = new HashMap<>();
+    }
 
     public PendingParcel(Parcel _parcelDetails) {
         parcelDetails = _parcelDetails;
-        optionalDeliveries = new ArrayList<>();
+        optionalDeliveries = new HashMap<>();
     }
 
-    public List<DeliveryPerson> getOptionalDeliveries() {
+    public HashMap<String, DeliveryPerson> getOptionalDeliveries() {
         return optionalDeliveries;
     }
 
@@ -26,7 +31,7 @@ public class PendingParcel {
     }
 
 
-    public void setOptionalDeliveries(List<DeliveryPerson> optionalDeliveries) {
+    public void setOptionalDeliveries(HashMap<String, DeliveryPerson> optionalDeliveries) {
         this.optionalDeliveries = optionalDeliveries;
     }
 
@@ -34,13 +39,13 @@ public class PendingParcel {
         parcelDetails = _parcelDetails;
     }
 
-    public void addOptionalDelivery (DeliveryPerson deliveryPerson){
-        optionalDeliveries.add(deliveryPerson);
+    public void addOptionalDelivery(DeliveryPerson deliveryPerson) {
+        optionalDeliveries.put(deliveryPerson.getPhone(), deliveryPerson);
     }
 
-    public void authorize(DeliveryPerson deliveryPerson, boolean authorized) {
-        int index = optionalDeliveries.indexOf(deliveryPerson);
-        deliveryPerson.setAuthorized(authorized);
-        optionalDeliveries.set(index, deliveryPerson);
-    }
+//    public void authorize(DeliveryPerson deliveryPerson, boolean authorized) {
+//
+//        deliveryPerson.setAuthorized(authorized);
+//
+//    }
 }

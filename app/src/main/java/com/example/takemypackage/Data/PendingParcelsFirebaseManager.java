@@ -5,18 +5,21 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.example.takemypackage.Entities.*;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.GenericTypeIndicator;
 import com.google.firebase.database.Query;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class PendingParcelsFirebaseManager {
-    private static List<PendingParcel> pendingParcelList=new ArrayList<PendingParcel>();
+    private static List<PendingParcel> pendingParcelList = new ArrayList<PendingParcel>();
 
     public interface Action<T> {
         void onSuccess(T obj);
@@ -40,10 +43,11 @@ public class PendingParcelsFirebaseManager {
     static {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         parcelRef = database.getReference("PendingParcel");
+
     }
 
     public static ChildEventListener parcelRefChildEventListener;
-
+//private GenericTypeIndicator<PendingParcel> typeIndicator = new GenericTypeIndicator<PendingParcel>() {};
 
     public static void NotifyToParcelList(/*final List<PendingParcel> pendingParcelList*/ final NotifyDataChange<List<PendingParcel>> notifyDataChange) {
         if (notifyDataChange != null) {
@@ -56,7 +60,10 @@ public class PendingParcelsFirebaseManager {
                 @Override
                 public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                     for (DataSnapshot child : dataSnapshot.getChildren()) {
-                        PendingParcel pendingParcel = new PendingParcel(child.getValue(Parcel.class));
+                        PendingParcel pendingParcel = child.getValue(PendingParcel.class);
+
+                       // DatabaseReference DeliveryPersonRef =parcelRef.child("optionalDeliveries");
+
                         pendingParcel.getParcelDetails().set_parcelID(child.getKey());
                         pendingParcelList.add(pendingParcel);
                     }
@@ -115,10 +122,24 @@ public class PendingParcelsFirebaseManager {
     }
 
     //-----------------------------------------CRUD Functions----------------------------------------------------------------------------------
-    public static void addMemberToOptionalDeliveries(DeliveryPerson deliveryPerson, final MembersFirebaseManager.Action<String> action) {
+    public static void addMemberToOptionalDeliveries(PendingParcel pendingParcel,DeliveryPerson deliveryPerson, final Action<String> action) {
 
+        DatabaseReference DeliveryPersonRef = parcelRef.child(pendingParcel.getParcelDetails().getRecipientPhone()).child(pendingParcel.getParcelDetails().getParcelID()).child("optionalDeliveries");
+
+        DeliveryPersonRef.child(deliveryPerson.getPhone()).setValue(deliveryPerson).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+                action.onSuccess("Registration was successful");
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                action.onFailure(e);
+            }
+        });
 
     }
+
     public List<Parcel> getMembersPendingParcels(String recipientPhone) {
         return null;
     }

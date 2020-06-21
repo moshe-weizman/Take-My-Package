@@ -77,7 +77,7 @@ public class FriendsParcelsFragment extends Fragment {
     private RecyclerView parcelRecyclerView;
     private List<PendingParcel> pendingParcels;
     private Member member;
-    public static float MAX_DISTANCE = 10000;
+    public static float MAX_DISTANCE = 1000000000;
     private Button buttonIWantToTake;
     private DeliveryPerson deliveryPerson;
 
