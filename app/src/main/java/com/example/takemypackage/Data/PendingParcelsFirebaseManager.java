@@ -61,9 +61,6 @@ public class PendingParcelsFirebaseManager {
                 public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                     for (DataSnapshot child : dataSnapshot.getChildren()) {
                         PendingParcel pendingParcel = child.getValue(PendingParcel.class);
-
-                       // DatabaseReference DeliveryPersonRef =parcelRef.child("optionalDeliveries");
-
                         pendingParcel.getParcelDetails().set_parcelID(child.getKey());
                         pendingParcelList.add(pendingParcel);
                     }

@@ -13,7 +13,6 @@ public class PendingParcel {
     private Parcel parcelDetails;
 
     public PendingParcel() {
-        optionalDeliveries = new HashMap<>();
     }
 
     public PendingParcel(Parcel _parcelDetails) {

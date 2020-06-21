@@ -5,6 +5,9 @@ public class DeliveryPerson {
     private String phone;
     private boolean isAuthorized;
 
+    public DeliveryPerson() {
+    }
+
     public DeliveryPerson(String name, String phone) {
         this.name = name;
         this.phone = phone;
@@ -27,7 +30,15 @@ public class DeliveryPerson {
         return isAuthorized;
     }
 
-    public void setAuthorized(boolean authorized) {
+    public void setIsAuthorized(boolean authorized) {
         isAuthorized = authorized;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 }
