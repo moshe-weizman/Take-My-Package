@@ -12,6 +12,7 @@ import com.example.takemypackage.Entities.Member;
 import com.example.takemypackage.R;
 import com.example.takemypackage.UI.Login.LoginActivity.LoginActivity;
 import com.example.takemypackage.UI.MainActivity.FriendsParcelsFragment.FriendsParcelsFragment;
+import com.example.takemypackage.UI.MainActivity.HistoryParcelsFragment.HistoryParcelsFragment;
 
 import static com.example.takemypackage.UI.Login.LoginActivity.LoginActivity.MEMBER_KEY;
 

@@ -41,14 +41,14 @@ public class HistoryParcelsFragment extends Fragment {
         // return inflater.inflate(R.layout.fragment_friends_parcels, container, false);
         Intent intent = getActivity().getIntent();
         member = (Member) intent.getSerializableExtra(MEMBER_KEY);
-        View view = inflater.inflate(R.layout.fragment_friends_parcels, container, false);
+        View view = inflater.inflate(R.layout.fragment_history_parcels, container, false);
         parcelRecyclerView = view.findViewById(R.id.parcelRecyclerView);
         parcelRecyclerView.setHasFixedSize(true);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this.getContext());
         parcelRecyclerView.setLayoutManager(layoutManager);
 
 
-        HisroryParcelsFirebaseManager.NotifyToHistoryParcelList(new HisroryParcelsFirebaseManager.NotifyDataChange<List<HistoryParcel>>() {
+        HisroryParcelsFirebaseManager.NotifyToHistoryParcelList(member.getPhone(), new HisroryParcelsFirebaseManager.NotifyDataChange<List<HistoryParcel>>() {
             @Override
             public void OnDataChanged(List<HistoryParcel> obj) {
                 if (parcelRecyclerView.getAdapter() == null) {

@@ -51,6 +51,7 @@ public class FriendsParcelsRecyclerViewAdapter extends RecyclerView.Adapter<Frie
         holder.textViewLocationOfStorage.setText(pendingParcel.getParcelDetails().getLocationOfStorage());
         holder.textViewRecipientAddress.setText(pendingParcel.getParcelDetails().getRecipientAddress());
         if (pendingParcel.getOptionalDeliveries().containsKey(member.getPhone()))
+
             memberHasOffered(holder);
 
         holder.buttonIWantToTakeIt.setOnClickListener(new View.OnClickListener() {
