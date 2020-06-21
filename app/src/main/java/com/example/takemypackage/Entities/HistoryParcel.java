@@ -7,18 +7,18 @@ import java.util.Date;
 public class HistoryParcel {
     private DeliveryPerson deliveryPerson;
     private Parcel parcelDetails;
-    private Calendar dateCollected;
+    private Date dateCollected;
 
     public HistoryParcel() {
     }
 
-    public HistoryParcel(Parcel _parcelDetails, DeliveryPerson _deliveryPerson, Calendar _dateCollected) {
+    public HistoryParcel(Parcel _parcelDetails, DeliveryPerson _deliveryPerson, Date _dateCollected) {
         parcelDetails = _parcelDetails;
         deliveryPerson = _deliveryPerson;
         dateCollected = _dateCollected;
     }
 
-    public HistoryParcel(PendingParcel _parcelDetails, DeliveryPerson _deliveryPerson, Calendar _dateCollected) {
+    public HistoryParcel(PendingParcel _parcelDetails, DeliveryPerson _deliveryPerson, Date _dateCollected) {
         parcelDetails = _parcelDetails.getParcelDetails();
         deliveryPerson = _deliveryPerson;
         dateCollected = _dateCollected;
@@ -40,11 +40,11 @@ public class HistoryParcel {
         this.parcelDetails = parcelDetails;
     }
 
-    public Calendar getDateCollected() {
+    public Date getDateCollected() {
         return dateCollected;
     }
 
-    public void setDateCollected(Calendar dateCollected) {
+    public void setDateCollected(Date dateCollected) {
         this.dateCollected = dateCollected;
     }
 }

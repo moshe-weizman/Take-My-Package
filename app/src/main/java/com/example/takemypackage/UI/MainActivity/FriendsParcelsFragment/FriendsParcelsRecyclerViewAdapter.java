@@ -20,6 +20,7 @@ import com.example.takemypackage.Entities.PendingParcel;
 import com.example.takemypackage.R;
 
 import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -29,7 +30,7 @@ public class FriendsParcelsRecyclerViewAdapter extends RecyclerView.Adapter<Frie
     private Member member;
     DeliveryPerson deliveryPerson;
     HistoryParcel historyParcel;
-    Calendar calendar;
+    Date calendar;
 
     public FriendsParcelsRecyclerViewAdapter(List<PendingParcel> pendingParcels, Member member) {
         this.pendingParcels = pendingParcels;
@@ -92,6 +93,7 @@ public class FriendsParcelsRecyclerViewAdapter extends RecyclerView.Adapter<Frie
             @Override
             public void onClick(View v) {
                 deliveryPerson = new DeliveryPerson(member);
+                calendar=new Date();
                 historyParcel = new HistoryParcel(pendingParcel, deliveryPerson, calendar);
                 PendingParcelsFirebaseManager.deletePendingParcel(pendingParcel, new PendingParcelsFirebaseManager.Action<String>() {
                     @Override
