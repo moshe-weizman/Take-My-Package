@@ -101,22 +101,7 @@ public class FriendsParcelsFragment extends Fragment {
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this.getContext());
         parcelRecyclerView.setLayoutManager(layoutManager);
 
-        parcelRecyclerView.addOnItemTouchListener(new RecyclerView.OnItemTouchListener() {
-            @Override
-            public boolean onInterceptTouchEvent(@NonNull RecyclerView rv, @NonNull MotionEvent e) {
-                return false;
-            }
 
-            @Override
-            public void onTouchEvent(@NonNull RecyclerView rv, @NonNull MotionEvent e) {
-
-            }
-
-            @Override
-            public void onRequestDisallowInterceptTouchEvent(boolean disallowIntercept) {
-
-            }
-        });
 
 
         PendingParcelsFirebaseManager.NotifyToParcelList(/*pendingParcels,*/ new PendingParcelsFirebaseManager.NotifyDataChange<List<PendingParcel>>() {

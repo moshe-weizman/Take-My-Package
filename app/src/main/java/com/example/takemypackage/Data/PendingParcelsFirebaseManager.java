@@ -52,7 +52,7 @@ public class PendingParcelsFirebaseManager {
     public static void NotifyToParcelList(/*final List<PendingParcel> pendingParcelList*/ final NotifyDataChange<List<PendingParcel>> notifyDataChange) {
         if (notifyDataChange != null) {
             if (parcelRefChildEventListener != null) {
-                notifyDataChange.onFailure(new Exception("first unNotify student list"));
+                notifyDataChange.onFailure(new Exception("first unNotify parcel list"));
                 return;
             }
             pendingParcelList.clear();
@@ -119,7 +119,7 @@ public class PendingParcelsFirebaseManager {
     }
 
     //-----------------------------------------CRUD Functions----------------------------------------------------------------------------------
-    public static void addMemberToOptionalDeliveries(PendingParcel pendingParcel,DeliveryPerson deliveryPerson, final Action<String> action) {
+    public static void addMemberToOptionalDeliveries(PendingParcel pendingParcel, DeliveryPerson deliveryPerson, final Action<String> action) {
 
         DatabaseReference DeliveryPersonRef = parcelRef.child(pendingParcel.getParcelDetails().getRecipientPhone()).child(pendingParcel.getParcelDetails().getParcelID()).child("optionalDeliveries");
 
@@ -127,6 +127,22 @@ public class PendingParcelsFirebaseManager {
             @Override
             public void onSuccess(Void aVoid) {
                 action.onSuccess("Registration was successful");
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                action.onFailure(e);
+            }
+        });
+
+    }
+
+    public static void deletePendingParcel(PendingParcel pendingParcel, final Action<String> action) {
+        Parcel parcel = pendingParcel.getParcelDetails();
+        parcelRef.child(parcel.getRecipientPhone()).child(parcel.getParcelID()).removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+                action.onSuccess("Deletion was successful");
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
@@ -157,8 +173,5 @@ public class PendingParcelsFirebaseManager {
 
     }
 
-    public void deletePendingParcel(PendingParcel pendingParcel) {
-
-    }
 
 }
