@@ -127,7 +127,7 @@ public class FriendsParcelsFragment extends Fragment {
 
         return view;
     }
-
+//
 //    public void onDestroyView() {
 //        super.onDestroyView();
 //        PendingParcelsFirebaseManager.stopNotifyToStudentList();
