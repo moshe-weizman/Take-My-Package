@@ -17,6 +17,7 @@ import com.example.takemypackage.Entities.Member;
 import com.example.takemypackage.R;
 import com.example.takemypackage.UI.Login.SignUp.SignUpActivity;
 import com.example.takemypackage.UI.MainActivity.MainActivity;
+import com.example.takemypackage.Utils.LoadingDialog;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -34,10 +35,10 @@ import static com.example.takemypackage.Data.MembersFirebaseManager.memberRef;
 
 public class LoginActivity extends AppCompatActivity {
     public final static String MEMBER_KEY = "com.example.takemypackage.Entities.Member";
-   // public final static String USERFIREBASE_KEY = "com.example.takemypackage.USERFIREBASE_KEY.";
+    // public final static String USERFIREBASE_KEY = "com.example.takemypackage.USERFIREBASE_KEY.";
 
 
-
+    private LoadingDialog loadingDialog;
     private FirebaseAuth mAuth;
     private TextView textViewSignUp;
     private EditText editTextPhoneLogIn, editTextPIN, editTextEmail;
@@ -55,10 +56,10 @@ public class LoginActivity extends AppCompatActivity {
         init();
 
 
-
         btnLogIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                loadingDialog.startLoadingDialog();
                 if (!TextUtils.isEmpty(editTextEmail.getText())) {
                     emailUser = editTextEmail.getText().toString();
                     Query queryEmail = memberRef.orderByChild("email").equalTo(emailUser);
@@ -119,6 +120,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void init() {
+        loadingDialog = new LoadingDialog(LoginActivity.this);
         editTextPIN = findViewById(R.id.editTextPIN);
         editTextPhoneLogIn = findViewById(R.id.editTextPhoneLogIn);
         textViewSignUp = findViewById(R.id.textViewSignUp);
@@ -139,6 +141,7 @@ public class LoginActivity extends AppCompatActivity {
                     Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                     intent.putExtra(MEMBER_KEY, memberLogin);
                     //intent.putExtra()
+                    loadingDialog.dismissDialog();
                     startActivity(intent);
                 } else {
                     // If sign in fails, display a message to the user.

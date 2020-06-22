@@ -7,7 +7,7 @@
     tools:context=".UI.Login.SignUp.SignUpActivity">
 
     <LinearLayout
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         tools:layout_editor_absoluteX="1dp"
@@ -119,11 +119,16 @@
 
         <Button
             android:id="@+id/buttonSignUp"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_width="250dp"
+            android:layout_height="60dp"
+            android:layout_gravity="center"
             android:layout_marginHorizontal="10dp"
             android:layout_marginTop="100dp"
+            android:background="@drawable/custom_button"
+            android:drawablePadding="12dp"
             android:text="@string/sign_up"
+            android:textColor="@color/colorPrimary"
+            android:textSize="20sp"
             tools:layout_editor_absoluteX="10dp"
             tools:layout_editor_absoluteY="266dp" />
 

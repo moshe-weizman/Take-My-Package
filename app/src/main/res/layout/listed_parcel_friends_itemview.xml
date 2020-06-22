@@ -8,7 +8,6 @@
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:cardBackgroundColor="@android:color/holo_blue_bright"
         tools:layout_editor_absoluteX="10dp">
 
         <LinearLayout
@@ -60,18 +59,32 @@
 
             <Button
                 android:id="@+id/buttonIWantToTake"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_width="250dp"
+                android:layout_height="60dp"
+                android:layout_gravity="center"
+                android:layout_marginHorizontal="10dp"
+                android:layout_marginTop="30dp"
+                android:background="@drawable/custom_button"
+                android:drawablePadding="12dp"
                 android:shadowColor="@android:color/holo_blue_dark"
                 android:text="I want to take it"
-                android:textColorHighlight="@android:color/holo_blue_dark" />
+                android:textColor="@color/colorPrimary"
+                android:textColorHighlight="@android:color/holo_blue_dark"
+                android:textSize="20sp" />
 
             <Button
                 android:id="@+id/buttonITookIt"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_width="250dp"
+                android:layout_height="60dp"
+                android:layout_gravity="center"
+                android:layout_marginHorizontal="10dp"
+                android:layout_marginTop="30dp"
+                android:background="@drawable/custom_button"
+                android:drawablePadding="12dp"
                 android:enabled="false"
-                android:text="I took it" />
+                android:text="I took it"
+                android:textColor="@color/colorPrimary"
+                android:textSize="20sp" />
 
 
         </LinearLayout>
