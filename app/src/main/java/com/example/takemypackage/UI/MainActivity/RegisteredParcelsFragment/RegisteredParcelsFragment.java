@@ -48,7 +48,7 @@ public class RegisteredParcelsFragment extends Fragment {
                      registeredParcels.add(pendingParcel);
                   }
                }
-               recyclerView.setAdapter(new RegisteredParcelsRecyclerViewAdapter(registeredParcels, member));
+               recyclerView.setAdapter(new RegisteredParcelsRecyclerViewAdapter(registeredParcels, member, getContext()));
             }else recyclerView.getAdapter().notifyDataSetChanged();
          }
 
