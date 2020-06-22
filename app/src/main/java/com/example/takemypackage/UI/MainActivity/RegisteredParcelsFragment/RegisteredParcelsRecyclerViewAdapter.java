@@ -46,6 +46,7 @@ public class RegisteredParcelsRecyclerViewAdapter extends RecyclerView.Adapter<R
          parcelWeightTextView = itemView.findViewById(R.id.parcelWeightTextView);
          recipientAddressTextView = itemView.findViewById(R.id.recipientAddressTextView);
          storageLocationTextView = itemView.findViewById(R.id.storageLocationTextView);
+         expandableLayout = itemView.findViewById(R.id.expandableLayout);
          whoCanTakeTextView = itemView.findViewById(R.id.whoCanTakeTextView);
          deliveryPersonsRecyclerView = itemView.findViewById(R.id.deliveryPersonsRecyclerView);
          deliveryPersonsRecyclerView.setHasFixedSize(true);

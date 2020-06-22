@@ -39,7 +39,6 @@ public class DeliveryPersonsRecyclerViewAdapter extends RecyclerView.Adapter<Del
    @NonNull
    @Override
    public DeliveryPersonsViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-      deliveryPersonList = new HashMap<>();
       View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.listed_delivery_person_itemview, parent, false);
       return new DeliveryPersonsViewHolder(view);
    }
