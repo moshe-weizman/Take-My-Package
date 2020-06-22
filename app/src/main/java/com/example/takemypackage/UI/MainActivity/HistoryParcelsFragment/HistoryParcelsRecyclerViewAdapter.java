@@ -75,7 +75,7 @@ public class HistoryParcelsRecyclerViewAdapter extends RecyclerView.Adapter<Hist
         final HistoryParcel historyParcel = historyParcelList.get(position);
         holder.textViewHistoryParcelID.setText(historyParcel.getParcelDetails().getParcelID());
         holder.textViewDeliveryPerson.setText(historyParcel.getDeliveryPerson().getName() + " Phone: " + historyParcel.getDeliveryPerson().getPhone());
-        //TODO implemetion
+        //TODO implemetion toString for date
         holder.textViewDate.setText(historyParcel.getDateCollected().toString());
     }
 

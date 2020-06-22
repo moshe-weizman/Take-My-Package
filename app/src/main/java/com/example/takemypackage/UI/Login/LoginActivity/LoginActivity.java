@@ -34,6 +34,9 @@ import static com.example.takemypackage.Data.MembersFirebaseManager.memberRef;
 
 public class LoginActivity extends AppCompatActivity {
     public final static String MEMBER_KEY = "com.example.takemypackage.Entities.Member";
+   // public final static String USERFIREBASE_KEY = "com.example.takemypackage.USERFIREBASE_KEY.";
+
+
 
     private FirebaseAuth mAuth;
     private TextView textViewSignUp;
@@ -51,8 +54,6 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.login_activity);
         init();
 
-        // Initialize Firebase Auth
-        mAuth = FirebaseAuth.getInstance();
 
 
         btnLogIn.setOnClickListener(new View.OnClickListener() {
@@ -81,7 +82,7 @@ public class LoginActivity extends AppCompatActivity {
                     });
 
                 } else {
-                    //TODO to change from query to loop (foreach) because thh application is fall down when the user insert phone number that not exsist or to do try catch or to do what roni suggested
+                    //TODO to change from query to loop (foreach) because the application is fall down when the user insert phone number that not exsist or to do try catch or to do what roni suggested
                     Query query = memberRef.orderByKey().equalTo(editTextPhoneLogIn.getText().toString());
                     //   DatabaseReference userRef=memberRef.child(editTextPhoneLogIn.getText().toString());
                     query.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -123,6 +124,9 @@ public class LoginActivity extends AppCompatActivity {
         textViewSignUp = findViewById(R.id.textViewSignUp);
         editTextEmail = findViewById(R.id.editTextEmail);
         btnLogIn = findViewById(R.id.btnLogIn);
+        // Initialize Firebase Auth
+        mAuth = FirebaseAuth.getInstance();
+
     }
 
     private void singIn(String email, String password) {
@@ -134,6 +138,7 @@ public class LoginActivity extends AppCompatActivity {
                     FirebaseUser user = mAuth.getCurrentUser();
                     Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                     intent.putExtra(MEMBER_KEY, memberLogin);
+                    //intent.putExtra()
                     startActivity(intent);
                 } else {
                     // If sign in fails, display a message to the user.
