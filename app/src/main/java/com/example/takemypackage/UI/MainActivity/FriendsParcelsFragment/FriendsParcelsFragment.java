@@ -41,6 +41,7 @@ import java.util.List;
  * create an instance of this fragment.
  */
 public class FriendsParcelsFragment extends Fragment {
+    public FriendsParcelsFragment(){}
 
 //=============================================================================================
 //    // TODO: Rename parameter arguments, choose names that match

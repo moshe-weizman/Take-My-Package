@@ -31,15 +31,14 @@ public class MainActivity extends AppCompatActivity {
     private ActionBarDrawerToggle drawerToggle;
     private FirebaseAuth auth;
     private FragmentTransaction fragmentTransaction;
-
+   private Fragment fragment;
+    private FragmentManager fragmentManager = getSupportFragmentManager();
     private FriendsParcelsFragment friendsParcelsFragment;
     Member member;// = new Member();
 
     @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        fragmentTransaction = fragmentManager.beginTransaction();
+    protected void onCreate(Bundle savedInstanceState) {
+
 
         auth = FirebaseAuth.getInstance();
         super.onCreate(savedInstanceState);
@@ -76,47 +75,51 @@ public class MainActivity extends AppCompatActivity {
 
     private void setupDrawerContent(NavigationView navigationView) {
         navigationView.setNavigationItemSelectedListener(
-              new NavigationView.OnNavigationItemSelectedListener() {
-                  @Override
-                  public boolean onNavigationItemSelected(MenuItem menuItem) {
-                      selectDrawerItem(menuItem);
-                      return true;
-                  }
-              });
+                new NavigationView.OnNavigationItemSelectedListener() {
+                    @Override
+                    public boolean onNavigationItemSelected(MenuItem menuItem) {
+                        selectDrawerItem(menuItem);
+                        return true;
+                    }
+                });
     }
 
     public void selectDrawerItem(MenuItem menuItem) {
         // Create a new fragment and specify the fragment to show based on nav item clicked
-        Fragment fragment = null;
+        fragment = null;
         Class fragmentClass;
-        switch(menuItem.getItemId()) {
+        switch (menuItem.getItemId()) {
             case R.id.nav_registered_parcels_fragment:
                 fragmentClass = RegisteredParcelsFragment.class;
+                fragment = new RegisteredParcelsFragment();
                 break;
             case R.id.nav_friend_parcels_fragment:
-                fragmentClass = FriendsParcelsFragment.class;
+                //fragmentClass = FriendsParcelsFragment.class;
+                fragment = new FriendsParcelsFragment();
                 break;
             case R.id.nav_history_parcels_fragment:
-                fragmentClass = HistoryParcelsFragment.class;
+                //  fragmentClass = HistoryParcelsFragment.class;
+                fragment = new HistoryParcelsFragment();
                 break;
             case R.id.profile_update:
-                fragmentClass = ProfileEditFragment.class;
+                fragment = new ProfileEditFragment();
                 break;
             case R.id.sign_out:
                 signOut();
+                break;
             default:
-                fragmentClass = RegisteredParcelsFragment.class;
+                fragment = new RegisteredParcelsFragment();
         }
 
         try {
-            fragment = (Fragment) fragmentClass.newInstance();
+            // fragment = (Fragment) fragmentClass.newInstance();
         } catch (Exception e) {
             e.printStackTrace();
         }
 
         // Insert the fragment by replacing any existing fragment
 
-        fragmentTransaction.replace(R.id.flContent, fragment).commit();
+        fragmentManager.beginTransaction().replace(R.id.flContent, fragment).commit();
 
         // Highlight the selected item has been done by NavigationView
         menuItem.setChecked(true);

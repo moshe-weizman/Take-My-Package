@@ -28,6 +28,9 @@ public class HistoryParcelsFragment extends Fragment {
     private List<HistoryParcel> historyParcelList;
     private Member member;
 
+    public HistoryParcelsFragment() {
+    }
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

@@ -29,8 +29,6 @@ public class RegisteredParcelsFragment extends Fragment {
 
    public RegisteredParcelsFragment() {
 
-
-
    }
 
    @Nullable

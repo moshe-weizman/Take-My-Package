@@ -119,7 +119,6 @@ public class PendingParcelsFirebaseManager {
 
     //-----------------------------------------CRUD Functions----------------------------------------------------------------------------------
     public static void addMemberToOptionalDeliveries(PendingParcel pendingParcel, DeliveryPerson deliveryPerson, final Action<String> action) {
-
         DatabaseReference DeliveryPersonRef = parcelRef.child(pendingParcel.getParcelDetails().getRecipientPhone()).child(pendingParcel.getParcelDetails().getParcelID()).child("optionalDeliveries");
 
         DeliveryPersonRef.child(deliveryPerson.getPhone()).setValue(deliveryPerson).addOnSuccessListener(new OnSuccessListener<Void>() {
