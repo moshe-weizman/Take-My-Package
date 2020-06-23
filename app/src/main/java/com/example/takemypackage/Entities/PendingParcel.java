@@ -20,7 +20,7 @@ public class PendingParcel {
         parcelDetails = _parcelDetails;
         optionalDeliveries = new HashMap<>();
     }
-
+//
     public HashMap<String, DeliveryPerson> getOptionalDeliveries() {
         return optionalDeliveries;
     }
