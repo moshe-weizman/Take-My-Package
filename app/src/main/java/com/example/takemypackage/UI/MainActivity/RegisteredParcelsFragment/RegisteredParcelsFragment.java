@@ -23,33 +23,41 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class RegisteredParcelsFragment extends Fragment {
-   private RecyclerView _recyclerView;
-   List<PendingParcel> registeredParcels;
+   private RecyclerView registeredParcelsRecyclerView;
+   private List<PendingParcel> registeredParcels;
    private Member member;
+
+   public RegisteredParcelsFragment() {
+
+
+
+   }
 
    @Nullable
    @Override
-   public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-      View view = inflater.inflate(R.layout.registered_parcels_fragment, container, false);
-      final RecyclerView recyclerView = view.findViewById(R.id.registeredParcelsRecyclerView);
-      recyclerView.setHasFixedSize(true);
-      RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this.getContext());
-      recyclerView.setLayoutManager(layoutManager);
-
+   public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
       Intent intent = this.getActivity().getIntent();
       member = (Member)intent.getSerializableExtra(MEMBER_KEY);
+      registeredParcels = new ArrayList<>();
+
+      View view = inflater.inflate(R.layout.fragment_friends_parcels, container, false);
+      registeredParcelsRecyclerView = view.findViewById(R.id.parcelRecyclerView);
+      registeredParcelsRecyclerView.setHasFixedSize(true);
+      RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this.getContext());
+      registeredParcelsRecyclerView.setLayoutManager(layoutManager);
+
 
       PendingParcelsFirebaseManager.NotifyToParcelList(new PendingParcelsFirebaseManager.NotifyDataChange<List<PendingParcel>>() {
          @Override
          public void OnDataChanged(List<PendingParcel> obj) {
-            if (recyclerView.getAdapter() == null){
+            if (registeredParcelsRecyclerView.getAdapter() == null){
                for (PendingParcel pendingParcel : obj) {
                   if (pendingParcel.getParcelDetails().getRecipientPhone().equals(member.getPhone())){
                      registeredParcels.add(pendingParcel);
                   }
                }
-               recyclerView.setAdapter(new RegisteredParcelsRecyclerViewAdapter(registeredParcels, member));
-            }else recyclerView.getAdapter().notifyDataSetChanged();
+               registeredParcelsRecyclerView.setAdapter(new RegisteredParcelsRecyclerViewAdapter(registeredParcels, member, getContext()));
+            }else registeredParcelsRecyclerView.getAdapter().notifyDataSetChanged();
          }
 
          @Override
