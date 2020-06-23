@@ -1,5 +1,7 @@
 package com.example.takemypackage.Entities;
 
+import android.net.Uri;
+
 import androidx.annotation.NonNull;
 
 import com.google.firebase.database.Exclude;
@@ -15,6 +17,8 @@ public class Member implements Serializable {
     private String email;
     private String phone;
     private String password;
+    private Uri imageLocalUri;
+    private String imageFirebaseUri;
 
     //---------------------------------------------------------------------------------------------------------------------
     public Member() {
@@ -33,6 +37,23 @@ public class Member implements Serializable {
     //---------------------------------------------------------------------------------------------------------------------
     public String getfName() {
         return fName;
+    }
+
+    @Exclude
+    public Uri getImageLocalUri() {
+        return imageLocalUri;
+    }
+
+    public void setImageLocalUri(Uri imageLocalUri) {
+        this.imageLocalUri = imageLocalUri;
+    }
+
+    public String getImageFirebaseUri() {
+        return imageFirebaseUri;
+    }
+
+    public void setImageFirebaseUri(String imageFirebaseUri) {
+        this.imageFirebaseUri = imageFirebaseUri;
     }
 
     public void setfName(String fName) {

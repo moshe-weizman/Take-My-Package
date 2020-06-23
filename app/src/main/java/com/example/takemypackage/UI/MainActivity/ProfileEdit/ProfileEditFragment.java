@@ -15,6 +15,7 @@ import android.widget.Toast;
 import com.example.takemypackage.Data.MembersFirebaseManager;
 import com.example.takemypackage.Entities.Member;
 import com.example.takemypackage.R;
+import com.example.takemypackage.Utils.LoadingDialog;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -24,6 +25,7 @@ import static com.example.takemypackage.UI.Login.LoginActivity.LoginActivity.MEM
  * A simple {@link Fragment} subclass.
  */
 public class ProfileEditFragment extends Fragment {
+    private LoadingDialog loadingDialog;
     private FirebaseAuth mAuth;
     FirebaseUser user;
     Member member;
@@ -45,6 +47,7 @@ public class ProfileEditFragment extends Fragment {
         buttonUpdate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                loadingDialog.startLoadingDialog();
                 newMember = new Member(editTextFirstName.getText().toString(), editTextLastName.getText().toString(),
                         editTextAddress.getText().toString(), editTextPhone.getText().toString(),
                         editTextEmail.getText().toString(), editTextPIN.getText().toString());
@@ -53,11 +56,13 @@ public class ProfileEditFragment extends Fragment {
                     public void onSuccess(String obj) {
                         user.updateEmail(editTextEmail.getText().toString());
                         user.updatePassword(editTextPIN.getText().toString());
+                        loadingDialog.dismissDialog();
                         Toast.makeText(getContext(), obj, Toast.LENGTH_LONG).show();
                     }
 
                     @Override
                     public void onFailure(Exception exception) {
+                        loadingDialog.dismissDialog();
                         Toast.makeText(getContext(), "update was failed", Toast.LENGTH_LONG).show();
                     }
 
@@ -71,16 +76,18 @@ public class ProfileEditFragment extends Fragment {
         buttonDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                loadingDialog.startLoadingDialog();
                 MembersFirebaseManager.deleteMember(member.getPhone(), new MembersFirebaseManager.Action<String>() {
                     @Override
                     public void onSuccess(String obj) {
                         user.delete();
+                        loadingDialog.dismissDialog();
                         Toast.makeText(getContext(), obj, Toast.LENGTH_LONG).show();
                     }
 
                     @Override
                     public void onFailure(Exception exception) {
-
+                        loadingDialog.dismissDialog();
                     }
 
                     @Override
@@ -95,6 +102,7 @@ public class ProfileEditFragment extends Fragment {
 
     private void init(View view) {
         Intent intent = getActivity().getIntent();
+        loadingDialog = new LoadingDialog(getActivity());
         member = (Member) intent.getSerializableExtra(MEMBER_KEY);
         buttonUpdate = view.findViewById(R.id.buttonUpdate);
         buttonDelete = view.findViewById(R.id.buttonDelete);
