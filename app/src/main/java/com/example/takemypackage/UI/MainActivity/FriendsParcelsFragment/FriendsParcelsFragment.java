@@ -72,12 +72,13 @@ public class FriendsParcelsFragment extends Fragment {
         PendingParcelsFirebaseManager.NotifyToParcelList(/*pendingParcels,*/ new PendingParcelsFirebaseManager.NotifyDataChange<List<PendingParcel>>() {
             @Override
             public void OnDataChanged(List<PendingParcel> obj) {
+
+                String addressMember = member.getAddress();
+                for (PendingParcel parcel : obj) {
+                    if (getDistance(getContext(), addressMember, parcel.getParcelDetails().getLocationOfStorage()) < MAX_DISTANCE && !parcel.getParcelDetails().getRecipientPhone().equals(member.getPhone()))
+                        pendingParcels.add(parcel);
+                }
                 if (parcelRecyclerView.getAdapter() == null) {
-                    String addressMember = member.getAddress();
-                    for (PendingParcel parcel : obj) {
-                        if (getDistance(getContext(), addressMember, parcel.getParcelDetails().getLocationOfStorage()) < MAX_DISTANCE)
-                            pendingParcels.add(parcel);
-                    }
                     parcelRecyclerView.setAdapter(new FriendsParcelsRecyclerViewAdapter(pendingParcels, member));
                 } else parcelRecyclerView.getAdapter().notifyDataSetChanged();
             }

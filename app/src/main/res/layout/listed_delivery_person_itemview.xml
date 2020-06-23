@@ -28,14 +28,15 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="TextView" />
+
+                <CheckBox
+                    android:id="@+id/authorizeCheckBox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Approval" />
             </LinearLayout>
 
-            <CheckBox
-                android:id="@+id/authorizeCheckBox"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="CheckBox" />
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 </androidx.constraintlayout.widget.ConstraintLayout>

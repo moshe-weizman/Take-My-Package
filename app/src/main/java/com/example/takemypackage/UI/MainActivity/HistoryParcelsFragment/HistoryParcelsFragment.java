@@ -53,8 +53,8 @@ public class HistoryParcelsFragment extends Fragment {
         HisroryParcelsFirebaseManager.NotifyToHistoryParcelList(member.getPhone(), new HisroryParcelsFirebaseManager.NotifyDataChange<List<HistoryParcel>>() {
             @Override
             public void OnDataChanged(List<HistoryParcel> obj) {
+                historyParcelList = obj;
                 if (parcelRecyclerView.getAdapter() == null) {
-                    historyParcelList = obj;
                     parcelRecyclerView.setAdapter(new HistoryParcelsRecyclerViewAdapter(historyParcelList));
                 } else parcelRecyclerView.getAdapter().notifyDataSetChanged();
             }

@@ -58,6 +58,7 @@ public class PendingParcelsFirebaseManager {
             parcelRefChildEventListener = new ChildEventListener() {
                 @Override
                 public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                    pendingParcelList.clear();
                     for (DataSnapshot child : dataSnapshot.getChildren()) {
                         PendingParcel pendingParcel = child.getValue(PendingParcel.class);
                         pendingParcel.getParcelDetails().set_parcelID(child.getKey());
@@ -134,7 +135,8 @@ public class PendingParcelsFirebaseManager {
         });
 
     }
-//TODO replace to get  parmeters insted PendingParcel to RecipientPhone and parcelID
+
+    //TODO replace to get  parmeters insted PendingParcel to RecipientPhone and parcelID
     public static void deletePendingParcel(PendingParcel pendingParcel, final Action<String> action) {
         Parcel parcel = pendingParcel.getParcelDetails();
         parcelRef.child(parcel.getRecipientPhone()).child(parcel.getParcelID()).removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
