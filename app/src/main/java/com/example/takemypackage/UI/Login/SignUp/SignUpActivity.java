@@ -17,6 +17,7 @@ import com.example.takemypackage.Entities.Member;
 import com.example.takemypackage.R;
 import com.example.takemypackage.UI.Login.LoginActivity.LoginActivity;
 import com.example.takemypackage.UI.MainActivity.MainActivity;
+import com.example.takemypackage.Utils.LoadingDialog;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -26,8 +27,8 @@ import com.google.firebase.auth.FirebaseUser;
 public class SignUpActivity extends AppCompatActivity {
     private EditText editTextPIN, editTextPhone, editTextAddress, editTextEmail, editTextFirstName, editTextLastName;
     private Button buttonSignUp;
-    private ProgressBar progressBarAddMember;
-    Member member;
+    private Member member;
+    private LoadingDialog loadingDialog;
     private FirebaseAuth mAuth;
 
     @Override
@@ -40,6 +41,7 @@ public class SignUpActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
+                loadingDialog.startLoadingDialog();
                 member = new Member(editTextFirstName.getText().toString(), editTextLastName.getText().toString(),
                         editTextAddress.getText().toString(), editTextPhone.getText().toString(),
                         editTextEmail.getText().toString(), editTextPIN.getText().toString());
@@ -62,14 +64,14 @@ public class SignUpActivity extends AppCompatActivity {
                 public void onSuccess(String obj) {
                     Toast.makeText(getBaseContext(), "welcome " + obj, Toast.LENGTH_LONG).show();
                 }
+
                 @Override
                 public void onFailure(Exception exception) {
                     Toast.makeText(getBaseContext(), "Error \n", Toast.LENGTH_LONG).show();
                 }
+
                 @Override
                 public void onProgress(String status, double percent) {
-                    if (percent != 100)
-                        progressBarAddMember.setProgress((int) percent*100);
                 }
             });
 
@@ -79,7 +81,7 @@ public class SignUpActivity extends AppCompatActivity {
     }
 
     private void init() {
-        progressBarAddMember = findViewById(R.id.progressBarAddMember);
+        loadingDialog = new LoadingDialog(SignUpActivity.this);
         editTextPIN = findViewById(R.id.editTextPIN);
         editTextPhone = findViewById(R.id.editTextPhone);
         editTextAddress = findViewById(R.id.editTextAddress);
@@ -99,9 +101,11 @@ public class SignUpActivity extends AppCompatActivity {
                     Toast.makeText(getBaseContext(), "Authentication succeeded ", Toast.LENGTH_LONG).show();
                     FirebaseUser user = mAuth.getCurrentUser();
                     addMember();
+                    loadingDialog.dismissDialog();
 
                 } else {
                     // If sign in fails, display a message to the user.
+                    loadingDialog.dismissDialog();
                     Toast.makeText(getBaseContext(), "Authentication failed.", Toast.LENGTH_SHORT).show();
 
                 }

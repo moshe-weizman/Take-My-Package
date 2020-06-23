@@ -145,6 +145,7 @@ public class LoginActivity extends AppCompatActivity {
                     startActivity(intent);
                 } else {
                     // If sign in fails, display a message to the user.
+                    loadingDialog.dismissDialog();
                     Toast.makeText(getBaseContext(), "Authentication failed.", Toast.LENGTH_SHORT).show();
                 }
             }

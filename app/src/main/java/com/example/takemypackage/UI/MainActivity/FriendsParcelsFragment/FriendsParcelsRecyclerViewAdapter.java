@@ -18,6 +18,7 @@ import com.example.takemypackage.Entities.HistoryParcel;
 import com.example.takemypackage.Entities.Member;
 import com.example.takemypackage.Entities.PendingParcel;
 import com.example.takemypackage.R;
+import com.example.takemypackage.Utils.LoadingDialog;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -28,9 +29,11 @@ public class FriendsParcelsRecyclerViewAdapter extends RecyclerView.Adapter<Frie
     private List<PendingParcel> pendingParcels;
     private HashMap<String, DeliveryPerson> optionalDeliveries;
     private Member member;
-    DeliveryPerson deliveryPerson;
-    HistoryParcel historyParcel;
-    Date calendar;
+    private DeliveryPerson deliveryPerson;
+    private HistoryParcel historyParcel;
+    private Date calendar;
+    private LoadingDialog loadingDialog;
+
 
     public FriendsParcelsRecyclerViewAdapter(List<PendingParcel> pendingParcels, Member member) {
         this.pendingParcels = pendingParcels;
