@@ -14,10 +14,13 @@ import com.example.takemypackage.Entities.DeliveryPerson;
 import com.example.takemypackage.R;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.List;
 
 public class DeliveryPersonsRecyclerViewAdapter extends RecyclerView.Adapter<DeliveryPersonsRecyclerViewAdapter.DeliveryPersonsViewHolder> {
-   HashMap<String, DeliveryPerson> deliveryPersonList;
+   List<DeliveryPerson> deliveryPersonList;
 
    public static class DeliveryPersonsViewHolder extends RecyclerView.ViewHolder {
       public TextView deliveryNameTextView;
@@ -33,7 +36,8 @@ public class DeliveryPersonsRecyclerViewAdapter extends RecyclerView.Adapter<Del
    }
 
    public DeliveryPersonsRecyclerViewAdapter(HashMap<String, DeliveryPerson> deliveryPersonList) {
-      this.deliveryPersonList = deliveryPersonList;
+      Collection mapValues = deliveryPersonList.values();
+      this.deliveryPersonList = new ArrayList<>(mapValues);
    }
 
    @NonNull
