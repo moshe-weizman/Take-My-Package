@@ -12,7 +12,9 @@ import androidx.fragment.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.widget.ImageView;
 
+import com.bumptech.glide.Glide;
 import com.example.takemypackage.Entities.Member;
 import com.example.takemypackage.R;
 import com.example.takemypackage.UI.MainActivity.FriendsParcelsFragment.FriendsParcelsFragment;
@@ -34,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
     private Fragment fragment;
     private FragmentManager fragmentManager = getSupportFragmentManager();
     private FriendsParcelsFragment friendsParcelsFragment;
+    private ImageView imageViewNav;
     Member member;// = new Member();
 
     @Override
@@ -47,6 +50,7 @@ public class MainActivity extends AppCompatActivity {
         Intent myIntent = getIntent();
         member = (Member) myIntent.getSerializableExtra(MEMBER_KEY);
         getIntent().putExtra(MEMBER_KEY, member);
+        imageViewNav = findViewById(R.id.imageViewNav);
 
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -56,6 +60,8 @@ public class MainActivity extends AppCompatActivity {
         nvDrawer = findViewById(R.id.nvView);
         // Setup drawer view
         setupDrawerContent(nvDrawer);
+        //TODO
+        //Glide.with(getBaseContext()).load(member.getImageFirebaseUri()).centerCrop().override(150, 150).into(imageViewNav);
 
 //        FragmentManager fragmentManager = getSupportFragmentManager();
 //        fragmentManager.beginTransaction().replace(R.id.fragmentContainer, new RegisteredParcelsFragment(), "SOMETAG").commit();
@@ -64,6 +70,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+
         // The action bar home/up action should open or close the drawer.
         switch (item.getItemId()) {
             case android.R.id.home:
