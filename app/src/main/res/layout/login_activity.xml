@@ -128,7 +128,7 @@
                 android:layout_marginHorizontal="10dp"
                 android:layout_marginTop="20dp"
                 android:clickable="true"
-                android:text="Sign Up"
+                android:text="Sign Up>>"
                 android:textColor="@color/colorPrimaryDark"
                 android:textSize="18sp" />
         </LinearLayout>

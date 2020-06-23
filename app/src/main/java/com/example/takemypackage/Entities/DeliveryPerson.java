@@ -4,6 +4,7 @@ public class DeliveryPerson {
     private String name;
     private String phone;
     private boolean isAuthorized;
+    private String imageFirebaseUri;
 
     public DeliveryPerson() {
     }
@@ -16,6 +17,15 @@ public class DeliveryPerson {
     public DeliveryPerson(Member member) {
         name = member.getfName() + " " + member.getlName();
         phone = member.getPhone();
+        imageFirebaseUri = member.getImageFirebaseUri();
+    }
+
+    public String getImageFirebaseUri() {
+        return imageFirebaseUri;
+    }
+
+    public void setImageFirebaseUri(String imageFirebaseUri) {
+        this.imageFirebaseUri = imageFirebaseUri;
     }
 
     public String getName() {

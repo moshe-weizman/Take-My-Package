@@ -80,7 +80,7 @@ public class RegisteredParcelsRecyclerViewAdapter extends RecyclerView.Adapter<R
       holder.expandableLayout.setVisibility(View.GONE);
       RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(context);
       holder.deliveryPersonsRecyclerView.setLayoutManager(layoutManager);
-      holder.deliveryPersonsRecyclerView.setAdapter(new DeliveryPersonsRecyclerViewAdapter(pendingParcel.getOptionalDeliveries()));
+      holder.deliveryPersonsRecyclerView.setAdapter(new DeliveryPersonsRecyclerViewAdapter(pendingParcel.getOptionalDeliveries(), _member));
 
       holder.whoCanTakeTextView.setOnClickListener(new View.OnClickListener() {
          @Override

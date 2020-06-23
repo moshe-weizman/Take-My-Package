@@ -4,13 +4,18 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Process;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import static com.example.takemypackage.UI.Login.LoginActivity.LoginActivity.MEMBER_KEY;
 
 import com.example.takemypackage.Data.MembersFirebaseManager;
 import com.example.takemypackage.Entities.Member;
@@ -30,12 +35,23 @@ public class SignUpActivity extends AppCompatActivity {
     private Member member;
     private LoadingDialog loadingDialog;
     private FirebaseAuth mAuth;
+    private TextView textViewSelectImage;
+    private Intent intent;
+    private ImageView urlImageView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
+
         init();
+        urlImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                selectImage();
+            }
+        });
+
 
         buttonSignUp.setOnClickListener(new View.OnClickListener() {
 
@@ -47,12 +63,12 @@ public class SignUpActivity extends AppCompatActivity {
                         editTextEmail.getText().toString(), editTextPIN.getText().toString());
                 register(member.getEmail(), member.getPassword());
 
-//                Intent intent = new Intent(SignUpActivity.this, MainActivity.class);
-//                startActivity(intent);
             }
 
 
         });
+
+
 
     }
 
@@ -81,15 +97,20 @@ public class SignUpActivity extends AppCompatActivity {
     }
 
     private void init() {
+
+        urlImageView = findViewById(R.id.urlImageView);
+
         loadingDialog = new LoadingDialog(SignUpActivity.this);
         editTextPIN = findViewById(R.id.editTextPIN);
         editTextPhone = findViewById(R.id.editTextPhone);
         editTextAddress = findViewById(R.id.editTextAddress);
         editTextEmail = findViewById(R.id.editTextEmail);
+        //  textViewSelectImage = findViewById(R.id.textViewSelectImage);
         editTextFirstName = findViewById(R.id.editTextFirstName);
         editTextLastName = findViewById(R.id.editTextLastName);
         buttonSignUp = findViewById(R.id.buttonSignUp);
         mAuth = FirebaseAuth.getInstance();
+        member = new Member();
     }
 
     private void register(String email, String password) {
@@ -100,6 +121,7 @@ public class SignUpActivity extends AppCompatActivity {
                     // Sign in success
                     Toast.makeText(getBaseContext(), "Authentication succeeded ", Toast.LENGTH_LONG).show();
                     FirebaseUser user = mAuth.getCurrentUser();
+                    addImage();
                     addMember();
                     loadingDialog.dismissDialog();
 
@@ -111,6 +133,49 @@ public class SignUpActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    private void addImage() {
+        //loadingDialog.startLoadingDialog();
+        member.setImageLocalUri((Uri) urlImageView.getTag());
+        MembersFirebaseManager.addImageMember(member, new MembersFirebaseManager.Action<String>() {
+            @Override
+            public void onSuccess(String obj) {
+                loadingDialog.dismissDialog();
+                Toast.makeText(getBaseContext(), "Upload was successful", Toast.LENGTH_LONG).show();
+
+            }
+
+            @Override
+            public void onFailure(Exception exception) {
+                loadingDialog.dismissDialog();
+                Toast.makeText(getBaseContext(), "Upload was failed ", Toast.LENGTH_LONG).show();
+
+
+            }
+
+            @Override
+            public void onProgress(String status, double percent) {
+
+            }
+        });
+
+    }
+
+    private void selectImage() {
+        Intent intent = new Intent();
+        intent.setType("image/*");
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        startActivityForResult(Intent.createChooser(intent, "Select Picture"), 1);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 1 && resultCode == RESULT_OK && data != null && data.getData() != null) {
+            urlImageView.setImageURI(data.getData());
+            urlImageView.setTag(data.getData());
+        }
     }
 }
 
