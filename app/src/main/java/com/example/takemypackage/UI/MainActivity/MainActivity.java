@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
     private ActionBarDrawerToggle drawerToggle;
     private FirebaseAuth auth;
     private FragmentTransaction fragmentTransaction;
-   private Fragment fragment;
+    private Fragment fragment;
     private FragmentManager fragmentManager = getSupportFragmentManager();
     private FriendsParcelsFragment friendsParcelsFragment;
     Member member;// = new Member();
@@ -87,10 +87,9 @@ public class MainActivity extends AppCompatActivity {
     public void selectDrawerItem(MenuItem menuItem) {
         // Create a new fragment and specify the fragment to show based on nav item clicked
         fragment = null;
-        Class fragmentClass;
+        //Class fragmentClass;
         switch (menuItem.getItemId()) {
             case R.id.nav_registered_parcels_fragment:
-                fragmentClass = RegisteredParcelsFragment.class;
                 fragment = new RegisteredParcelsFragment();
                 break;
             case R.id.nav_friend_parcels_fragment:
@@ -109,12 +108,6 @@ public class MainActivity extends AppCompatActivity {
                 break;
             default:
                 fragment = new RegisteredParcelsFragment();
-        }
-
-        try {
-            // fragment = (Fragment) fragmentClass.newInstance();
-        } catch (Exception e) {
-            e.printStackTrace();
         }
 
         // Insert the fragment by replacing any existing fragment

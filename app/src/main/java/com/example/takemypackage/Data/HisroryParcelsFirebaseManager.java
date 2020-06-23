@@ -126,7 +126,7 @@ public class HisroryParcelsFirebaseManager {
     }
 
 
-    public static void stopNotifyToStudentList() {
+    public static void stopNotifyToHistoryList() {
         if (historyParcelRefChildEventListener != null) {
             histortParcelsRef.removeEventListener(historyParcelRefChildEventListener);
             historyParcelRefChildEventListener = null;

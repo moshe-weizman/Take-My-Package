@@ -110,7 +110,7 @@ public class PendingParcelsFirebaseManager {
     }
 
 
-    public static void stopNotifyToStudentList() {
+    public static void stopNotifyToPendingList() {
         if (parcelRefChildEventListener != null) {
             parcelRef.removeEventListener(parcelRefChildEventListener);
             parcelRefChildEventListener = null;

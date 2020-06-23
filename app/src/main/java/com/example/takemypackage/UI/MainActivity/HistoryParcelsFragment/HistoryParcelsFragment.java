@@ -16,7 +16,6 @@ import com.example.takemypackage.Data.HisroryParcelsFirebaseManager;
 import com.example.takemypackage.Entities.HistoryParcel;
 import com.example.takemypackage.Entities.Member;
 import com.example.takemypackage.R;
-import com.example.takemypackage.UI.MainActivity.FriendsParcelsFragment.FriendsParcelsRecyclerViewAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -67,5 +66,11 @@ public class HistoryParcelsFragment extends Fragment {
             }
         });
         return view;
+    }
+
+    public void onDestroyView() {
+        super.onDestroyView();
+        HisroryParcelsFirebaseManager.stopNotifyToHistoryList();
+        super.onDestroy();
     }
 }

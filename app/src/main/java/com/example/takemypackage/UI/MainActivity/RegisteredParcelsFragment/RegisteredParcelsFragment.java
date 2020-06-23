@@ -17,57 +17,64 @@ import com.example.takemypackage.Data.PendingParcelsFirebaseManager;
 import com.example.takemypackage.Entities.Member;
 import com.example.takemypackage.Entities.PendingParcel;
 import com.example.takemypackage.R;
+
 import static com.example.takemypackage.UI.Login.LoginActivity.LoginActivity.MEMBER_KEY;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class RegisteredParcelsFragment extends Fragment {
-   private RecyclerView registeredParcelsRecyclerView;
-   private List<PendingParcel> registeredParcels;
-   private Member member;
+    private RecyclerView registeredParcelsRecyclerView;
+    private List<PendingParcel> registeredParcels;
+    private Member member;
 
-   public RegisteredParcelsFragment() {
+    public RegisteredParcelsFragment() {
 
-   }
+    }
 
-   @Nullable
-   @Override
-   public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-      Intent intent = this.getActivity().getIntent();
-      member = (Member)intent.getSerializableExtra(MEMBER_KEY);
-      registeredParcels = new ArrayList<>();
+    @Nullable
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        Intent intent = this.getActivity().getIntent();
+        member = (Member) intent.getSerializableExtra(MEMBER_KEY);
+        registeredParcels = new ArrayList<>();
 
-      View view = inflater.inflate(R.layout.fragment_friends_parcels, container, false);
-      registeredParcelsRecyclerView = view.findViewById(R.id.parcelRecyclerView);
-      registeredParcelsRecyclerView.setHasFixedSize(true);
-      RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this.getContext());
-      registeredParcelsRecyclerView.setLayoutManager(layoutManager);
+        View view = inflater.inflate(R.layout.fragment_friends_parcels, container, false);
+        registeredParcelsRecyclerView = view.findViewById(R.id.parcelRecyclerView);
+        registeredParcelsRecyclerView.setHasFixedSize(true);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this.getContext());
+        registeredParcelsRecyclerView.setLayoutManager(layoutManager);
 
 
-      PendingParcelsFirebaseManager.NotifyToParcelList(new PendingParcelsFirebaseManager.NotifyDataChange<List<PendingParcel>>() {
-         @Override
-         public void OnDataChanged(List<PendingParcel> obj) {
-            if (registeredParcelsRecyclerView.getAdapter() == null){
-               for (PendingParcel pendingParcel : obj) {
-                  if (pendingParcel.getParcelDetails().getRecipientPhone().equals(member.getPhone())){
-                     registeredParcels.add(pendingParcel);
-                  }
-               }
-               registeredParcelsRecyclerView.setAdapter(new RegisteredParcelsRecyclerViewAdapter(registeredParcels, member, getContext()));
-            }else registeredParcelsRecyclerView.getAdapter().notifyDataSetChanged();
-         }
+        PendingParcelsFirebaseManager.NotifyToParcelList(new PendingParcelsFirebaseManager.NotifyDataChange<List<PendingParcel>>() {
+            @Override
+            public void OnDataChanged(List<PendingParcel> obj) {
+                if (registeredParcelsRecyclerView.getAdapter() == null) {
+                    for (PendingParcel pendingParcel : obj) {
+                        if (pendingParcel.getParcelDetails().getRecipientPhone().equals(member.getPhone())) {
+                            registeredParcels.add(pendingParcel);
+                        }
+                    }
+                    registeredParcelsRecyclerView.setAdapter(new RegisteredParcelsRecyclerViewAdapter(registeredParcels, member, getContext()));
+                } else registeredParcelsRecyclerView.getAdapter().notifyDataSetChanged();
+            }
 
-         @Override
-         public void onFailure(Exception exception) {
-            Toast.makeText(getContext(), "Failed to get your registered parcels data \n" + exception.toString(), Toast.LENGTH_LONG).show();
-         }
-      });
-      return view;
-   }
+            @Override
+            public void onFailure(Exception exception) {
+                Toast.makeText(getContext(), "Failed to get your registered parcels data \n" + exception.toString(), Toast.LENGTH_LONG).show();
+            }
+        });
+        return view;
+    }
 
-   @Override
-   public void onCreate(@Nullable Bundle savedInstanceState) {
-      super.onCreate(savedInstanceState);
-   }
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+    }
+
+    public void onDestroyView() {
+        super.onDestroyView();
+        PendingParcelsFirebaseManager.stopNotifyToPendingList();
+        super.onDestroy();
+    }
 }
