@@ -3,13 +3,19 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_first_fragment"
-            android:title="First" />
+            android:id="@+id/nav_registered_parcels_fragment"
+            android:title="My Registered Packages" />
         <item
-            android:id="@+id/nav_second_fragment"
-            android:title="Second" />
+            android:id="@+id/nav_friend_parcels_fragment"
+            android:title="My Friends' Packages" />
         <item
-            android:id="@+id/nav_third_fragment"
-            android:title="Third" />
+            android:id="@+id/nav_history_parcels_fragment"
+            android:title="My Packages History" />
+        <item
+            android:id="@+id/profile_update"
+            android:title="My Profile" />
+        <item
+            android:id="@+id/sign_out"
+            android:title="Sign Out" />
     </group>
 </menu>

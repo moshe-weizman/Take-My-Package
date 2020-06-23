@@ -7,21 +7,19 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 
-import com.example.takemypackage.UI.Login.LoginActivity.*;
 import com.example.takemypackage.Entities.Member;
 import com.example.takemypackage.R;
-import com.example.takemypackage.UI.Login.LoginActivity.LoginActivity;
 import com.example.takemypackage.UI.MainActivity.FriendsParcelsFragment.FriendsParcelsFragment;
 import com.example.takemypackage.UI.MainActivity.HistoryParcelsFragment.HistoryParcelsFragment;
 import com.example.takemypackage.UI.MainActivity.ProfileEdit.ProfileEditFragment;
 import com.example.takemypackage.UI.MainActivity.RegisteredParcelsFragment.RegisteredParcelsFragment;
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.auth.FirebaseAuth;
 
 import static com.example.takemypackage.UI.Login.LoginActivity.LoginActivity.MEMBER_KEY;
 
@@ -30,12 +28,15 @@ public class MainActivity extends AppCompatActivity {
     private Toolbar toolbar;
     private NavigationView nvDrawer;
     private ActionBarDrawerToggle drawerToggle;
+    private FirebaseAuth auth;
 
     private FriendsParcelsFragment friendsParcelsFragment;
     Member member;// = new Member();
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
+        auth = FirebaseAuth.getInstance();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -43,12 +44,12 @@ public class MainActivity extends AppCompatActivity {
         member = (Member) myIntent.getSerializableExtra(MEMBER_KEY);
         getIntent().putExtra(MEMBER_KEY, member);
 
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        mDrawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        mDrawer = findViewById(R.id.drawer_layout);
         // Find our drawer view
-        nvDrawer = (NavigationView) findViewById(R.id.nvView);
+        nvDrawer = findViewById(R.id.nvView);
         // Setup drawer view
         setupDrawerContent(nvDrawer);
 
@@ -84,15 +85,20 @@ public class MainActivity extends AppCompatActivity {
         Fragment fragment = null;
         Class fragmentClass;
         switch(menuItem.getItemId()) {
-            case R.id.nav_first_fragment:
+            case R.id.nav_registered_parcels_fragment:
                 fragmentClass = RegisteredParcelsFragment.class;
                 break;
-            case R.id.nav_second_fragment:
+            case R.id.nav_friend_parcels_fragment:
                 fragmentClass = FriendsParcelsFragment.class;
                 break;
-            case R.id.nav_third_fragment:
+            case R.id.nav_history_parcels_fragment:
                 fragmentClass = HistoryParcelsFragment.class;
                 break;
+            case R.id.profile_update:
+                fragmentClass = ProfileEditFragment.class;
+                break;
+            case R.id.sign_out:
+                signOut();
             default:
                 fragmentClass = RegisteredParcelsFragment.class;
         }
@@ -113,5 +119,9 @@ public class MainActivity extends AppCompatActivity {
         setTitle(menuItem.getTitle());
         // Close the navigation drawer
         mDrawer.closeDrawers();
+    }
+
+    private void signOut() {
+        auth.signOut();
     }
 }
