@@ -3,8 +3,9 @@ package com.example.takemypackage.Entities;
 public class DeliveryPerson {
     private String name;
     private String phone;
-    private boolean isAuthorized;
+    private boolean authorized;
     private String imageFirebaseUri;
+
 
     public DeliveryPerson() {
     }
@@ -36,12 +37,12 @@ public class DeliveryPerson {
         return phone;
     }
 
-    public boolean isAuthorized() {
-        return isAuthorized;
+    public boolean getAuthorized() {
+        return authorized;
     }
 
-    public void setIsAuthorized(boolean authorized) {
-        isAuthorized = authorized;
+    public void setAuthorized(boolean authorized) {
+        this.authorized = authorized;
     }
 
     public void setName(String name) {

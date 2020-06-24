@@ -53,7 +53,7 @@ public class FriendsParcelsRecyclerViewAdapter extends RecyclerView.Adapter<Frie
         holder.textViewLocationOfStorage.setText(pendingParcel.getParcelDetails().getLocationOfStorage());
         holder.textViewRecipientAddress.setText(pendingParcel.getParcelDetails().getRecipientAddress());
         if (pendingParcel.getOptionalDeliveries().containsKey(member.getPhone())) {
-            if (pendingParcel.getOptionalDeliveries().get(member.getPhone()).isAuthorized()) {
+            if (pendingParcel.getOptionalDeliveries().get(member.getPhone()).getAuthorized()) {
                 holder.buttonITookIt.setEnabled(true);
                 holder.buttonIWantToTakeIt.setText("You can now to take it");
             } else
@@ -62,6 +62,7 @@ public class FriendsParcelsRecyclerViewAdapter extends RecyclerView.Adapter<Frie
         holder.buttonIWantToTakeIt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                loadingDialog.startLoadingDialog();
                 deliveryPerson = new DeliveryPerson(member);
                 pendingParcel.addOptionalDelivery(deliveryPerson);
 
@@ -69,6 +70,7 @@ public class FriendsParcelsRecyclerViewAdapter extends RecyclerView.Adapter<Frie
 
                     @Override
                     public void onSuccess(String obj) {
+                        loadingDialog.dismissDialog();
                         //TODO toast
                         //Toast.makeText(, "welcome " + obj, Toast.LENGTH_LONG).show();
                         memberHasOffered(holder);
@@ -76,6 +78,7 @@ public class FriendsParcelsRecyclerViewAdapter extends RecyclerView.Adapter<Frie
 
                     @Override
                     public void onFailure(Exception exception) {
+                        loadingDialog.dismissDialog();
                         //TODO toast
 
                         // Toast.makeText(getBaseContext(), "Error \n", Toast.LENGTH_LONG).show();

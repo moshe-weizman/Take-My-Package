@@ -15,7 +15,9 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class PendingParcelsFirebaseManager {
     private static List<PendingParcel> pendingParcelList = new ArrayList<PendingParcel>();
@@ -40,7 +42,7 @@ public class PendingParcelsFirebaseManager {
     public static DatabaseReference parcelRef;
 
     static {
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
+         FirebaseDatabase database = FirebaseDatabase.getInstance();
         parcelRef = database.getReference("PendingParcel");
 
     }
@@ -61,6 +63,9 @@ public class PendingParcelsFirebaseManager {
                     pendingParcelList.clear();
                     for (DataSnapshot child : dataSnapshot.getChildren()) {
                         PendingParcel pendingParcel = child.getValue(PendingParcel.class);
+//                        for (DataSnapshot childDelviries : child.child("optionalDeliveries").getChildren()) {
+//                            pendingParcel.getOptionalDeliveries().put(childDelviries.getKey(), childDelviries.getValue(DeliveryPerson.class));
+//                        }
                         pendingParcel.getParcelDetails().set_parcelID(child.getKey());
                         pendingParcelList.add(pendingParcel);
                     }

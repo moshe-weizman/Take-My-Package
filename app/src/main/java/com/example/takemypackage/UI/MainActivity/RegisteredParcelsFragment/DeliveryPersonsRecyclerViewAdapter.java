@@ -50,6 +50,7 @@ public class DeliveryPersonsRecyclerViewAdapter extends RecyclerView.Adapter<Del
         Collection mapValues = deliveryPersonList.values();
         this.deliveryPersonList = new ArrayList<>(mapValues);
         this.member = member;
+        this.pendingParcel = pendingParcel;
     }
 
     @NonNull
@@ -66,13 +67,13 @@ public class DeliveryPersonsRecyclerViewAdapter extends RecyclerView.Adapter<Del
 
         holder.deliveryPhoneTextView.setText(deliveryPerson.getPhone());
         holder.deliveryNameTextView.setText(deliveryPerson.getName());
-        holder.authorizationCheckBox.setChecked(deliveryPerson.isAuthorized());
+        holder.authorizationCheckBox.setChecked(deliveryPerson.getAuthorized());
         Glide.with(context).load(deliveryPerson.getImageFirebaseUri()).centerCrop().override(150, 150).into(holder.imageViewDeliveryPerson);
 
         holder.authorizationCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                deliveryPerson.setIsAuthorized(isChecked);
+                deliveryPerson.setAuthorized(isChecked);
                 //TODO update the firebase that the delivery is authorized
                 PendingParcelsFirebaseManager.addOrUpdateMemberToOptionalDeliveries(pendingParcel, deliveryPerson, new PendingParcelsFirebaseManager.Action<String>() {
 
