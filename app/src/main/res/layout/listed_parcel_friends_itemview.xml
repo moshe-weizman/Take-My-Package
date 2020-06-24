@@ -15,8 +15,6 @@
     android:background="@drawable/custom_cardview"
     tools:layout_editor_absoluteX="10dp">
 
-
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -70,14 +68,16 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="TextView" />
+                    android:text="TextView"
+                    android:textSize="20sp"/>
 
                 <TextView
                     android:id="@+id/parcelWeightTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="TextView" />
+                    android:text="TextView"
+                    android:textSize="20sp"/>
 
                 <TextView
                     android:id="@+id/fragileTextView"
@@ -85,7 +85,8 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="fregile"
-                    android:textColor="#F44336" />
+                    android:textColor="#F44336"
+                    android:textSize="20sp"/>
             </LinearLayout>
 
             <TextView
