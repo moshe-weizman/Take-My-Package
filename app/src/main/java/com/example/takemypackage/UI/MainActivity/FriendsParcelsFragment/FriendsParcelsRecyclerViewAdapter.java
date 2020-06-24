@@ -14,6 +14,7 @@ import com.example.takemypackage.Data.PendingParcelsFirebaseManager;
 import com.example.takemypackage.Entities.DeliveryPerson;
 import com.example.takemypackage.Entities.HistoryParcel;
 import com.example.takemypackage.Entities.Member;
+import com.example.takemypackage.Entities.Parcel;
 import com.example.takemypackage.Entities.PendingParcel;
 import com.example.takemypackage.R;
 import com.example.takemypackage.Utils.LoadingDialog;
@@ -48,17 +49,19 @@ public class FriendsParcelsRecyclerViewAdapter extends RecyclerView.Adapter<Frie
     public void onBindViewHolder(@NonNull final FriendsParcelsViewHolder holder, int position) {
 
         final PendingParcel pendingParcel = pendingParcels.get(position);
+        Parcel parcelDetails = pendingParcel.getParcelDetails();
 
-        holder.textViewParcelId.setText(pendingParcel.getParcelDetails().getParcelID());
-        holder.textViewLocationOfStorage.setText(pendingParcel.getParcelDetails().getLocationOfStorage());
-        holder.textViewRecipientAddress.setText(pendingParcel.getParcelDetails().getRecipientAddress());
-        if (pendingParcel.getOptionalDeliveries().containsKey(member.getPhone())) {
-            if (pendingParcel.getOptionalDeliveries().get(member.getPhone()).isAuthorized()) {
-                holder.buttonITookIt.setEnabled(true);
-                holder.buttonIWantToTakeIt.setText("You can now to take it");
-            } else
-                memberHasOffered(holder);
-        }
+        holder.textViewParcelId.setText(parcelDetails.getParcelID());
+        holder.textViewLocationOfStorage.setText(parcelDetails.getLocationOfStorage());
+        holder.textViewRecipientAddress.setText(parcelDetails.getRecipientAddress());
+        holder.textViewParcelType.setText(parcelDetails.getType().toString());
+        holder.textViewParcelWeight.setText(parcelDetails.getWeight().toString());
+        holder.textViewFragile.setVisibility(parcelDetails.isFragile() ? View.VISIBLE : View.INVISIBLE);
+        holder.buttonITookIt.setVisibility(View.GONE);
+        boolean theUserHasOffered = pendingParcel.getOptionalDeliveries().containsKey(member.getPhone());
+        if (theUserHasOffered)
+            memberHasOffered(holder, pendingParcel);
+
         holder.buttonIWantToTakeIt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -71,7 +74,7 @@ public class FriendsParcelsRecyclerViewAdapter extends RecyclerView.Adapter<Frie
                     public void onSuccess(String obj) {
                         //TODO toast
                         //Toast.makeText(, "welcome " + obj, Toast.LENGTH_LONG).show();
-                        memberHasOffered(holder);
+                        memberHasOffered(holder, pendingParcel);
                     }
 
                     @Override
@@ -136,7 +139,12 @@ public class FriendsParcelsRecyclerViewAdapter extends RecyclerView.Adapter<Frie
         });
     }
 
-    private void memberHasOffered(FriendsParcelsViewHolder holder) {
+    private void memberHasOffered(FriendsParcelsViewHolder holder, PendingParcel pendingParcel) {
+        if (pendingParcel.getOptionalDeliveries().get(member.getPhone()).isAuthorized()) {
+            holder.buttonITookIt.setVisibility(View.VISIBLE);
+            holder.buttonITookIt.setEnabled(true);
+            holder.buttonIWantToTakeIt.setText("You are premitted to take it");
+        }
         holder.buttonIWantToTakeIt.setEnabled(false);
         holder.buttonIWantToTakeIt.setText("Waiting for a Permission...");
     }
@@ -151,6 +159,9 @@ public class FriendsParcelsRecyclerViewAdapter extends RecyclerView.Adapter<Frie
         TextView textViewParcelId;
         TextView textViewRecipientAddress;
         TextView textViewLocationOfStorage;
+        TextView textViewParcelType;
+        TextView textViewParcelWeight;
+        TextView textViewFragile;
         Button buttonIWantToTakeIt;
         Button buttonITookIt;
 
@@ -160,6 +171,9 @@ public class FriendsParcelsRecyclerViewAdapter extends RecyclerView.Adapter<Frie
             textViewRecipientAddress = itemView.findViewById(R.id.textViewRecipientAddress);
             textViewLocationOfStorage = itemView.findViewById(R.id.textViewLocationOfStorage);
             buttonIWantToTakeIt = itemView.findViewById(R.id.buttonIWantToTake);
+            textViewParcelType = itemView.findViewById(R.id.parcelTypeTextView);
+            textViewParcelWeight = itemView.findViewById(R.id.parcelWeightTextView);
+            textViewFragile = itemView.findViewById(R.id.fragileTextView);
             buttonITookIt = itemView.findViewById(R.id.buttonITookIt);
         }
     }

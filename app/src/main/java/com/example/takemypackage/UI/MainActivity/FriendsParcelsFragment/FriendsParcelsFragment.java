@@ -85,7 +85,6 @@ public class FriendsParcelsFragment extends Fragment {
                 } else parcelRecyclerView.getAdapter().notifyDataSetChanged();
             }
 
-
             @Override
             public void onFailure(Exception exception) {
                 Toast.makeText(getContext(), "error to get parcel list of yours friends \n" + exception.toString(), Toast.LENGTH_LONG).show();

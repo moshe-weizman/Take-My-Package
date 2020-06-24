@@ -50,6 +50,7 @@ public class DeliveryPersonsRecyclerViewAdapter extends RecyclerView.Adapter<Del
         Collection mapValues = deliveryPersonList.values();
         this.deliveryPersonList = new ArrayList<>(mapValues);
         this.member = member;
+        this.pendingParcel = pendingParcel;
     }
 
     @NonNull
