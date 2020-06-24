@@ -68,45 +68,29 @@ public class MembersFirebaseManager {
 
     public static void UpdateUserProfile(final String phoneOldMember, final Member newMember, final Action<String> action) {
         String phoneNewMember = newMember.getPhone();
-        if (phoneOldMember.equals(phoneNewMember)) {
-            memberRef.child(phoneOldMember).setValue(newMember).addOnSuccessListener(new OnSuccessListener<Void>() {
-                @Override
-                public void onSuccess(Void aVoid) {
-                    action.onSuccess("Update successful");
-                }
-            }).addOnFailureListener(new OnFailureListener() {
-                @Override
-                public void onFailure(@NonNull Exception e) {
 
-                }
-            });
-        } else {//if needed to update the key too (phone number)
-            deleteMember(true, phoneOldMember, action);
-            memberRef.child(phoneNewMember).setValue(newMember).addOnSuccessListener(new OnSuccessListener<Void>() {
-                @Override
-                public void onSuccess(Void aVoid) {
-                    action.onSuccess("Update successful");
-                }
-            }).addOnFailureListener(new OnFailureListener() {
-                @Override
-                public void onFailure(@NonNull Exception e) {
-                    action.onFailure(e);
-                }
-            });
+        memberRef.child(phoneOldMember).setValue(newMember).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+                action.onSuccess("Update successful");
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
 
-        }
+            }
+        });
+
+
     }
 
-    public static void deleteMember(String phoneMember, final Action<String> action) {
-        deleteMember(false, phoneMember, action);
-    }
 
-    public static void deleteMember(final boolean deleteForUpdate, final String phoneMember, final Action<String> action) {
+    public static void deleteMember(final String phoneMember, final Action<String> action) {
         memberRef.child(phoneMember).removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void aVoid) {
-                if (!deleteForUpdate)
-                    action.onSuccess("Deletion was successful");
+
+                action.onSuccess("Deletion was successful");
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override

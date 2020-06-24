@@ -127,7 +127,9 @@ public class PendingParcelsFirebaseManager {
     public static void addOrUpdateMemberToOptionalDeliveries(PendingParcel pendingParcel, DeliveryPerson deliveryPerson, final Action<String> action) {
         DatabaseReference DeliveryPersonRef = parcelRef.child(pendingParcel.getParcelDetails().getRecipientPhone()).child(pendingParcel.getParcelDetails().getParcelID()).child("optionalDeliveries");
 
-        DeliveryPersonRef.child(deliveryPerson.getPhone()).setValue(deliveryPerson).addOnSuccessListener(new OnSuccessListener<Void>() {
+        DeliveryPersonRef.child(deliveryPerson.getPhone())
+                .setValue(deliveryPerson)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void aVoid) {
                 action.onSuccess("Registration was successful");

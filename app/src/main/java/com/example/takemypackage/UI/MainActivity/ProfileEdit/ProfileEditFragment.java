@@ -51,6 +51,9 @@ public class ProfileEditFragment extends Fragment {
                 newMember = new Member(editTextFirstName.getText().toString(), editTextLastName.getText().toString(),
                         editTextAddress.getText().toString(), editTextPhone.getText().toString(),
                         editTextEmail.getText().toString(), editTextPIN.getText().toString());
+                newMember.setImageFirebaseUri(member.getImageFirebaseUri());
+                newMember.setImageLocalUri(member.getImageLocalUri());
+
                 MembersFirebaseManager.UpdateUserProfile(member.getPhone(), newMember, new MembersFirebaseManager.Action<String>() {
                     @Override
                     public void onSuccess(String obj) {
