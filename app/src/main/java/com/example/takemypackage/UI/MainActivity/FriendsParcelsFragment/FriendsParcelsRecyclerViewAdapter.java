@@ -140,7 +140,7 @@ public class FriendsParcelsRecyclerViewAdapter extends RecyclerView.Adapter<Frie
     }
 
     private void memberHasOffered(FriendsParcelsViewHolder holder, PendingParcel pendingParcel) {
-        if (pendingParcel.getOptionalDeliveries().get(member.getPhone()).isAuthorized()) {
+        if (pendingParcel.getOptionalDeliveries().get(member.getPhone()).getAuthorized()) {
             holder.buttonITookIt.setVisibility(View.VISIBLE);
             holder.buttonITookIt.setEnabled(true);
             holder.buttonIWantToTakeIt.setText("You are premitted to take it");
