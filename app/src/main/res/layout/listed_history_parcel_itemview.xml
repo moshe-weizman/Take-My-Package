@@ -10,6 +10,9 @@
         android:layout_marginLeft="30dp"
         android:layout_marginTop="30dp"
         android:layout_marginRight="30dp"
+        app:layout_constraintCircleRadius="20dp"
+        android:backgroundTint="#ffd6d7d7"
+        app:contentPadding="4dp"
         android:padding="20dp"
         app:cardCornerRadius="8dp"
         app:layout_editor_absoluteX="10dp">

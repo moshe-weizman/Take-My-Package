@@ -9,6 +9,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:cardCornerRadius="8dp"
+        android:backgroundTint="#ffd6d7d7"
+
+        android:background="@drawable/custom_cardview"
         tools:layout_editor_absoluteX="10dp"
         android:layout_marginRight="30dp"
         android:layout_marginTop="30dp"
@@ -20,10 +23,25 @@
             android:orientation="vertical">
 
             <TextView
+                android:id="@+id/textView10"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Parcel ID:"
+                android:textColor="@color/colorPrimary" />
+
+            <TextView
                 android:id="@+id/serialNumTextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="24sp" />
+
+            <TextView
+                android:id="@+id/textView11"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Recipient address:"
+                android:textColor="@color/colorPrimary"
+                android:textSize="18sp" />
 
             <TextView
                 android:id="@+id/recipientAddressTextView"
@@ -60,19 +78,29 @@
             </LinearLayout>-->
 
             <TextView
+                android:id="@+id/textView12"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Storage location:"
+                android:textColor="@color/colorPrimary"
+                android:textSize="18sp" />
+
+            <TextView
                 android:id="@+id/storageLocationTextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="TextView"
-                android:textSize="18sp" />
+                android:textSize="24sp" />
 
             <TextView
                 android:id="@+id/whoCanTakeTextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:drawableRight="@android:drawable/ic_menu_more"
                 android:text="@string/who_can_take_it"
-                android:textSize="18sp" />
+                android:textColor="@color/colorPrimary"
+                android:textSize="24sp" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/expandableLayout"
