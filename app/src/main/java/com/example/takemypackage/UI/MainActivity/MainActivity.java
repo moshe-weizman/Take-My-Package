@@ -12,7 +12,9 @@ import androidx.fragment.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.takemypackage.Entities.Member;
@@ -37,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
     private FragmentManager fragmentManager = getSupportFragmentManager();
     private FriendsParcelsFragment friendsParcelsFragment;
     private ImageView imageViewNav;
+    private TextView textName;
     Member member;// = new Member();
 
     @Override
@@ -50,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
         Intent myIntent = getIntent();
         member = (Member) myIntent.getSerializableExtra(MEMBER_KEY);
         getIntent().putExtra(MEMBER_KEY, member);
-        imageViewNav = findViewById(R.id.imageViewNav);
+
 
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -60,9 +63,13 @@ public class MainActivity extends AppCompatActivity {
         nvDrawer = findViewById(R.id.nvView);
         // Setup drawer view
         setupDrawerContent(nvDrawer);
-        //TODO
-        //Glide.with(getBaseContext()).load(member.getImageFirebaseUri()).centerCrop().override(150, 150).into(imageViewNav);
 
+
+        View header = nvDrawer.getHeaderView(0);
+        imageViewNav = header.findViewById(R.id.imageViewNav);
+        textName = header.findViewById(R.id.textName);
+        Glide.with(getBaseContext()).load(member.getImageFirebaseUri()).centerCrop().override(150, 150).into(imageViewNav);
+        textName.setText(member.getfName() +"  "+ member.getlName());
 //        FragmentManager fragmentManager = getSupportFragmentManager();
 //        fragmentManager.beginTransaction().replace(R.id.fragmentContainer, new RegisteredParcelsFragment(), "SOMETAG").commit();
 
