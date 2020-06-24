@@ -75,8 +75,10 @@ public class FriendsParcelsFragment extends Fragment {
 
                 String addressMember = member.getAddress();
                 for (PendingParcel parcel : obj) {
-                    if (getDistance(getContext(), addressMember, parcel.getParcelDetails().getLocationOfStorage()) < MAX_DISTANCE && !parcel.getParcelDetails().getRecipientPhone().equals(member.getPhone()))
-                        pendingParcels.add(parcel);
+                    if (!parcel.getParcelDetails().getRecipientPhone().equals(member.getPhone())) {
+                        if (getDistance(getContext(), addressMember, parcel.getParcelDetails().getLocationOfStorage()) < MAX_DISTANCE)
+                            pendingParcels.add(parcel);
+                    }
                 }
                 if (parcelRecyclerView.getAdapter() == null) {
                     parcelRecyclerView.setAdapter(new FriendsParcelsRecyclerViewAdapter(pendingParcels, member));
@@ -111,7 +113,7 @@ public class FriendsParcelsFragment extends Fragment {
         Location location = new Location(pnt);
         List<Address> addresses = null;
         try {
-            addresses = geocoder.getFromLocationName(loc, 5);
+            addresses=geocoder.getFromLocationName(loc, 5) ;
             location.setLatitude(addresses.get(0).getLatitude());
             location.setLongitude(addresses.get(0).getLongitude());
         } catch (IOException e) {

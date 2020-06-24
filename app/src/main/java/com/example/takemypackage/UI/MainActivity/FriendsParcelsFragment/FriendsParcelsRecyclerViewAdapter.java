@@ -1,12 +1,10 @@
 package com.example.takemypackage.UI.MainActivity.FriendsParcelsFragment;
 
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -20,7 +18,6 @@ import com.example.takemypackage.Entities.PendingParcel;
 import com.example.takemypackage.R;
 import com.example.takemypackage.Utils.LoadingDialog;
 
-import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -68,7 +65,7 @@ public class FriendsParcelsRecyclerViewAdapter extends RecyclerView.Adapter<Frie
                 deliveryPerson = new DeliveryPerson(member);
                 pendingParcel.addOptionalDelivery(deliveryPerson);
 
-                PendingParcelsFirebaseManager.addMemberToOptionalDeliveries(pendingParcel, deliveryPerson, new PendingParcelsFirebaseManager.Action<String>() {
+                PendingParcelsFirebaseManager.addOrUpdateMemberToOptionalDeliveries(pendingParcel, deliveryPerson, new PendingParcelsFirebaseManager.Action<String>() {
 
                     @Override
                     public void onSuccess(String obj) {
