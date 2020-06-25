@@ -120,7 +120,6 @@ public class SignUpActivity extends AppCompatActivity {
                 if (task.isSuccessful()) {
                     // Sign in success
                     Toast.makeText(getBaseContext(), "Authentication succeeded ", Toast.LENGTH_LONG).show();
-                    FirebaseUser user = mAuth.getCurrentUser();
                     addImage();
                     addMember();
                     loadingDialog.dismissDialog();

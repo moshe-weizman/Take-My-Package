@@ -35,7 +35,6 @@ import static com.example.takemypackage.Data.MembersFirebaseManager.memberRef;
 
 public class LoginActivity extends AppCompatActivity {
     public final static String MEMBER_KEY = "com.example.takemypackage.Entities.Member";
-    // public final static String USERFIREBASE_KEY = "com.example.takemypackage.USERFIREBASE_KEY.";
 
 
     private LoadingDialog loadingDialog;
@@ -43,8 +42,6 @@ public class LoginActivity extends AppCompatActivity {
     private TextView textViewSignUp;
     private EditText editTextPhoneLogIn, editTextPIN, editTextEmail;
     private Button btnLogIn;
-    private String password;
-    Member member;
     Member memberLogin;
     String emailUser;
     String phoneUser;

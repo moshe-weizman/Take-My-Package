@@ -67,7 +67,6 @@ public class MembersFirebaseManager {
 
 
     public static void UpdateUserProfile(final String phoneOldMember, final Member newMember, final Action<String> action) {
-        String phoneNewMember = newMember.getPhone();
 
         memberRef.child(phoneOldMember).setValue(newMember).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
