@@ -44,6 +44,7 @@ public class RegisteredParcelsFragment extends Fragment {
         registeredParcelsRecyclerView = view.findViewById(R.id.parcelRecyclerView);
         noDataTextView = view.findViewById(R.id.noDataTextView);
         noDataTextView.setText("No package is waiting for you yet");
+        noDataTextView.setVisibility(View.GONE);
         registeredParcelsRecyclerView.setHasFixedSize(true);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this.getContext());
         registeredParcelsRecyclerView.setLayoutManager(layoutManager);
@@ -58,16 +59,19 @@ public class RegisteredParcelsFragment extends Fragment {
                         registeredParcels.add(pendingParcel);
                     }
                 }
-                if (registeredParcels.isEmpty()){
-                    noDataTextView.setVisibility(View.VISIBLE);
-                    registeredParcelsRecyclerView.setVisibility(View.GONE);
-                }else{
-                    noDataTextView.setVisibility(View.GONE);
-                    registeredParcelsRecyclerView.setVisibility(View.VISIBLE);
-                }
+
                 if (registeredParcelsRecyclerView.getAdapter() == null) {
                     registeredParcelsRecyclerView.setAdapter(new RegisteredParcelsRecyclerViewAdapter(registeredParcels, member, getContext()));
-                } else registeredParcelsRecyclerView.getAdapter().notifyDataSetChanged();
+                } else
+                    registeredParcelsRecyclerView.getAdapter().notifyDataSetChanged();
+
+//                if (registeredParcelsRecyclerView.getAdapter().getItemCount() == 0){
+//                    noDataTextView.setVisibility(View.VISIBLE);
+//                    registeredParcelsRecyclerView.setVisibility(View.GONE);
+//                }else{
+//                    noDataTextView.setVisibility(View.GONE);
+//                    registeredParcelsRecyclerView.setVisibility(View.VISIBLE);
+//                }
             }
 
             @Override
@@ -75,6 +79,8 @@ public class RegisteredParcelsFragment extends Fragment {
                 Toast.makeText(getContext(), "Failed to get your registered parcels data \n" + exception.toString(), Toast.LENGTH_LONG).show();
             }
         });
+
+
         return view;
     }
 

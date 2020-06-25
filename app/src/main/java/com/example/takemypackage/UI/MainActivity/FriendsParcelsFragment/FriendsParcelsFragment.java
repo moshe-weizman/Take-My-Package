@@ -68,6 +68,7 @@ public class FriendsParcelsFragment extends Fragment {
         parcelRecyclerView = view.findViewById(R.id.parcelRecyclerView);
         noDataTextView = view.findViewById(R.id.noDataTextView);
         noDataTextView.setText("Your friends dont have any pending package");
+        noDataTextView.setVisibility(View.GONE);
         parcelRecyclerView.setHasFixedSize(true);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this.getContext());
         parcelRecyclerView.setLayoutManager(layoutManager);
