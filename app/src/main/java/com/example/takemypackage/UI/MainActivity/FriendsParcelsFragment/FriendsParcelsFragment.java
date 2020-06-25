@@ -77,21 +77,22 @@ public class FriendsParcelsFragment extends Fragment {
         PendingParcelsFirebaseManager.NotifyToParcelList(new PendingParcelsFirebaseManager.NotifyDataChange<List<PendingParcel>>() {
             @Override
             public void OnDataChanged(List<PendingParcel> obj) {
-                pendingParcels.clear();
+                //pendingParcels.clear();
                 String addressMember = member.getAddress();
                 for (PendingParcel parcel : obj) {
                     if (!parcel.getParcelDetails().getRecipientPhone().equals(member.getPhone())) {
-                        if (getDistance(getContext(), addressMember, parcel.getParcelDetails().getLocationOfStorage()) < MAX_DISTANCE)
+                        if (getDistance(getContext(), addressMember, parcel.getParcelDetails().getLocationOfStorage()) < MAX_DISTANCE
+                        && !pendingParcels.contains(parcel))
                             pendingParcels.add(parcel);
                     }
                 }
-                if (pendingParcels.isEmpty()){
-                    noDataTextView.setVisibility(View.VISIBLE);
-                    parcelRecyclerView.setVisibility(View.GONE);
-                }else{
-                    noDataTextView.setVisibility(View.GONE);
-                    parcelRecyclerView.setVisibility(View.VISIBLE);
-                }
+//                if (pendingParcels.isEmpty()){
+//                    noDataTextView.setVisibility(View.VISIBLE);
+//                    parcelRecyclerView.setVisibility(View.GONE);
+//                }else{
+//                    noDataTextView.setVisibility(View.GONE);
+//                    parcelRecyclerView.setVisibility(View.VISIBLE);
+//                }
                 if (parcelRecyclerView.getAdapter() == null) {
                     parcelRecyclerView.setAdapter(new FriendsParcelsRecyclerViewAdapter(pendingParcels, member));
                 } else parcelRecyclerView.getAdapter().notifyDataSetChanged();
