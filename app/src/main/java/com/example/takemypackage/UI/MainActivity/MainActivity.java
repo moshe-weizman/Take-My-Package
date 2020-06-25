@@ -18,6 +18,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.takemypackage.Entities.Member;
+import com.example.takemypackage.MyBroadcastService;
 import com.example.takemypackage.R;
 import com.example.takemypackage.UI.MainActivity.FriendsParcelsFragment.FriendsParcelsFragment;
 import com.example.takemypackage.UI.MainActivity.HistoryParcelsFragment.HistoryParcelsFragment;
@@ -40,7 +41,8 @@ public class MainActivity extends AppCompatActivity {
     private FriendsParcelsFragment friendsParcelsFragment;
     private ImageView imageViewNav;
     private TextView textName;
-    Member member;// = new Member();
+    Member member;
+    private Intent serviceIntent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +55,9 @@ public class MainActivity extends AppCompatActivity {
         Intent myIntent = getIntent();
         member = (Member) myIntent.getSerializableExtra(MEMBER_KEY);
         getIntent().putExtra(MEMBER_KEY, member);
+        serviceIntent = new Intent(this, MyBroadcastService.class);
+        serviceIntent.putExtra(MEMBER_KEY, member);
+        startService(serviceIntent);
 
 
         toolbar = findViewById(R.id.toolbar);

@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
@@ -24,6 +25,7 @@ import static com.example.takemypackage.UI.Login.LoginActivity.LoginActivity.MEM
 
 public class HistoryParcelsFragment extends Fragment {
     private RecyclerView parcelRecyclerView;
+    private TextView noDataTextView;
     private List<HistoryParcel> historyParcelList;
     private Member member;
 
@@ -45,6 +47,8 @@ public class HistoryParcelsFragment extends Fragment {
         member = (Member) intent.getSerializableExtra(MEMBER_KEY);
         View view = inflater.inflate(R.layout.fragment_friends_parcels, container, false);
         parcelRecyclerView = view.findViewById(R.id.parcelRecyclerView);
+        noDataTextView = view.findViewById(R.id.noDataTextView);
+        noDataTextView.setText("Your packages history is empty");
         parcelRecyclerView.setHasFixedSize(true);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this.getContext());
         parcelRecyclerView.setLayoutManager(layoutManager);
@@ -54,6 +58,13 @@ public class HistoryParcelsFragment extends Fragment {
             @Override
             public void OnDataChanged(List<HistoryParcel> obj) {
                 historyParcelList = obj;
+                if (historyParcelList.isEmpty()){
+                    noDataTextView.setVisibility(View.VISIBLE);
+                    parcelRecyclerView.setVisibility(View.GONE);
+                }else{
+                    noDataTextView.setVisibility(View.GONE);
+                    parcelRecyclerView.setVisibility(View.VISIBLE);
+                }
                 if (parcelRecyclerView.getAdapter() == null) {
                     parcelRecyclerView.setAdapter(new HistoryParcelsRecyclerViewAdapter(historyParcelList));
                 } else parcelRecyclerView.getAdapter().notifyDataSetChanged();

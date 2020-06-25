@@ -25,6 +25,7 @@
         <activity
             android:name=".UI.Login.VerifyMobileActivity.VerifyMobileActivity"
             android:parentActivityName=".UI.Login.LoginActivity.LoginActivity" />
+        <service android:name=".MyBroadcastService"/>
     </application>
 
 </manifest>

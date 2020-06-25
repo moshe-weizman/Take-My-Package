@@ -18,6 +18,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.takemypackage.Entities.DeliveryPerson;
@@ -42,6 +43,7 @@ public class FriendsParcelsFragment extends Fragment {
     }
 
     private RecyclerView parcelRecyclerView;
+    private TextView noDataTextView;
     private List<PendingParcel> pendingParcels;
     private Member member;
     private static float MAX_DISTANCE = 1000000000;
@@ -64,6 +66,8 @@ public class FriendsParcelsFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_friends_parcels, container, false);
         parcelRecyclerView = view.findViewById(R.id.parcelRecyclerView);
+        noDataTextView = view.findViewById(R.id.noDataTextView);
+        noDataTextView.setText("Your friends dont have any pending package");
         parcelRecyclerView.setHasFixedSize(true);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this.getContext());
         parcelRecyclerView.setLayoutManager(layoutManager);
@@ -79,6 +83,13 @@ public class FriendsParcelsFragment extends Fragment {
                         if (getDistance(getContext(), addressMember, parcel.getParcelDetails().getLocationOfStorage()) < MAX_DISTANCE)
                             pendingParcels.add(parcel);
                     }
+                }
+                if (pendingParcels.isEmpty()){
+                    noDataTextView.setVisibility(View.VISIBLE);
+                    parcelRecyclerView.setVisibility(View.GONE);
+                }else{
+                    noDataTextView.setVisibility(View.GONE);
+                    parcelRecyclerView.setVisibility(View.VISIBLE);
                 }
                 if (parcelRecyclerView.getAdapter() == null) {
                     parcelRecyclerView.setAdapter(new FriendsParcelsRecyclerViewAdapter(pendingParcels, member));
