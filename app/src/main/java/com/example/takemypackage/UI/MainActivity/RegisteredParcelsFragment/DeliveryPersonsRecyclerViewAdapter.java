@@ -8,6 +8,7 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -74,13 +75,12 @@ public class DeliveryPersonsRecyclerViewAdapter extends RecyclerView.Adapter<Del
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 deliveryPerson.setAuthorized(isChecked);
-                //TODO update the firebase that the delivery is authorized
                 PendingParcelsFirebaseManager.addOrUpdateMemberToOptionalDeliveries(pendingParcel, deliveryPerson, new PendingParcelsFirebaseManager.Action<String>() {
 
                     @Override
                     public void onSuccess(String obj) {
                         //TODO toast
-                        //Toast.makeText(, "welcome " + obj, Toast.LENGTH_LONG).show();
+                       // Toast.makeText(, "welcome " + obj, Toast.LENGTH_LONG).show();
                     }
 
                     @Override
@@ -90,10 +90,6 @@ public class DeliveryPersonsRecyclerViewAdapter extends RecyclerView.Adapter<Del
                         // Toast.makeText(getBaseContext(), "Error \n", Toast.LENGTH_LONG).show();
                     }
 
-                    @Override
-                    public void onProgress(String status, double percent) {
-
-                    }
                 });
             }
         });

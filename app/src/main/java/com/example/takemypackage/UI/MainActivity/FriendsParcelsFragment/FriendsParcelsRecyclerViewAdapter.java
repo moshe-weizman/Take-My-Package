@@ -86,10 +86,7 @@ public class FriendsParcelsRecyclerViewAdapter extends RecyclerView.Adapter<Frie
                         // Toast.makeText(getBaseContext(), "Error \n", Toast.LENGTH_LONG).show();
                     }
 
-                    @Override
-                    public void onProgress(String status, double percent) {
 
-                    }
                 });
             }
         });
@@ -114,9 +111,7 @@ public class FriendsParcelsRecyclerViewAdapter extends RecyclerView.Adapter<Frie
                         // Toast.makeText(getBaseContext(), "Error \n", Toast.LENGTH_LONG).show();
                     }
 
-                    @Override
-                    public void onProgress(String status, double percent) {
-                    }
+
                 });
 
                 HisroryParcelsFirebaseManager.addParcelToHistory(historyParcel, new HisroryParcelsFirebaseManager.Action<String>() {
@@ -132,9 +127,6 @@ public class FriendsParcelsRecyclerViewAdapter extends RecyclerView.Adapter<Frie
                         // Toast.makeText(getBaseContext(), "Error \n", Toast.LENGTH_LONG).show();
                     }
 
-                    @Override
-                    public void onProgress(String status, double percent) {
-                    }
                 });
             }
         });

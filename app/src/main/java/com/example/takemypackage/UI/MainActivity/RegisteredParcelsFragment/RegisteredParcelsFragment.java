@@ -55,14 +55,14 @@ public class RegisteredParcelsFragment extends Fragment {
             public void OnDataChanged(List<PendingParcel> obj) {
                 for (PendingParcel pendingParcel : obj) {
                     if (pendingParcel.getParcelDetails().getRecipientPhone().equals(member.getPhone())
-                    && !registeredParcels.contains(pendingParcel)) {
+                            && !registeredParcels.contains(pendingParcel)) {
                         registeredParcels.add(pendingParcel);
                     }
                 }
-                if (registeredParcels.isEmpty()){
+                if (registeredParcels.isEmpty()) {
                     noDataTextView.setVisibility(View.VISIBLE);
                     registeredParcelsRecyclerView.setVisibility(View.GONE);
-                }else{
+                } else {
                     noDataTextView.setVisibility(View.GONE);
                     registeredParcelsRecyclerView.setVisibility(View.VISIBLE);
                 }
@@ -80,8 +80,6 @@ public class RegisteredParcelsFragment extends Fragment {
                 Toast.makeText(getContext(), "Failed to get your registered parcels data \n" + exception.toString(), Toast.LENGTH_LONG).show();
             }
         });
-
-
         return view;
     }
 

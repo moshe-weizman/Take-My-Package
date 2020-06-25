@@ -72,9 +72,6 @@ public class ProfileEditFragment extends Fragment {
                         Toast.makeText(getContext(), "update was failed", Toast.LENGTH_LONG).show();
                     }
 
-                    @Override
-                    public void onProgress(String status, double percent) {
-                    }
                 });
             }
         });
@@ -96,10 +93,6 @@ public class ProfileEditFragment extends Fragment {
                         loadingDialog.dismissDialog();
                     }
 
-                    @Override
-                    public void onProgress(String status, double percent) {
-
-                    }
                 });
 
                 PendingParcelsFirebaseManager.deleteAllPedingsParcelsOfMember(member.getPhone(),  new PendingParcelsFirebaseManager.Action<String>() {
@@ -118,10 +111,6 @@ public class ProfileEditFragment extends Fragment {
                         loadingDialog.dismissDialog();
                     }
 
-                    @Override
-                    public void onProgress(String status, double percent) {
-
-                    }
                 });
             }
         });

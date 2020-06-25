@@ -25,7 +25,6 @@ public class HisroryParcelsFirebaseManager {
 
     }
 
-    //TODO implement the interface NotifyDataChange
     public interface NotifyDataChange<T> {
         void OnDataChanged(T obj);
 

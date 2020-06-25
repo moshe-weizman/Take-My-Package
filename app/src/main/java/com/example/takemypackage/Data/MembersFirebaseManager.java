@@ -77,7 +77,6 @@ public class MembersFirebaseManager {
         memberRef.child(phoneMember).removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void aVoid) {
-
                 action.onSuccess("Deletion was successful");
             }
         }).addOnFailureListener(new OnFailureListener() {
@@ -121,40 +120,4 @@ public class MembersFirebaseManager {
     }
 
 
-//    public static void NotifyToMember(final NotifyDataChange<Member> notifyDataChange) {
-//        if (notifyDataChange != null) {
-//            if (memberRefChildEventListener != null) {
-//                notifyDataChange.onFailure(new Exception("first unNotify parcel list"));
-//                return;
-//            }
-//            memberRefChildEventListener=new ChildEventListener(){
-//                @Override
-//                public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-//
-//                }
-//
-//                @Override
-//                public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-//
-//                }
-//
-//                @Override
-//                public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
-//
-//                }
-//
-//                @Override
-//                public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-//
-//                }
-//
-//                @Override
-//                public void onCancelled(@NonNull DatabaseError databaseError) {
-//
-//                }
-//            };
-//
-//            memberRef.addChildEventListener(memberRefChildEventListener);
-//        }
-//    }
 }
