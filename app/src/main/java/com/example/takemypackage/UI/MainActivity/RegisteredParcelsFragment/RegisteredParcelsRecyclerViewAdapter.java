@@ -30,7 +30,6 @@ public class RegisteredParcelsRecyclerViewAdapter extends RecyclerView.Adapter<R
       public TextView fragileTextView;
       public TextView parcelTypeTextView;
       public TextView parcelWeightTextView;
-      public TextView recipientAddressTextView;
       public TextView storageLocationTextView;
       public TextView whoCanTakeTextView;
       public ConstraintLayout expandableLayout;
@@ -41,10 +40,9 @@ public class RegisteredParcelsRecyclerViewAdapter extends RecyclerView.Adapter<R
          super(itemView);
          isExpanded = false;
          parcelIdTextView = itemView.findViewById(R.id.serialNumTextView);
-        // fragileTextView = itemView.findViewById(R.id.fragileTextView);
-        // parcelTypeTextView = itemView.findViewById(R.id.parcelTypeTextView);
-       //  parcelWeightTextView = itemView.findViewById(R.id.parcelWeightTextView);
-         recipientAddressTextView = itemView.findViewById(R.id.recipientAddressTextView);
+         fragileTextView = itemView.findViewById(R.id.fragileTextView);
+         parcelTypeTextView = itemView.findViewById(R.id.parcelTypeTextView);
+         parcelWeightTextView = itemView.findViewById(R.id.parcelWeightTextView);
          storageLocationTextView = itemView.findViewById(R.id.storageLocationTextView);
          expandableLayout = itemView.findViewById(R.id.expandableLayout);
          whoCanTakeTextView = itemView.findViewById(R.id.whoCanTakeTextView);
@@ -72,11 +70,10 @@ public class RegisteredParcelsRecyclerViewAdapter extends RecyclerView.Adapter<R
       PendingParcel pendingParcel = _registeredParcels.get(position);
       Parcel parcelDetails = pendingParcel.getParcelDetails();
       holder.parcelIdTextView.setText(parcelDetails.getParcelID());
-     // holder.fragileTextView.setVisibility(parcelDetails.isFragile()? TextView.VISIBLE : TextView.INVISIBLE);
+      holder.fragileTextView.setVisibility(parcelDetails.isFragile()? TextView.VISIBLE : TextView.INVISIBLE);
       holder.storageLocationTextView.setText(parcelDetails.getLocationOfStorage());
-      holder.recipientAddressTextView.setText(parcelDetails.getRecipientAddress());
-     // holder.parcelTypeTextView.setText(parcelDetails.getType().toString());
-     // holder.parcelWeightTextView.setText(parcelDetails.getWeight().toString());
+      holder.parcelTypeTextView.setText(parcelDetails.getType().toString());
+      holder.parcelWeightTextView.setText(parcelDetails.getWeight().toString());
       holder.expandableLayout.setVisibility(View.GONE);
       RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(context);
       holder.deliveryPersonsRecyclerView.setLayoutManager(layoutManager);

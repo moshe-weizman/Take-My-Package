@@ -7,8 +7,6 @@ Aharon Packter 201530508
  */
 package com.example.takemypackage.Entities;
 
-import androidx.annotation.NonNull;
-
 /**
  * represents a package sent to a receiver including relevant information
  */
@@ -18,55 +16,21 @@ public class Parcel {
      * Optional types of parcel sent by the network
      */
     public enum ParcelType {
-        ENVELOPE, SMALL_PARCEL, BIG_PARCEL;
-
-        @NonNull
-        @Override
-        public String toString() {
-            switch (ordinal()){
-                case 0:
-                    return "Envelope";
-                case 1:
-                    return "Small package";
-                case 2:
-                    return "Large package";
-            }
-            return super.toString();
-        }
+        ENVELOPE, SMALL_PARCEL, BIG_PARCELzz
     }
 
     /**
      * Optional weight of the package
      */
     public enum ParcelWeight {
-        UP_TO_500G, UP_TO_1KG, UP_TO_5KG, UP_TO_20KG;
-
-        @NonNull
-        @Override
-        public String toString() {
-            switch (ordinal()){
-                case 0:
-                    return "Up to 500 g";
-                case 1:
-                    return "500 g - 1 kg";
-                case 2:
-                    return "1 kg - 5 kg";
-                case 3:
-                    return "5kg - 20kg";
-            }
-            return super.toString();
-        }
+        UP_TO_500G, UP_TO_1KG, UP_TO_5KG, UP_TO_20KG
     }
 
     private ParcelType _type;
     private boolean _fragile;
     private ParcelWeight _weight;
     private String _locationOfStorage;
-
-
     private String _parcelID;
-
-
     //private String _delivers;
     private String _recipientPhone;
     private String _recipientFirstName;

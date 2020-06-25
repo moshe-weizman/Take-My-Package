@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -25,6 +26,7 @@ import java.util.List;
 
 public class RegisteredParcelsFragment extends Fragment {
     private RecyclerView registeredParcelsRecyclerView;
+    private TextView noDataTextView;
     private List<PendingParcel> registeredParcels;
     private Member member;
 
@@ -38,9 +40,10 @@ public class RegisteredParcelsFragment extends Fragment {
         Intent intent = this.getActivity().getIntent();
         member = (Member) intent.getSerializableExtra(MEMBER_KEY);
         registeredParcels = new ArrayList<>();
-
         View view = inflater.inflate(R.layout.fragment_friends_parcels, container, false);
         registeredParcelsRecyclerView = view.findViewById(R.id.parcelRecyclerView);
+        noDataTextView = view.findViewById(R.id.noDataTextView);
+        noDataTextView.setText("No package is waiting for you yet");
         registeredParcelsRecyclerView.setHasFixedSize(true);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this.getContext());
         registeredParcelsRecyclerView.setLayoutManager(layoutManager);
@@ -53,6 +56,13 @@ public class RegisteredParcelsFragment extends Fragment {
                     if (pendingParcel.getParcelDetails().getRecipientPhone().equals(member.getPhone())) {
                         registeredParcels.add(pendingParcel);
                     }
+                }
+                if (registeredParcels.isEmpty()){
+                    noDataTextView.setVisibility(View.VISIBLE);
+                    registeredParcelsRecyclerView.setVisibility(View.GONE);
+                }else{
+                    noDataTextView.setVisibility(View.GONE);
+                    registeredParcelsRecyclerView.setVisibility(View.VISIBLE);
                 }
                 if (registeredParcelsRecyclerView.getAdapter() == null) {
                     registeredParcelsRecyclerView.setAdapter(new RegisteredParcelsRecyclerViewAdapter(registeredParcels, member, getContext()));

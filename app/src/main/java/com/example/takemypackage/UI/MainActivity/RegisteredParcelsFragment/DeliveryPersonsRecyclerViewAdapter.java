@@ -29,7 +29,7 @@ public class DeliveryPersonsRecyclerViewAdapter extends RecyclerView.Adapter<Del
     private List<DeliveryPerson> deliveryPersonList;
     private Member member;
     private Context context;
-    PendingParcel pendingParcel;
+    private PendingParcel pendingParcel;
 
     public static class DeliveryPersonsViewHolder extends RecyclerView.ViewHolder {
         public TextView deliveryNameTextView;
