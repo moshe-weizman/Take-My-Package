@@ -15,31 +15,27 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.util.ArrayList;
 import java.util.List;
 
-public class HisroryParcelsFirebaseManager {
+public class HistroryParcelsFirebaseManager {
     private static List<HistoryParcel> historyParcelList = new ArrayList<HistoryParcel>();
 
     public interface Action<T> {
         void onSuccess(T obj);
-
         void onFailure(Exception exception);
-
     }
 
     //TODO implement the interface NotifyDataChange
     public interface NotifyDataChange<T> {
         void OnDataChanged(T obj);
-
         void onFailure(Exception exception);
     }
 
     public static DatabaseReference historyParcelsRef;
+    public static ChildEventListener historyParcelRefChildEventListener;
 
     static {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         historyParcelsRef = database.getReference("HistoryParcels");
     }
-
-    public static ChildEventListener historyParcelRefChildEventListener;
 
     public static void addParcelToHistory(final HistoryParcel historyParcel, final Action<String> action) {
         Parcel parcel = historyParcel.getParcelDetails();
@@ -55,7 +51,6 @@ public class HisroryParcelsFirebaseManager {
             }
         });
     }
-
 
     public static void NotifyToHistoryParcelList(final String userPhone, final NotifyDataChange<List<HistoryParcel>> notifyDataChange) {
         if (notifyDataChange != null) {
@@ -75,17 +70,14 @@ public class HisroryParcelsFirebaseManager {
                         }
                     }
                     notifyDataChange.OnDataChanged(historyParcelList);
-
                 }
 
                 @Override
                 public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-//
                 }
 
                 @Override
                 public void onChildRemoved(DataSnapshot dataSnapshot) {
-//
                 }
 
                 @Override
@@ -100,7 +92,6 @@ public class HisroryParcelsFirebaseManager {
             historyParcelsRef.addChildEventListener(historyParcelRefChildEventListener);
         }
     }
-
 
     public static void stopNotifyToHistoryList() {
         if (historyParcelRefChildEventListener != null) {

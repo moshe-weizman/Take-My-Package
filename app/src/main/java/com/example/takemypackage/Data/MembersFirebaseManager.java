@@ -20,7 +20,6 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
 public class MembersFirebaseManager {
-
     public interface Action<T> {
         void onSuccess(T obj);
 
@@ -35,9 +34,6 @@ public class MembersFirebaseManager {
         memberRef = database.getReference("Members");
         imagesRef = FirebaseStorage.getInstance().getReference();
     }
-
-    public static ChildEventListener memberRefChildEventListener;
-
 
     public static void addMemberToFirebase(final Member member, final Action<String> action) {
         memberRef.child(member.getPhone()).setValue(member).addOnSuccessListener(new OnSuccessListener<Void>() {
@@ -54,7 +50,6 @@ public class MembersFirebaseManager {
         });
     }
 
-
     public static void UpdateUserProfile(final String phoneOldMember, final Member newMember, final Action<String> action) {
 
         memberRef.child(phoneOldMember).setValue(newMember).addOnSuccessListener(new OnSuccessListener<Void>() {
@@ -65,19 +60,14 @@ public class MembersFirebaseManager {
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
-
             }
         });
-
-
     }
-
 
     public static void deleteMember(final String phoneMember, final Action<String> action) {
         memberRef.child(phoneMember).removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void aVoid) {
-
                 action.onSuccess("Deletion was successful");
             }
         }).addOnFailureListener(new OnFailureListener() {
@@ -88,11 +78,9 @@ public class MembersFirebaseManager {
         });
     }
 
-
     public static void addImageMember(final Member member, final Action<String> action) {
         if (member.getImageLocalUri() != null) {
             // upload image
-
             imagesRef = imagesRef.child("images").child(System.currentTimeMillis() + ".jpg");
             //final StorageReference finalImagesRef = imagesRef;
             imagesRef.putFile(member.getImageLocalUri()).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
@@ -100,7 +88,6 @@ public class MembersFirebaseManager {
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                     // Get a URL to the uploaded content
                     Task<Uri> downloadUrl = taskSnapshot.getStorage().getDownloadUrl();
-
                     while (!downloadUrl.isComplete()) ;
                     Uri url = downloadUrl.getResult();
                     member.setImageFirebaseUri(url.toString());
@@ -114,47 +101,8 @@ public class MembersFirebaseManager {
             }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
                 @Override
                 public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
-
                 }
             });
         } else action.onFailure(new Exception("select image first ..."));
     }
-
-
-//    public static void NotifyToMember(final NotifyDataChange<Member> notifyDataChange) {
-//        if (notifyDataChange != null) {
-//            if (memberRefChildEventListener != null) {
-//                notifyDataChange.onFailure(new Exception("first unNotify parcel list"));
-//                return;
-//            }
-//            memberRefChildEventListener=new ChildEventListener(){
-//                @Override
-//                public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-//
-//                }
-//
-//                @Override
-//                public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-//
-//                }
-//
-//                @Override
-//                public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
-//
-//                }
-//
-//                @Override
-//                public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-//
-//                }
-//
-//                @Override
-//                public void onCancelled(@NonNull DatabaseError databaseError) {
-//
-//                }
-//            };
-//
-//            memberRef.addChildEventListener(memberRefChildEventListener);
-//        }
-//    }
 }

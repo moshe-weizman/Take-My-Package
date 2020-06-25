@@ -13,7 +13,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.takemypackage.Data.HisroryParcelsFirebaseManager;
+import com.example.takemypackage.Data.HistroryParcelsFirebaseManager;
 import com.example.takemypackage.Entities.HistoryParcel;
 import com.example.takemypackage.Entities.Member;
 import com.example.takemypackage.R;
@@ -54,7 +54,7 @@ public class HistoryParcelsFragment extends Fragment {
         parcelRecyclerView.setLayoutManager(layoutManager);
 
 
-        HisroryParcelsFirebaseManager.NotifyToHistoryParcelList(member.getPhone(), new HisroryParcelsFirebaseManager.NotifyDataChange<List<HistoryParcel>>() {
+        HistroryParcelsFirebaseManager.NotifyToHistoryParcelList(member.getPhone(), new HistroryParcelsFirebaseManager.NotifyDataChange<List<HistoryParcel>>() {
             @Override
             public void OnDataChanged(List<HistoryParcel> obj) {
                 historyParcelList = obj;
@@ -82,7 +82,7 @@ public class HistoryParcelsFragment extends Fragment {
 
     public void onDestroyView() {
         super.onDestroyView();
-        HisroryParcelsFirebaseManager.stopNotifyToHistoryList();
+        HistroryParcelsFirebaseManager.stopNotifyToHistoryList();
         super.onDestroy();
     }
 }
