@@ -58,16 +58,15 @@ public class Parcel {
         }
     }
 
-    private ParcelType _type;
-    private boolean _fragile;
-    private ParcelWeight _weight;
-    private String _locationOfStorage;
-    private String _parcelID;
-    //private String _delivers;
-    private String _recipientPhone;
-    private String _recipientFirstName;
-    private String _recipientLastName;
-    private String _recipientAddress;
+    private ParcelType type;
+    private boolean fragile;
+    private ParcelWeight weight;
+    private String locationOfStorage;
+    private String parcelID;
+    private String recipientPhone;
+    private String recipientFirstName;
+    private String recipientLastName;
+    private String recipientAddress;
 
     //---------------------------------------Constructors------------------------------------------
     public Parcel() {
@@ -87,95 +86,89 @@ public class Parcel {
     public Parcel(String recipientPhone, String recipientFirstName, String recipientLastName, String recipientAddress,
                   ParcelType type, boolean fragile, ParcelWeight weight, String parcelID,
                   String locationOfStorage) {
-        this._type = type;
-        this._fragile = fragile;
-        _weight = weight;
-        _recipientPhone = recipientPhone;
-        _parcelID = parcelID;
-        _locationOfStorage = locationOfStorage;
-        _recipientFirstName = recipientFirstName;
-        _recipientLastName = recipientLastName;
-        _recipientAddress = recipientAddress;
+        this.type = type;
+        this.fragile = fragile;
+        this.weight = weight;
+        this.recipientPhone = recipientPhone;
+        this.parcelID = parcelID;
+        this.locationOfStorage = locationOfStorage;
+        this.recipientFirstName = recipientFirstName;
+        this.recipientLastName = recipientLastName;
+        this.recipientAddress = recipientAddress;
     }
 //------------------------------Getters------------------------------------------
 
     public String getRecipientFirstName() {
-        return _recipientFirstName;
+        return recipientFirstName;
     }
 
     public String getRecipientLastName() {
-        return _recipientLastName;
+        return recipientLastName;
     }
 
     public String getRecipientAddress() {
-        return _recipientAddress;
+        return recipientAddress;
     }
 
     public ParcelType getType() {
-        return _type;
+        return type;
     }
 
     public boolean isFragile() {
-        return _fragile;
+        return fragile;
     }
 
     public ParcelWeight getWeight() {
-        return _weight;
+        return weight;
     }
 
     public String getRecipientPhone() {
-        return _recipientPhone;
+        return recipientPhone;
     }
 
     public String getParcelID() {
-        return _parcelID;
+        return parcelID;
     }
 
     public String getLocationOfStorage() {
-        return _locationOfStorage;
+        return locationOfStorage;
     }
 
-//    public String get_delivers() {
-//        return _delivers;
-//    }
 //-------------------------------Setters--------------------------------------
 
-    //    public void set_delivers(String _delivers) {
-//        this._delivers = _delivers;
-//    }
     public void set_parcelID(String parcelID) {
-        this._parcelID = parcelID;
+        this.parcelID = parcelID;
     }
 
     public void setRecipientAddress(String recipientAddress) {
-        _recipientAddress = recipientAddress;
+        this.recipientAddress = recipientAddress;
     }
 
     public void setRecipientFirstName(String recipientFirstName) {
-        _recipientFirstName = recipientFirstName;
+        this.recipientFirstName = recipientFirstName;
     }
 
     public void setRecipientLastName(String recipientLastName) {
-        _recipientLastName = recipientLastName;
+        this.recipientLastName = recipientLastName;
     }
 
     public void setType(ParcelType type) {
-        _type = type;
+        this.type = type;
     }
 
     public void setFragile(boolean fragile) {
-        _fragile = fragile;
+        this.fragile = fragile;
     }
 
     public void setWeight(ParcelWeight weight) {
-        _weight = weight;
+        this.weight = weight;
     }
 
     public void setRecipientPhone(String recipientPhone) {
-        _recipientPhone = recipientPhone;
+        this.recipientPhone = recipientPhone;
     }
 
     public void setLocationOfStorage(String locationOfStorage) {
-        _locationOfStorage = locationOfStorage;
+        this.locationOfStorage = locationOfStorage;
     }
 }

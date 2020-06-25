@@ -1,9 +1,6 @@
 package com.example.takemypackage.Data;
 
-
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-
 import com.example.takemypackage.Entities.*;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -12,12 +9,8 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
-
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class PendingParcelsFirebaseManager {
     private static List<PendingParcel> pendingParcelList = new ArrayList<PendingParcel>();
@@ -42,7 +35,6 @@ public class PendingParcelsFirebaseManager {
     static {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         parcelRef = database.getReference("PendingParcel");
-
     }
 
     public static ChildEventListener parcelRefChildEventListener;
@@ -71,9 +63,6 @@ public class PendingParcelsFirebaseManager {
                     for (DataSnapshot child : dataSnapshot.getChildren()) {
                         pendingParcel = child.getValue(PendingParcel.class);
                         pendingParcel.getParcelDetails().set_parcelID(child.child(child.getKey()).getKey());
-
-
-                        //   pendingParcel.getParcelDetails().set_parcelID(parcelID);
                         for (int i = 0; i < pendingParcelList.size(); i++) {
                             if (pendingParcelList.get(i).getParcelDetails().getParcelID().equals(pendingParcel.getParcelDetails().getParcelID())) {
                                 pendingParcelList.set(i, pendingParcel);
@@ -91,9 +80,6 @@ public class PendingParcelsFirebaseManager {
                         pendingParcel = child.getValue(PendingParcel.class);
                         pendingParcel.getParcelDetails().set_parcelID(child.child(child.getKey()).getKey());
                     }
-                    // String phone = dataSnapshot.getKey();
-                    // String parcelID = dataSnapshot.child(pendingParcel.getParcelDetails().getRecipientPhone()).getKey();
-                    //  pendingParcel.getParcelDetails().set_parcelID(pendingParcel.getParcelDetails().getParcelID());
                     for (int i = 0; i < pendingParcelList.size(); i++) {
                         if (pendingParcelList.get(i).getParcelDetails().getParcelID().equals(pendingParcel.getParcelDetails().getParcelID())) {
                             pendingParcelList.remove(i);
@@ -115,7 +101,6 @@ public class PendingParcelsFirebaseManager {
             parcelRef.addChildEventListener(parcelRefChildEventListener);
         }
     }
-
 
     public static void stopNotifyToPendingList() {
         if (parcelRefChildEventListener != null) {
@@ -174,32 +159,4 @@ public class PendingParcelsFirebaseManager {
         });
 
     }
-
-//    public static void updateAuthorization(PendingParcel pendingParcel, DeliveryPerson deliveryPerson, boolean isChecked){
-//
-//        DatabaseReference DeliveryPersonRef = parcelRef.child(pendingParcel.getParcelDetails().getRecipientPhone()).child(pendingParcel.getParcelDetails().getParcelID()).child("optionalDeliveries").child(deliveryPerson.getPhone());
-//        DeliveryPersonRef.setValue(deliveryPerson);
-//    }
-
-    public List<Parcel> getMembersPendingParcels(String recipientPhone) {
-        return null;
-    }
-
-    public List<Parcel> getPendingParcelByQuery(Query query) {
-        return null;
-    }
-
-    public List<Parcel> getAllPendingParcels() {
-        return null;
-    }
-
-    public void addPendingParcel(PendingParcel pendingParcel) {
-
-    }
-
-    public void updatePendingParcel(PendingParcel pendingParcel) {
-
-    }
-
-
 }
