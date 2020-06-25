@@ -58,8 +58,6 @@ public class MainActivity extends AppCompatActivity {
         mDrawer = findViewById(R.id.drawer_layout);
         nvDrawer = findViewById(R.id.nvView);
         setupDrawerContent(nvDrawer);
-
-
         View header = nvDrawer.getHeaderView(0);
         imageViewNav = header.findViewById(R.id.imageViewNav);
         textName = header.findViewById(R.id.textName);
@@ -69,7 +67,6 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-
         // The action bar home/up action should open or close the drawer.
         switch (item.getItemId()) {
             case android.R.id.home:
@@ -93,17 +90,14 @@ public class MainActivity extends AppCompatActivity {
     public void selectDrawerItem(MenuItem menuItem) {
         // Create a new fragment and specify the fragment to show based on nav item clicked
         fragment = null;
-        //Class fragmentClass;
         switch (menuItem.getItemId()) {
             case R.id.nav_registered_parcels_fragment:
                 fragment = new RegisteredParcelsFragment();
                 break;
             case R.id.nav_friend_parcels_fragment:
-                //fragmentClass = FriendsParcelsFragment.class;
                 fragment = new FriendsParcelsFragment();
                 break;
             case R.id.nav_history_parcels_fragment:
-                //  fragmentClass = HistoryParcelsFragment.class;
                 fragment = new HistoryParcelsFragment();
                 break;
             case R.id.profile_update:
@@ -112,14 +106,10 @@ public class MainActivity extends AppCompatActivity {
             case R.id.sign_out:
                 signOut();
                 break;
-            default:
-                fragment = new RegisteredParcelsFragment();
         }
 
         // Insert the fragment by replacing any existing fragment
-
         fragmentManager.beginTransaction().replace(R.id.flContent, fragment).commit();
-
         // Highlight the selected item has been done by NavigationView
         menuItem.setChecked(true);
         // Set action bar title

@@ -1,16 +1,13 @@
 package com.example.takemypackage.UI.MainActivity.FriendsParcelsFragment;
 
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
-import com.example.takemypackage.Data.HisroryParcelsFirebaseManager;
+import com.example.takemypackage.Data.HistroryParcelsFirebaseManager;
 import com.example.takemypackage.Data.PendingParcelsFirebaseManager;
 import com.example.takemypackage.Entities.DeliveryPerson;
 import com.example.takemypackage.Entities.HistoryParcel;
@@ -18,24 +15,17 @@ import com.example.takemypackage.Entities.Member;
 import com.example.takemypackage.Entities.Parcel;
 import com.example.takemypackage.Entities.PendingParcel;
 import com.example.takemypackage.R;
-import com.example.takemypackage.Utils.LoadingDialog;
-
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
 
 public class FriendsParcelsRecyclerViewAdapter extends RecyclerView.Adapter<FriendsParcelsRecyclerViewAdapter.FriendsParcelsViewHolder> {
     private List<PendingParcel> pendingParcels;
-    private HashMap<String, DeliveryPerson> optionalDeliveries;
     private Member member;
     private DeliveryPerson deliveryPerson;
     private HistoryParcel historyParcel;
     private Date calendar;
-    private LoadingDialog loadingDialog;
-
 
     public FriendsParcelsRecyclerViewAdapter(List<PendingParcel> pendingParcels, Member member) {
-
         this.pendingParcels = pendingParcels;
         this.member = member;
     }
@@ -52,7 +42,6 @@ public class FriendsParcelsRecyclerViewAdapter extends RecyclerView.Adapter<Frie
 
         final PendingParcel pendingParcel = pendingParcels.get(position);
         Parcel parcelDetails = pendingParcel.getParcelDetails();
-
         holder.textViewParcelId.setText(parcelDetails.getParcelID());
         holder.textViewLocationOfStorage.setText(parcelDetails.getLocationOfStorage());
         holder.textViewRecipientAddress.setText(parcelDetails.getRecipientAddress());
@@ -69,9 +58,7 @@ public class FriendsParcelsRecyclerViewAdapter extends RecyclerView.Adapter<Frie
             public void onClick(View v) {
                 deliveryPerson = new DeliveryPerson(member);
                 pendingParcel.addOptionalDelivery(deliveryPerson);
-
                 PendingParcelsFirebaseManager.addOrUpdateMemberToOptionalDeliveries(pendingParcel, deliveryPerson, new PendingParcelsFirebaseManager.Action<String>() {
-
                     @Override
                     public void onSuccess(String obj) {
                         //TODO toast
@@ -82,11 +69,8 @@ public class FriendsParcelsRecyclerViewAdapter extends RecyclerView.Adapter<Frie
                     @Override
                     public void onFailure(Exception exception) {
                         //TODO toast
-
                         // Toast.makeText(getBaseContext(), "Error \n", Toast.LENGTH_LONG).show();
                     }
-
-
                 });
             }
         });
@@ -107,14 +91,11 @@ public class FriendsParcelsRecyclerViewAdapter extends RecyclerView.Adapter<Frie
                     @Override
                     public void onFailure(Exception exception) {
                         //TODO toast
-
                         // Toast.makeText(getBaseContext(), "Error \n", Toast.LENGTH_LONG).show();
                     }
-
-
                 });
 
-                HisroryParcelsFirebaseManager.addParcelToHistory(historyParcel, new HisroryParcelsFirebaseManager.Action<String>() {
+                HistroryParcelsFirebaseManager.addParcelToHistory(historyParcel, new HistroryParcelsFirebaseManager.Action<String>() {
                     @Override
                     public void onSuccess(String obj) {
                         //Toast.makeText(, "welcome " + obj, Toast.LENGTH_LONG).show();
@@ -123,10 +104,8 @@ public class FriendsParcelsRecyclerViewAdapter extends RecyclerView.Adapter<Frie
                     @Override
                     public void onFailure(Exception exception) {
                         //TODO toast
-
                         // Toast.makeText(getBaseContext(), "Error \n", Toast.LENGTH_LONG).show();
                     }
-
                 });
             }
         });
@@ -135,9 +114,7 @@ public class FriendsParcelsRecyclerViewAdapter extends RecyclerView.Adapter<Frie
     private void memberHasOffered(FriendsParcelsViewHolder holder, PendingParcel pendingParcel) {
         if (pendingParcel.getOptionalDeliveries().get(member.getPhone()).getAuthorized()) {
             holder.buttonITookIt.setVisibility(View.VISIBLE);
-           // holder.buttonITookIt.setEnabled(true);
             holder.buttonIWantToTakeIt.setVisibility(View.GONE);
-          //  holder.buttonIWantToTakeIt.setText("You are premitted to take it");
         }
         holder.buttonIWantToTakeIt.setEnabled(false);
         holder.buttonIWantToTakeIt.setText("Waiting for a Permission...");

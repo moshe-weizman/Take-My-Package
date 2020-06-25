@@ -35,8 +35,6 @@ import static com.example.takemypackage.Data.MembersFirebaseManager.memberRef;
 
 public class LoginActivity extends AppCompatActivity {
     public final static String MEMBER_KEY = "com.example.takemypackage.Entities.Member";
-
-
     private LoadingDialog loadingDialog;
     private FirebaseAuth mAuth;
     private TextView textViewSignUp;
@@ -51,8 +49,6 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login_activity);
         init();
-
-
         btnLogIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -75,13 +71,11 @@ public class LoginActivity extends AppCompatActivity {
                         @Override
                         public void onCancelled(@NonNull DatabaseError databaseError) {
                             Toast.makeText(LoginActivity.this, "Failed to read value", Toast.LENGTH_SHORT).show();
-
                         }
                     });
 
                 } else {
                     Query query = memberRef.orderByKey().equalTo(editTextPhoneLogIn.getText().toString());
-                    //   DatabaseReference userRef=memberRef.child(editTextPhoneLogIn.getText().toString());
                     query.addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -89,7 +83,6 @@ public class LoginActivity extends AppCompatActivity {
                             memberLogin = new Member();
                             memberLogin = dataSnapshot.child(phoneUser).getValue(Member.class);
                             memberLogin.setPhone(phoneUser);
-
                             if (memberLogin != null)
                                 singIn(memberLogin.getEmail(), editTextPIN.getText().toString());
                         }
@@ -99,7 +92,6 @@ public class LoginActivity extends AppCompatActivity {
                             Toast.makeText(LoginActivity.this, "Failed to read value", Toast.LENGTH_SHORT).show();
                         }
                     });
-
                 }
             }
         });
@@ -111,8 +103,6 @@ public class LoginActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
-
     }
 
     private void init() {
@@ -124,7 +114,6 @@ public class LoginActivity extends AppCompatActivity {
         btnLogIn = findViewById(R.id.btnLogIn);
         // Initialize Firebase Auth
         mAuth = FirebaseAuth.getInstance();
-
     }
 
     private void singIn(String email, String password) {
@@ -136,7 +125,6 @@ public class LoginActivity extends AppCompatActivity {
                     FirebaseUser user = mAuth.getCurrentUser();
                     Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                     intent.putExtra(MEMBER_KEY, memberLogin);
-                    //intent.putExtra()
                     loadingDialog.dismissDialog();
                     startActivity(intent);
                 } else {

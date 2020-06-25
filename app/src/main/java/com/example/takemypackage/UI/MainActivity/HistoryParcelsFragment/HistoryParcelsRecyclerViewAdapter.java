@@ -1,42 +1,13 @@
 package com.example.takemypackage.UI.MainActivity.HistoryParcelsFragment;
 
-import android.text.NoCopySpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.TextView;
-import android.widget.Toast;
-
-import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.RecyclerView;
-
-import com.example.takemypackage.Data.HisroryParcelsFirebaseManager;
-import com.example.takemypackage.Data.PendingParcelsFirebaseManager;
-import com.example.takemypackage.Entities.DeliveryPerson;
 import com.example.takemypackage.Entities.HistoryParcel;
-import com.example.takemypackage.Entities.Member;
-import com.example.takemypackage.Entities.PendingParcel;
 import com.example.takemypackage.R;
-
-import java.util.Calendar;
-import java.util.HashMap;
-import java.util.List;
-
-import com.example.takemypackage.Entities.HistoryParcel;
-import com.example.takemypackage.Entities.Member;
-import com.example.takemypackage.R;
-import com.example.takemypackage.UI.MainActivity.FriendsParcelsFragment.FriendsParcelsRecyclerViewAdapter;
-
 import java.util.List;
 
 public class HistoryParcelsRecyclerViewAdapter extends RecyclerView.Adapter<HistoryParcelsRecyclerViewAdapter.HistoryParcelsViewHolder> {
@@ -50,7 +21,6 @@ public class HistoryParcelsRecyclerViewAdapter extends RecyclerView.Adapter<Hist
         TextView textViewParcelWeight;
         TextView textViewFragile;
 
-
         public HistoryParcelsViewHolder(@NonNull View itemView) {
             super(itemView);
             textViewHistoryParcelID = itemView.findViewById(R.id.textViewHistoryParcelID);
@@ -59,7 +29,6 @@ public class HistoryParcelsRecyclerViewAdapter extends RecyclerView.Adapter<Hist
             textViewParcelType = itemView.findViewById(R.id.parcelTypeTextView);
             textViewParcelWeight = itemView.findViewById(R.id.parcelWeightTextView);
             textViewFragile = itemView.findViewById(R.id.fragileTextView);
-
         }
     }
 
@@ -74,10 +43,8 @@ public class HistoryParcelsRecyclerViewAdapter extends RecyclerView.Adapter<Hist
         return new HistoryParcelsViewHolder(view);
     }
 
-
     @Override
     public void onBindViewHolder(@NonNull final HistoryParcelsViewHolder holder, int position) {
-
         final HistoryParcel historyParcel = historyParcelList.get(position);
         holder.textViewHistoryParcelID.setText(historyParcel.getParcelDetails().getParcelID());
         holder.textViewDeliveryPerson.setText(historyParcel.getDeliveryPerson().getName() + " Phone: " + historyParcel.getDeliveryPerson().getPhone());
