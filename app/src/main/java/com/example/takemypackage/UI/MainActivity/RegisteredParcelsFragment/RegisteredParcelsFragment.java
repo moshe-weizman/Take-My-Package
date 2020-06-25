@@ -53,13 +53,12 @@ public class RegisteredParcelsFragment extends Fragment {
         PendingParcelsFirebaseManager.NotifyToParcelList(new PendingParcelsFirebaseManager.NotifyDataChange<List<PendingParcel>>() {
             @Override
             public void OnDataChanged(List<PendingParcel> obj) {
-                registeredParcels.clear();
                 for (PendingParcel pendingParcel : obj) {
-                    if (pendingParcel.getParcelDetails().getRecipientPhone().equals(member.getPhone())) {
+                    if (pendingParcel.getParcelDetails().getRecipientPhone().equals(member.getPhone())
+                    && !registeredParcels.contains(pendingParcel)) {
                         registeredParcels.add(pendingParcel);
                     }
                 }
-
                 if (registeredParcelsRecyclerView.getAdapter() == null) {
                     registeredParcelsRecyclerView.setAdapter(new RegisteredParcelsRecyclerViewAdapter(registeredParcels, member, getContext()));
                 } else

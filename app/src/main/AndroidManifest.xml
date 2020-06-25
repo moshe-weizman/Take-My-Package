@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.takemypackage">
-
     <uses-permission android:name="android.permission.SEND_SMS" />
-
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -15,7 +13,6 @@
         <activity android:name=".UI.Login.LoginActivity.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -27,5 +24,4 @@
             android:parentActivityName=".UI.Login.LoginActivity.LoginActivity" />
         <service android:name=".MyBroadcastService"/>
     </application>
-
 </manifest>
