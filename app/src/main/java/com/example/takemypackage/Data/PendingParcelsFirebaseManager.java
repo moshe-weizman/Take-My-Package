@@ -26,8 +26,6 @@ public class PendingParcelsFirebaseManager {
         void onSuccess(T obj);
 
         void onFailure(Exception exception);
-
-        void onProgress(String status, double percent);
     }
 
     public interface NotifyDataChange<T> {
@@ -48,9 +46,7 @@ public class PendingParcelsFirebaseManager {
     }
 
     public static ChildEventListener parcelRefChildEventListener;
-//private GenericTypeIndicator<PendingParcel> typeIndicator = new GenericTypeIndicator<PendingParcel>() {};
-
-    public static void NotifyToParcelList(/*final List<PendingParcel>pendingParcelList ,*/final NotifyDataChange<List<PendingParcel>> notifyDataChange) {
+    public static void NotifyToParcelList(final NotifyDataChange<List<PendingParcel>> notifyDataChange) {
         if (notifyDataChange != null) {
             if (parcelRefChildEventListener != null) {
                 notifyDataChange.onFailure(new Exception("first unNotify parcel list"));
@@ -60,8 +56,6 @@ public class PendingParcelsFirebaseManager {
             parcelRefChildEventListener = new ChildEventListener() {
                 @Override
                 public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-
-             //       pendingParcelList.clear();
                     for (DataSnapshot child : dataSnapshot.getChildren()) {
                         PendingParcel pendingParcel = new PendingParcel();
                         pendingParcel = child.getValue(PendingParcel.class);

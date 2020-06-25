@@ -3,9 +3,7 @@ package com.example.takemypackage.Data;
 import androidx.annotation.NonNull;
 
 import com.example.takemypackage.Entities.HistoryParcel;
-import com.example.takemypackage.Entities.Member;
 import com.example.takemypackage.Entities.Parcel;
-import com.example.takemypackage.Entities.PendingParcel;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.ChildEventListener;
@@ -25,7 +23,6 @@ public class HisroryParcelsFirebaseManager {
 
         void onFailure(Exception exception);
 
-        void onProgress(String status, double percent);
     }
 
     //TODO implement the interface NotifyDataChange
@@ -35,18 +32,18 @@ public class HisroryParcelsFirebaseManager {
         void onFailure(Exception exception);
     }
 
-    public static DatabaseReference histortParcelsRef;
+    public static DatabaseReference historyParcelsRef;
 
     static {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        histortParcelsRef = database.getReference("HistoryParcels");
+        historyParcelsRef = database.getReference("HistoryParcels");
     }
 
     public static ChildEventListener historyParcelRefChildEventListener;
 
     public static void addParcelToHistory(final HistoryParcel historyParcel, final Action<String> action) {
         Parcel parcel = historyParcel.getParcelDetails();
-        histortParcelsRef.child(parcel.getRecipientPhone()).child(parcel.getParcelID()).setValue(historyParcel).addOnSuccessListener(new OnSuccessListener<Void>() {
+        historyParcelsRef.child(parcel.getRecipientPhone()).child(parcel.getParcelID()).setValue(historyParcel).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void aVoid) {
                 action.onSuccess("Registration was successful");
@@ -83,32 +80,12 @@ public class HisroryParcelsFirebaseManager {
 
                 @Override
                 public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-//                    HistoryParcel historyParcel = dataSnapshot.getValue(HistoryParcel.class);
-//                    String phone = dataSnapshot.getKey();
-//                    String parcelID = dataSnapshot.child(phone).getKey();
-//                    historyParcel.getParcelDetails().set_parcelID(parcelID);
-//                    for (int i = 0; i < historyParcelList.size(); i++) {
-//                        if (historyParcelList.get(i).getParcelDetails().getParcelID().equals(parcelID)) {
-//                            historyParcelList.set(i, historyParcel);
-//                            break;
-//                        }
-//                    }
-//                    notifyDataChange.OnDataChanged(historyParcelList);
+//
                 }
 
                 @Override
                 public void onChildRemoved(DataSnapshot dataSnapshot) {
-//                    HistoryParcel historyParcel = dataSnapshot.getValue(HistoryParcel.class);
-//                    String phone = dataSnapshot.getKey();
-//                    String parcelID = dataSnapshot.child(phone).getKey();
-//                    historyParcel.getParcelDetails().set_parcelID(parcelID);
-//                    for (int i = 0; i < historyParcelList.size(); i++) {
-//                        if (historyParcelList.get(i).getParcelDetails().getParcelID().equals(parcelID)) {
-//                            historyParcelList.remove(i);
-//                            break;
-//                        }
-//                    }
-//                    notifyDataChange.OnDataChanged(historyParcelList);
+//
                 }
 
                 @Override
@@ -120,15 +97,14 @@ public class HisroryParcelsFirebaseManager {
                     notifyDataChange.onFailure(databaseError.toException());
                 }
             };
-            // DatabaseReference userHistoryParcelRef = histortParcelsRef.child(userPhone);
-            histortParcelsRef.addChildEventListener(historyParcelRefChildEventListener);
+            historyParcelsRef.addChildEventListener(historyParcelRefChildEventListener);
         }
     }
 
 
     public static void stopNotifyToHistoryList() {
         if (historyParcelRefChildEventListener != null) {
-            histortParcelsRef.removeEventListener(historyParcelRefChildEventListener);
+            historyParcelsRef.removeEventListener(historyParcelRefChildEventListener);
             historyParcelRefChildEventListener = null;
         }
     }

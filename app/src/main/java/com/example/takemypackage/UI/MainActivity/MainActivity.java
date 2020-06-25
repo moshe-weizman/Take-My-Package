@@ -1,21 +1,16 @@
 package com.example.takemypackage.UI.MainActivity;
-
-import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import com.bumptech.glide.Glide;
 import com.example.takemypackage.Entities.Member;
 import com.example.takemypackage.MyBroadcastService;
@@ -26,19 +21,15 @@ import com.example.takemypackage.UI.MainActivity.ProfileEdit.ProfileEditFragment
 import com.example.takemypackage.UI.MainActivity.RegisteredParcelsFragment.RegisteredParcelsFragment;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
-
 import static com.example.takemypackage.UI.Login.LoginActivity.LoginActivity.MEMBER_KEY;
 
 public class MainActivity extends AppCompatActivity {
     private DrawerLayout mDrawer;
     private Toolbar toolbar;
     private NavigationView nvDrawer;
-    private ActionBarDrawerToggle drawerToggle;
     private FirebaseAuth auth;
-    private FragmentTransaction fragmentTransaction;
     private Fragment fragment;
     private FragmentManager fragmentManager = getSupportFragmentManager();
-    private FriendsParcelsFragment friendsParcelsFragment;
     private ImageView imageViewNav;
     private TextView textName;
     Member member;
@@ -46,28 +37,26 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
-
-        auth = FirebaseAuth.getInstance();
         super.onCreate(savedInstanceState);
+        //an authenticated user that is currently logged in
+        auth = FirebaseAuth.getInstance();
         setContentView(R.layout.activity_main);
 
+        //setting intent for the fragments with the users details
         Intent myIntent = getIntent();
         member = (Member) myIntent.getSerializableExtra(MEMBER_KEY);
         getIntent().putExtra(MEMBER_KEY, member);
 
+        //setting intent for the background service with the user's details
         serviceIntent = new Intent(this, MyBroadcastService.class);
         serviceIntent.putExtra(MEMBER_KEY, member);
         startService(serviceIntent);
-
 
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         mDrawer = findViewById(R.id.drawer_layout);
-        // Find our drawer view
         nvDrawer = findViewById(R.id.nvView);
-        // Setup drawer view
         setupDrawerContent(nvDrawer);
 
 
@@ -76,9 +65,6 @@ public class MainActivity extends AppCompatActivity {
         textName = header.findViewById(R.id.textName);
         Glide.with(getBaseContext()).load(member.getImageFirebaseUri()).centerCrop().override(150, 150).into(imageViewNav);
         textName.setText(member.getfName() +"  "+ member.getlName());
-//        FragmentManager fragmentManager = getSupportFragmentManager();
-//        fragmentManager.beginTransaction().replace(R.id.fragmentContainer, new RegisteredParcelsFragment(), "SOMETAG").commit();
-
     }
 
     @Override

@@ -25,15 +25,6 @@ public class MembersFirebaseManager {
         void onSuccess(T obj);
 
         void onFailure(Exception exception);
-
-        void onProgress(String status, double percent);
-    }
-
-    //TODO implement the interface NotifyDataChange
-    public interface NotifyDataChange<T> {
-        void OnDataChanged(T obj);
-
-        void onFailure(Exception exception);
     }
 
     public static DatabaseReference memberRef;
@@ -53,14 +44,12 @@ public class MembersFirebaseManager {
             @Override
             public void onSuccess(Void aVoid) {
                 action.onSuccess(member.getPhone());
-                action.onProgress("upload member data", 100);
             }
 
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
                 action.onFailure(e);
-                action.onProgress("error upload student data", 100);
             }
         });
     }

@@ -124,7 +124,7 @@ public class FriendsParcelsFragment extends Fragment {
     static private Location setLatLon(Context context, String loc, String pnt) {
         Geocoder geocoder = new Geocoder(context);
         Location location = new Location(pnt);
-        List<Address> addresses = null;
+        List<Address> addresses;
         try {
             addresses = geocoder.getFromLocationName(loc, 5);
             location.setLatitude(addresses.get(0).getLatitude());
