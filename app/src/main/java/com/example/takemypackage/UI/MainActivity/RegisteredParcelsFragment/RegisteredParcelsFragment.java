@@ -53,11 +53,18 @@ public class RegisteredParcelsFragment extends Fragment {
         PendingParcelsFirebaseManager.NotifyToParcelList(new PendingParcelsFirebaseManager.NotifyDataChange<List<PendingParcel>>() {
             @Override
             public void OnDataChanged(List<PendingParcel> obj) {
-                registeredParcels.clear();
                 for (PendingParcel pendingParcel : obj) {
-                    if (pendingParcel.getParcelDetails().getRecipientPhone().equals(member.getPhone())) {
+                    if (pendingParcel.getParcelDetails().getRecipientPhone().equals(member.getPhone())
+                    && !registeredParcels.contains(pendingParcel)) {
                         registeredParcels.add(pendingParcel);
                     }
+                }
+                if (registeredParcels.isEmpty()){
+                    noDataTextView.setVisibility(View.VISIBLE);
+                    registeredParcelsRecyclerView.setVisibility(View.GONE);
+                }else{
+                    noDataTextView.setVisibility(View.GONE);
+                    registeredParcelsRecyclerView.setVisibility(View.VISIBLE);
                 }
 
                 if (registeredParcelsRecyclerView.getAdapter() == null) {
@@ -65,13 +72,7 @@ public class RegisteredParcelsFragment extends Fragment {
                 } else
                     registeredParcelsRecyclerView.getAdapter().notifyDataSetChanged();
 
-//                if (registeredParcelsRecyclerView.getAdapter().getItemCount() == 0){
-//                    noDataTextView.setVisibility(View.VISIBLE);
-//                    registeredParcelsRecyclerView.setVisibility(View.GONE);
-//                }else{
-//                    noDataTextView.setVisibility(View.GONE);
-//                    registeredParcelsRecyclerView.setVisibility(View.VISIBLE);
-//                }
+
             }
 
             @Override

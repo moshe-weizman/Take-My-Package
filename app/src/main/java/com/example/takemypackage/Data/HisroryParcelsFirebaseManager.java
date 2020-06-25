@@ -70,7 +70,6 @@ public class HisroryParcelsFirebaseManager {
             historyParcelRefChildEventListener = new ChildEventListener() {
                 @Override
                 public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                    historyParcelList.clear();
                     if (dataSnapshot.getKey().equals(userPhone)) {
                         for (DataSnapshot child : dataSnapshot.getChildren()) {
                             HistoryParcel historyParcel = child.getValue(HistoryParcel.class);

@@ -68,6 +68,7 @@ public class HistoryParcelsFragment extends Fragment {
                 if (parcelRecyclerView.getAdapter() == null) {
                     parcelRecyclerView.setAdapter(new HistoryParcelsRecyclerViewAdapter(historyParcelList));
                 } else parcelRecyclerView.getAdapter().notifyDataSetChanged();
+
             }
 
 

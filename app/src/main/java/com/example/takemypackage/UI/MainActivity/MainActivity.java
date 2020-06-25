@@ -55,9 +55,10 @@ public class MainActivity extends AppCompatActivity {
         Intent myIntent = getIntent();
         member = (Member) myIntent.getSerializableExtra(MEMBER_KEY);
         getIntent().putExtra(MEMBER_KEY, member);
-        //serviceIntent = new Intent(this, MyBroadcastService.class);
-        //serviceIntent.putExtra(MEMBER_KEY, member);
-        //startService(serviceIntent);
+
+        serviceIntent = new Intent(this, MyBroadcastService.class);
+        serviceIntent.putExtra(MEMBER_KEY, member);
+        startService(serviceIntent);
 
 
         toolbar = findViewById(R.id.toolbar);
