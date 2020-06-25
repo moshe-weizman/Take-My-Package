@@ -90,10 +90,6 @@ public class DeliveryPersonsRecyclerViewAdapter extends RecyclerView.Adapter<Del
                         // Toast.makeText(getBaseContext(), "Error \n", Toast.LENGTH_LONG).show();
                     }
 
-                    @Override
-                    public void onProgress(String status, double percent) {
-
-                    }
                 });
             }
         });
