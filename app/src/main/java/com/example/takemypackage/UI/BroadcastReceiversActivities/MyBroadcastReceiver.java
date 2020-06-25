@@ -1,7 +1,6 @@
 package com.example.takemypackage.UI.BroadcastReceiversActivities;
 
 
-import android.app.ActivityManager;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.content.BroadcastReceiver;
@@ -28,11 +27,11 @@ public class MyBroadcastReceiver extends BroadcastReceiver {
       channelId = createNotificationChannel(context);
       if (intent.getAction() != null) {
          switch (intent.getAction()) {
-            case "new_package_service":
-               sendNotification(context,"Social Delivery!", "You received a new package: " + intent.getSerializableExtra("parcelId") );
+            case "parcel_entered_service":
+               sendNotification(context,"Take My Package", "A new package is waiting for you: " + intent.getSerializableExtra("parcelId") );
                break;
             case "no_internet_connection":
-               sendNotification(context,"Social Delivery! no internet connection", "Check your connection" );
+               sendNotification(context,"Take My Package is offline", "Check your connection" );
                break;
             default:
                break;
@@ -54,8 +53,8 @@ public class MyBroadcastReceiver extends BroadcastReceiver {
    @RequiresApi(api = Build.VERSION_CODES.O)
    public static String createNotificationChannel(Context context) {
       String channelId = "ChannelId";
-      CharSequence channelName = "Social Delivery";
-      String channelDescription = "Social Delivery Alert";
+      CharSequence channelName = "Take My Package";
+      String channelDescription = "Take My Package notifications";
       int channelImportance = NotificationManager.IMPORTANCE_DEFAULT;
       NotificationChannel notificationChannel = new NotificationChannel(channelId, channelName, channelImportance);
       notificationChannel.setDescription(channelDescription);

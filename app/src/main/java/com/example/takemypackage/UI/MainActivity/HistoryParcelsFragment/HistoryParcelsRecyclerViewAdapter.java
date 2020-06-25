@@ -46,6 +46,9 @@ public class HistoryParcelsRecyclerViewAdapter extends RecyclerView.Adapter<Hist
         TextView textViewHistoryParcelID;
         TextView textViewDeliveryPerson;
         TextView textViewDate;
+        TextView textViewParcelType;
+        TextView textViewParcelWeight;
+        TextView textViewFragile;
 
 
         public HistoryParcelsViewHolder(@NonNull View itemView) {
@@ -53,6 +56,9 @@ public class HistoryParcelsRecyclerViewAdapter extends RecyclerView.Adapter<Hist
             textViewHistoryParcelID = itemView.findViewById(R.id.textViewHistoryParcelID);
             textViewDeliveryPerson = itemView.findViewById(R.id.textViewDeliveryPerson);
             textViewDate = itemView.findViewById(R.id.textViewDate);
+            textViewParcelType = itemView.findViewById(R.id.parcelTypeTextView);
+            textViewParcelWeight = itemView.findViewById(R.id.parcelWeightTextView);
+            textViewFragile = itemView.findViewById(R.id.fragileTextView);
 
         }
     }
@@ -75,7 +81,9 @@ public class HistoryParcelsRecyclerViewAdapter extends RecyclerView.Adapter<Hist
         final HistoryParcel historyParcel = historyParcelList.get(position);
         holder.textViewHistoryParcelID.setText(historyParcel.getParcelDetails().getParcelID());
         holder.textViewDeliveryPerson.setText(historyParcel.getDeliveryPerson().getName() + " Phone: " + historyParcel.getDeliveryPerson().getPhone());
-        //TODO implemetion toString for date
+        holder.textViewParcelType.setText(historyParcel.getParcelDetails().getType().toString());
+        holder.textViewParcelWeight.setText(historyParcel.getParcelDetails().getWeight().toString());
+        holder.textViewFragile.setVisibility(historyParcel.getParcelDetails().isFragile() ? View.VISIBLE : View.INVISIBLE);
         holder.textViewDate.setText(historyParcel.getDateCollected().toString());
     }
 

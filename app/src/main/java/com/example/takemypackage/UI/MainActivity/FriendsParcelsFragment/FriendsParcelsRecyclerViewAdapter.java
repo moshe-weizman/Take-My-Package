@@ -102,8 +102,7 @@ public class FriendsParcelsRecyclerViewAdapter extends RecyclerView.Adapter<Frie
                 PendingParcelsFirebaseManager.deletePendingParcel(pendingParcel, new PendingParcelsFirebaseManager.Action<String>() {
                     @Override
                     public void onSuccess(String obj) {
-                        //TODO toast
-                        //Toast.makeText(, "welcome " + obj, Toast.LENGTH_LONG).show();
+                        holder.buttonITookIt.setEnabled(false);
                     }
 
                     @Override
@@ -121,7 +120,6 @@ public class FriendsParcelsRecyclerViewAdapter extends RecyclerView.Adapter<Frie
                 HisroryParcelsFirebaseManager.addParcelToHistory(historyParcel, new HisroryParcelsFirebaseManager.Action<String>() {
                     @Override
                     public void onSuccess(String obj) {
-                        //TODO toast
                         //Toast.makeText(, "welcome " + obj, Toast.LENGTH_LONG).show();
                     }
 

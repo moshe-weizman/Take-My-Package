@@ -86,13 +86,14 @@ public class FriendsParcelsFragment extends Fragment {
                             pendingParcels.add(parcel);
                     }
                 }
-//                if (pendingParcels.isEmpty()){
-//                    noDataTextView.setVisibility(View.VISIBLE);
-//                    parcelRecyclerView.setVisibility(View.GONE);
-//                }else{
-//                    noDataTextView.setVisibility(View.GONE);
-//                    parcelRecyclerView.setVisibility(View.VISIBLE);
-//                }
+                if (pendingParcels.isEmpty()){
+                    noDataTextView.setVisibility(View.VISIBLE);
+                    parcelRecyclerView.setVisibility(View.GONE);
+                }else{
+                    noDataTextView.setVisibility(View.GONE);
+                    parcelRecyclerView.setVisibility(View.VISIBLE);
+                }
+
                 if (parcelRecyclerView.getAdapter() == null) {
                     parcelRecyclerView.setAdapter(new FriendsParcelsRecyclerViewAdapter(pendingParcels, member));
                 } else parcelRecyclerView.getAdapter().notifyDataSetChanged();

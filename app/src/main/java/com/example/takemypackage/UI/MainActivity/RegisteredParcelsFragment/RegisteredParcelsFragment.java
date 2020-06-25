@@ -59,18 +59,20 @@ public class RegisteredParcelsFragment extends Fragment {
                         registeredParcels.add(pendingParcel);
                     }
                 }
+                if (registeredParcels.isEmpty()){
+                    noDataTextView.setVisibility(View.VISIBLE);
+                    registeredParcelsRecyclerView.setVisibility(View.GONE);
+                }else{
+                    noDataTextView.setVisibility(View.GONE);
+                    registeredParcelsRecyclerView.setVisibility(View.VISIBLE);
+                }
+
                 if (registeredParcelsRecyclerView.getAdapter() == null) {
                     registeredParcelsRecyclerView.setAdapter(new RegisteredParcelsRecyclerViewAdapter(registeredParcels, member, getContext()));
                 } else
                     registeredParcelsRecyclerView.getAdapter().notifyDataSetChanged();
 
-//                if (registeredParcelsRecyclerView.getAdapter().getItemCount() == 0){
-//                    noDataTextView.setVisibility(View.VISIBLE);
-//                    registeredParcelsRecyclerView.setVisibility(View.GONE);
-//                }else{
-//                    noDataTextView.setVisibility(View.GONE);
-//                    registeredParcelsRecyclerView.setVisibility(View.VISIBLE);
-//                }
+
             }
 
             @Override
