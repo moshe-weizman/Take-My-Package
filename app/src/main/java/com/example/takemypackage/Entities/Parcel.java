@@ -16,7 +16,7 @@ public class Parcel {
      * Optional types of parcel sent by the network
      */
     public enum ParcelType {
-        ENVELOPE, SMALL_PARCEL, BIG_PARCELzz
+        ENVELOPE, SMALL_PARCEL, BIG_PARCEL
     }
 
     /**
