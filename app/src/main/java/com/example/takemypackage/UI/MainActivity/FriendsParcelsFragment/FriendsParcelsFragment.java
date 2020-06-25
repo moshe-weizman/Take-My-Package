@@ -6,32 +6,23 @@ import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
 import android.os.Bundle;
-
 import com.example.takemypackage.Data.PendingParcelsFirebaseManager;
-
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import com.example.takemypackage.Entities.DeliveryPerson;
 import com.example.takemypackage.Entities.Member;
 import com.example.takemypackage.Entities.PendingParcel;
 import com.example.takemypackage.R;
-
 import static com.example.takemypackage.UI.Login.LoginActivity.LoginActivity.MEMBER_KEY;
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-
 
 /**
  * A simple {@link Fragment} subclass.
@@ -39,17 +30,14 @@ import java.util.List;
  * create an instance of this fragment.
  */
 public class FriendsParcelsFragment extends Fragment {
-    public FriendsParcelsFragment() {
-    }
-
     private RecyclerView parcelRecyclerView;
     private TextView noDataTextView;
     private List<PendingParcel> pendingParcels;
     private Member member;
     private static float MAX_DISTANCE = 1000000000;
-    private Button buttonIWantToTake;
-    private DeliveryPerson deliveryPerson;
 
+    public FriendsParcelsFragment() {
+    }
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,11 +47,8 @@ public class FriendsParcelsFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        // return inflater.inflate(R.layout.fragment_friends_parcels, container, false);
         Intent intent = getActivity().getIntent();
         member = (Member) intent.getSerializableExtra(MEMBER_KEY);
-
         View view = inflater.inflate(R.layout.fragment_friends_parcels, container, false);
         parcelRecyclerView = view.findViewById(R.id.parcelRecyclerView);
         noDataTextView = view.findViewById(R.id.noDataTextView);
@@ -73,11 +58,9 @@ public class FriendsParcelsFragment extends Fragment {
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this.getContext());
         parcelRecyclerView.setLayoutManager(layoutManager);
 
-
         PendingParcelsFirebaseManager.NotifyToParcelList(new PendingParcelsFirebaseManager.NotifyDataChange<List<PendingParcel>>() {
             @Override
             public void OnDataChanged(List<PendingParcel> obj) {
-                //pendingParcels.clear();
                 String addressMember = member.getAddress();
                 for (PendingParcel parcel : obj) {
                     if (!parcel.getParcelDetails().getRecipientPhone().equals(member.getPhone())) {
@@ -104,8 +87,6 @@ public class FriendsParcelsFragment extends Fragment {
                 Toast.makeText(getContext(), "error to get parcel list of yours friends \n" + exception.toString(), Toast.LENGTH_LONG).show();
             }
         });
-
-
         return view;
     }
 
@@ -134,6 +115,5 @@ public class FriendsParcelsFragment extends Fragment {
         }
         return location;
     }
-
 }
 //

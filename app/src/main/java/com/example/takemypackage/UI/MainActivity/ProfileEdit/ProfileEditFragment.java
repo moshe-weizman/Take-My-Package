@@ -37,9 +37,7 @@ public class ProfileEditFragment extends Fragment {
     EditText editTextPIN, editTextAddress, editTextEmail, editTextFirstName, editTextLastName;
 
     public ProfileEditFragment() {
-
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -71,10 +69,6 @@ public class ProfileEditFragment extends Fragment {
                         loadingDialog.dismissDialog();
                         Toast.makeText(getContext(), "update was failed", Toast.LENGTH_LONG).show();
                     }
-
-                    @Override
-                    public void onProgress(String status, double percent) {
-                    }
                 });
             }
         });
@@ -87,40 +81,26 @@ public class ProfileEditFragment extends Fragment {
                     @Override
                     public void onSuccess(String obj) {
                         user.delete();
-                      //  loadingDialog.dismissDialog();
-                      //  Toast.makeText(getContext(), obj, Toast.LENGTH_LONG).show();
                     }
 
                     @Override
                     public void onFailure(Exception exception) {
                         loadingDialog.dismissDialog();
-                    }
-
-                    @Override
-                    public void onProgress(String status, double percent) {
-
                     }
                 });
 
                 PendingParcelsFirebaseManager.deleteAllPedingsParcelsOfMember(member.getPhone(),  new PendingParcelsFirebaseManager.Action<String>() {
                     @Override
                     public void onSuccess(String obj) {
-                       // user.delete();
                         loadingDialog.dismissDialog();
                         Toast.makeText(getContext(), obj, Toast.LENGTH_LONG).show();
                         Intent intent = new Intent(getContext(), LoginActivity.class);
                         startActivity(intent);
-
                     }
 
                     @Override
                     public void onFailure(Exception exception) {
                         loadingDialog.dismissDialog();
-                    }
-
-                    @Override
-                    public void onProgress(String status, double percent) {
-
                     }
                 });
             }

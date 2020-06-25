@@ -4,13 +4,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.example.takemypackage.Entities.HistoryParcel;
 import com.example.takemypackage.R;
-
 import java.util.List;
 
 public class HistoryParcelsRecyclerViewAdapter extends RecyclerView.Adapter<HistoryParcelsRecyclerViewAdapter.HistoryParcelsViewHolder> {
@@ -32,7 +29,6 @@ public class HistoryParcelsRecyclerViewAdapter extends RecyclerView.Adapter<Hist
             textViewParcelType = itemView.findViewById(R.id.parcelTypeTextView);
             textViewParcelWeight = itemView.findViewById(R.id.parcelWeightTextView);
             textViewFragile = itemView.findViewById(R.id.fragileTextView);
-
         }
     }
 

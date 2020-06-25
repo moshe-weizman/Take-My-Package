@@ -7,11 +7,9 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
-
 import androidx.annotation.RequiresApi;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
-
 import com.example.takemypackage.R;
 
 public class MyBroadcastReceiver extends BroadcastReceiver {
@@ -19,7 +17,6 @@ public class MyBroadcastReceiver extends BroadcastReceiver {
    private String channelId;
    private NotificationCompat.Builder notificationBuilder;
    private NotificationManagerCompat notificationManager;
-
 
    @RequiresApi(api = Build.VERSION_CODES.O)
    @Override

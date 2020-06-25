@@ -20,16 +20,13 @@ public class PendingParcel {
         parcelDetails = _parcelDetails;
         optionalDeliveries = new HashMap<>();
     }
-//
     public HashMap<String, DeliveryPerson> getOptionalDeliveries() {
         return optionalDeliveries;
     }
 
-
     public Parcel getParcelDetails() {
         return parcelDetails;
     }
-
 
     public void setOptionalDeliveries(HashMap<String, DeliveryPerson> optionalDeliveries) {
         this.optionalDeliveries = optionalDeliveries;
@@ -42,10 +39,4 @@ public class PendingParcel {
     public void addOptionalDelivery(DeliveryPerson deliveryPerson) {
         optionalDeliveries.put(deliveryPerson.getPhone(), deliveryPerson);
     }
-
-//    public void authorize(DeliveryPerson deliveryPerson, boolean authorized) {
-//
-//        deliveryPerson.setAuthorized(authorized);
-//
-//    }
 }
