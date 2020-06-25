@@ -127,7 +127,6 @@
                 android:layout_marginTop="30dp"
                 android:background="@drawable/custom_button"
                 android:drawablePadding="12dp"
-                android:enabled="false"
                 android:text="I took it"
                 android:textColor="@color/colorPrimary"
                 android:textSize="20sp" />

@@ -49,6 +49,7 @@ public class RegisteredParcelsFragment extends Fragment {
         PendingParcelsFirebaseManager.NotifyToParcelList(new PendingParcelsFirebaseManager.NotifyDataChange<List<PendingParcel>>() {
             @Override
             public void OnDataChanged(List<PendingParcel> obj) {
+                registeredParcels.clear();
                 for (PendingParcel pendingParcel : obj) {
                     if (pendingParcel.getParcelDetails().getRecipientPhone().equals(member.getPhone())) {
                         registeredParcels.add(pendingParcel);

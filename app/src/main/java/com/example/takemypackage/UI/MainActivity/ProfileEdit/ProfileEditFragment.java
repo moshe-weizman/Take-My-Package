@@ -31,7 +31,7 @@ public class ProfileEditFragment extends Fragment {
     Member member;
     Member newMember;
     Button buttonUpdate, buttonDelete;
-    EditText editTextPIN, editTextPhone, editTextAddress, editTextEmail, editTextFirstName, editTextLastName;
+    EditText editTextPIN, editTextAddress, editTextEmail, editTextFirstName, editTextLastName;
 
     public ProfileEditFragment() {
 
@@ -49,7 +49,7 @@ public class ProfileEditFragment extends Fragment {
             public void onClick(View v) {
                 loadingDialog.startLoadingDialog();
                 newMember = new Member(editTextFirstName.getText().toString(), editTextLastName.getText().toString(),
-                        editTextAddress.getText().toString(), editTextPhone.getText().toString(),
+                        editTextAddress.getText().toString(), member.getPhone(),
                         editTextEmail.getText().toString(), editTextPIN.getText().toString());
                 newMember.setImageFirebaseUri(member.getImageFirebaseUri());
                 newMember.setImageLocalUri(member.getImageLocalUri());
@@ -109,13 +109,11 @@ public class ProfileEditFragment extends Fragment {
         member = (Member) intent.getSerializableExtra(MEMBER_KEY);
         buttonUpdate = view.findViewById(R.id.buttonUpdate);
         buttonDelete = view.findViewById(R.id.buttonDelete);
-        editTextPhone = view.findViewById(R.id.editTextPhone);
         editTextPIN = view.findViewById(R.id.editTextPIN);
         editTextAddress = view.findViewById(R.id.editTextAddress);
         editTextEmail = view.findViewById(R.id.editTextEmail);
         editTextFirstName = view.findViewById(R.id.editTextFirstName);
         editTextLastName = view.findViewById(R.id.editTextLastName);
-        editTextPhone.setText(member.getPhone());
         editTextAddress.setText(member.getAddress());
         editTextEmail.setText(member.getEmail());
         editTextFirstName.setText(member.getfName());

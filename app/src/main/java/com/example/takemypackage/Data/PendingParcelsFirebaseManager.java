@@ -42,7 +42,7 @@ public class PendingParcelsFirebaseManager {
     public static DatabaseReference parcelRef;
 
     static {
-         FirebaseDatabase database = FirebaseDatabase.getInstance();
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
         parcelRef = database.getReference("PendingParcel");
 
     }
@@ -50,7 +50,7 @@ public class PendingParcelsFirebaseManager {
     public static ChildEventListener parcelRefChildEventListener;
 //private GenericTypeIndicator<PendingParcel> typeIndicator = new GenericTypeIndicator<PendingParcel>() {};
 
-    public static void NotifyToParcelList(/*final List<PendingParcel> pendingParcelList*/ final NotifyDataChange<List<PendingParcel>> notifyDataChange) {
+    public static void NotifyToParcelList( final NotifyDataChange<List<PendingParcel>> notifyDataChange) {
         if (notifyDataChange != null) {
             if (parcelRefChildEventListener != null) {
                 notifyDataChange.onFailure(new Exception("first unNotify parcel list"));
@@ -63,9 +63,6 @@ public class PendingParcelsFirebaseManager {
                     pendingParcelList.clear();
                     for (DataSnapshot child : dataSnapshot.getChildren()) {
                         PendingParcel pendingParcel = child.getValue(PendingParcel.class);
-//                        for (DataSnapshot childDelviries : child.child("optionalDeliveries").getChildren()) {
-//                            pendingParcel.getOptionalDeliveries().put(childDelviries.getKey(), childDelviries.getValue(DeliveryPerson.class));
-//                        }
                         pendingParcel.getParcelDetails().set_parcelID(child.getKey());
                         pendingParcelList.add(pendingParcel);
                     }
@@ -74,12 +71,15 @@ public class PendingParcelsFirebaseManager {
 
                 @Override
                 public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-                    PendingParcel pendingParcel = dataSnapshot.getValue(PendingParcel.class);
-                    String phone = dataSnapshot.getKey();
-                    String parcelID = dataSnapshot.child(phone).getKey();
-                    pendingParcel.getParcelDetails().set_parcelID(parcelID);
+                    PendingParcel pendingParcel = new PendingParcel();
+                    for (DataSnapshot child : dataSnapshot.getChildren()) {
+                        pendingParcel = child.getValue(PendingParcel.class);
+                        pendingParcel.getParcelDetails().set_parcelID(child.child(child.getKey()).getKey());
+
+                    }
+                    //   pendingParcel.getParcelDetails().set_parcelID(parcelID);
                     for (int i = 0; i < pendingParcelList.size(); i++) {
-                        if (pendingParcelList.get(i).getParcelDetails().getParcelID().equals(parcelID)) {
+                        if (pendingParcelList.get(i).getParcelDetails().getParcelID().equals(pendingParcel.getParcelDetails().getParcelID())) {
                             pendingParcelList.set(i, pendingParcel);
                             break;
                         }
@@ -89,12 +89,16 @@ public class PendingParcelsFirebaseManager {
 
                 @Override
                 public void onChildRemoved(DataSnapshot dataSnapshot) {
-                    PendingParcel pendingParcel = dataSnapshot.getValue(PendingParcel.class);
-                    String phone = dataSnapshot.getKey();
-                    String parcelID = dataSnapshot.child(phone).getKey();
-                    pendingParcel.getParcelDetails().set_parcelID(parcelID);
+                    PendingParcel pendingParcel = new PendingParcel();
+                    for (DataSnapshot child : dataSnapshot.getChildren()) {
+                        pendingParcel = child.getValue(PendingParcel.class);
+                        pendingParcel.getParcelDetails().set_parcelID(child.child(child.getKey()).getKey());
+                    }
+                   // String phone = dataSnapshot.getKey();
+                   // String parcelID = dataSnapshot.child(pendingParcel.getParcelDetails().getRecipientPhone()).getKey();
+                  //  pendingParcel.getParcelDetails().set_parcelID(pendingParcel.getParcelDetails().getParcelID());
                     for (int i = 0; i < pendingParcelList.size(); i++) {
-                        if (pendingParcelList.get(i).getParcelDetails().getParcelID().equals(parcelID)) {
+                        if (pendingParcelList.get(i).getParcelDetails().getParcelID().equals(pendingParcel.getParcelDetails().getParcelID())) {
                             pendingParcelList.remove(i);
                             break;
                         }
@@ -128,8 +132,7 @@ public class PendingParcelsFirebaseManager {
         DatabaseReference DeliveryPersonRef = parcelRef.child(pendingParcel.getParcelDetails().getRecipientPhone()).child(pendingParcel.getParcelDetails().getParcelID()).child("optionalDeliveries");
 
         DeliveryPersonRef.child(deliveryPerson.getPhone())
-                .setValue(deliveryPerson)
-                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                .setValue(deliveryPerson).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void aVoid) {
                 action.onSuccess("Registration was successful");

@@ -99,17 +99,17 @@ public class HisroryParcelsFirebaseManager {
 
                 @Override
                 public void onChildRemoved(DataSnapshot dataSnapshot) {
-                    HistoryParcel historyParcel = dataSnapshot.getValue(HistoryParcel.class);
-                    String phone = dataSnapshot.getKey();
-                    String parcelID = dataSnapshot.child(phone).getKey();
-                    historyParcel.getParcelDetails().set_parcelID(parcelID);
-                    for (int i = 0; i < historyParcelList.size(); i++) {
-                        if (historyParcelList.get(i).getParcelDetails().getParcelID().equals(parcelID)) {
-                            historyParcelList.remove(i);
-                            break;
-                        }
-                    }
-                    notifyDataChange.OnDataChanged(historyParcelList);
+//                    HistoryParcel historyParcel = dataSnapshot.getValue(HistoryParcel.class);
+//                    String phone = dataSnapshot.getKey();
+//                    String parcelID = dataSnapshot.child(phone).getKey();
+//                    historyParcel.getParcelDetails().set_parcelID(parcelID);
+//                    for (int i = 0; i < historyParcelList.size(); i++) {
+//                        if (historyParcelList.get(i).getParcelDetails().getParcelID().equals(parcelID)) {
+//                            historyParcelList.remove(i);
+//                            break;
+//                        }
+//                    }
+//                    notifyDataChange.OnDataChanged(historyParcelList);
                 }
 
                 @Override

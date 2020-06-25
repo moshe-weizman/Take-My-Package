@@ -69,10 +69,10 @@ public class FriendsParcelsFragment extends Fragment {
         parcelRecyclerView.setLayoutManager(layoutManager);
 
 
-        PendingParcelsFirebaseManager.NotifyToParcelList(/*pendingParcels,*/ new PendingParcelsFirebaseManager.NotifyDataChange<List<PendingParcel>>() {
+        PendingParcelsFirebaseManager.NotifyToParcelList(new PendingParcelsFirebaseManager.NotifyDataChange<List<PendingParcel>>() {
             @Override
             public void OnDataChanged(List<PendingParcel> obj) {
-
+                pendingParcels.clear();
                 String addressMember = member.getAddress();
                 for (PendingParcel parcel : obj) {
                     if (!parcel.getParcelDetails().getRecipientPhone().equals(member.getPhone())) {
@@ -112,7 +112,7 @@ public class FriendsParcelsFragment extends Fragment {
         Location location = new Location(pnt);
         List<Address> addresses = null;
         try {
-            addresses=geocoder.getFromLocationName(loc, 5) ;
+            addresses = geocoder.getFromLocationName(loc, 5);
             location.setLatitude(addresses.get(0).getLatitude());
             location.setLongitude(addresses.get(0).getLongitude());
         } catch (IOException e) {
