@@ -13,8 +13,11 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.takemypackage.Data.MembersFirebaseManager;
+import com.example.takemypackage.Data.PendingParcelsFirebaseManager;
 import com.example.takemypackage.Entities.Member;
 import com.example.takemypackage.R;
+import com.example.takemypackage.UI.Login.LoginActivity.LoginActivity;
+import com.example.takemypackage.UI.MainActivity.MainActivity;
 import com.example.takemypackage.Utils.LoadingDialog;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -84,8 +87,30 @@ public class ProfileEditFragment extends Fragment {
                     @Override
                     public void onSuccess(String obj) {
                         user.delete();
+                      //  loadingDialog.dismissDialog();
+                      //  Toast.makeText(getContext(), obj, Toast.LENGTH_LONG).show();
+                    }
+
+                    @Override
+                    public void onFailure(Exception exception) {
+                        loadingDialog.dismissDialog();
+                    }
+
+                    @Override
+                    public void onProgress(String status, double percent) {
+
+                    }
+                });
+
+                PendingParcelsFirebaseManager.deleteAllPedingsParcelsOfMember(member.getPhone(),  new PendingParcelsFirebaseManager.Action<String>() {
+                    @Override
+                    public void onSuccess(String obj) {
+                       // user.delete();
                         loadingDialog.dismissDialog();
                         Toast.makeText(getContext(), obj, Toast.LENGTH_LONG).show();
+                        Intent intent = new Intent(getContext(), LoginActivity.class);
+                        startActivity(intent);
+
                     }
 
                     @Override

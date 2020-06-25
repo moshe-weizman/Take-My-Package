@@ -1,5 +1,6 @@
 package com.example.takemypackage.UI.MainActivity.FriendsParcelsFragment;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,6 +35,7 @@ public class FriendsParcelsRecyclerViewAdapter extends RecyclerView.Adapter<Frie
 
 
     public FriendsParcelsRecyclerViewAdapter(List<PendingParcel> pendingParcels, Member member) {
+
         this.pendingParcels = pendingParcels;
         this.member = member;
     }
