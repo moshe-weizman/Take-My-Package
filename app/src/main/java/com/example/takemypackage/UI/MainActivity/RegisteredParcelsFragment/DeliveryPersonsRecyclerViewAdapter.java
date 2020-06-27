@@ -73,21 +73,18 @@ public class DeliveryPersonsRecyclerViewAdapter extends RecyclerView.Adapter<Del
 
         holder.authorizationCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+            public void onCheckedChanged(final CompoundButton buttonView, boolean isChecked) {
                 deliveryPerson.setAuthorized(isChecked);
                 PendingParcelsFirebaseManager.addOrUpdateMemberToOptionalDeliveries(pendingParcel, deliveryPerson, new PendingParcelsFirebaseManager.Action<String>() {
 
                     @Override
                     public void onSuccess(String obj) {
-                        //TODO toast
-                       // Toast.makeText(, "welcome " + obj, Toast.LENGTH_LONG).show();
+                        Toast.makeText(buttonView.getContext(), "welcome " + obj, Toast.LENGTH_LONG).show();
                     }
 
                     @Override
                     public void onFailure(Exception exception) {
-                        //TODO toast
-
-                        // Toast.makeText(getBaseContext(), "Error \n", Toast.LENGTH_LONG).show();
+                        Toast.makeText(buttonView.getContext(), "Error \n", Toast.LENGTH_LONG).show();
                     }
 
                 });

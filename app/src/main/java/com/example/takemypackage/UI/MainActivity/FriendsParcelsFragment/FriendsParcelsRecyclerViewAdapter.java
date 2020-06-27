@@ -1,12 +1,16 @@
 package com.example.takemypackage.UI.MainActivity.FriendsParcelsFragment;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
 import com.example.takemypackage.Data.HistroryParcelsFirebaseManager;
 import com.example.takemypackage.Data.PendingParcelsFirebaseManager;
 import com.example.takemypackage.Entities.DeliveryPerson;
@@ -15,6 +19,7 @@ import com.example.takemypackage.Entities.Member;
 import com.example.takemypackage.Entities.Parcel;
 import com.example.takemypackage.Entities.PendingParcel;
 import com.example.takemypackage.R;
+
 import java.util.Date;
 import java.util.List;
 
@@ -55,21 +60,19 @@ public class FriendsParcelsRecyclerViewAdapter extends RecyclerView.Adapter<Frie
 
         holder.buttonIWantToTakeIt.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(final View v) {
                 deliveryPerson = new DeliveryPerson(member);
                 pendingParcel.addOptionalDelivery(deliveryPerson);
                 PendingParcelsFirebaseManager.addOrUpdateMemberToOptionalDeliveries(pendingParcel, deliveryPerson, new PendingParcelsFirebaseManager.Action<String>() {
                     @Override
                     public void onSuccess(String obj) {
-                        //TODO toast
-                        //Toast.makeText(, "welcome " + obj, Toast.LENGTH_LONG).show();
                         memberHasOffered(holder, pendingParcel);
+                        Toast.makeText(v.getContext(), "You have successfully registered", Toast.LENGTH_LONG).show();
                     }
 
                     @Override
                     public void onFailure(Exception exception) {
-                        //TODO toast
-                        // Toast.makeText(getBaseContext(), "Error \n", Toast.LENGTH_LONG).show();
+                        Toast.makeText(v.getContext(), "Registration failed \n", Toast.LENGTH_LONG).show();
                     }
                 });
             }
@@ -77,34 +80,34 @@ public class FriendsParcelsRecyclerViewAdapter extends RecyclerView.Adapter<Frie
 
         holder.buttonITookIt.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(final View v) {
                 deliveryPerson = new DeliveryPerson(member);
                 deliveryPerson.setAuthorized(true);
-                calendar=new Date();
+                calendar = new Date();
                 historyParcel = new HistoryParcel(pendingParcel, deliveryPerson, calendar);
                 PendingParcelsFirebaseManager.deletePendingParcel(pendingParcel, new PendingParcelsFirebaseManager.Action<String>() {
                     @Override
                     public void onSuccess(String obj) {
                         holder.buttonITookIt.setEnabled(false);
+                        Toast.makeText(v.getContext(), "Successfully recorded \n", Toast.LENGTH_LONG).show();
+
                     }
 
                     @Override
                     public void onFailure(Exception exception) {
-                        //TODO toast
-                        // Toast.makeText(getBaseContext(), "Error \n", Toast.LENGTH_LONG).show();
+                        Toast.makeText(v.getContext(), "Error. try again \n", Toast.LENGTH_LONG).show();
                     }
                 });
 
                 HistroryParcelsFirebaseManager.addParcelToHistory(historyParcel, new HistroryParcelsFirebaseManager.Action<String>() {
                     @Override
                     public void onSuccess(String obj) {
-                        //Toast.makeText(, "welcome " + obj, Toast.LENGTH_LONG).show();
+                        Toast.makeText(v.getContext(), "The package was successfully registered in history \n", Toast.LENGTH_LONG).show();
                     }
 
                     @Override
                     public void onFailure(Exception exception) {
-                        //TODO toast
-                        // Toast.makeText(getBaseContext(), "Error \n", Toast.LENGTH_LONG).show();
+                        Toast.makeText(v.getContext(), "Error. try again \n", Toast.LENGTH_LONG).show();
                     }
                 });
             }

@@ -6,20 +6,26 @@ import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
 import android.os.Bundle;
+
 import com.example.takemypackage.Data.PendingParcelsFirebaseManager;
+
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import com.example.takemypackage.Entities.Member;
 import com.example.takemypackage.Entities.PendingParcel;
 import com.example.takemypackage.R;
+
 import static com.example.takemypackage.UI.Login.LoginActivity.LoginActivity.MEMBER_KEY;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -38,6 +44,7 @@ public class FriendsParcelsFragment extends Fragment {
 
     public FriendsParcelsFragment() {
     }
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,23 +70,25 @@ public class FriendsParcelsFragment extends Fragment {
             public void OnDataChanged(List<PendingParcel> obj) {
                 String addressMember = member.getAddress();
                 for (PendingParcel parcel : obj) {
-                    if (!parcel.getParcelDetails().getRecipientPhone().equals(member.getPhone())) {
-                        if (getDistance(getContext(), addressMember, parcel.getParcelDetails().getLocationOfStorage()) < MAX_DISTANCE
-                        && !pendingParcels.contains(parcel))
-                            pendingParcels.add(parcel);
-                    }
+                    if (!parcel.getParcelDetails().getRecipientPhone().equals(member.getPhone())
+                            && getDistance(getContext(), addressMember, parcel.getParcelDetails().getLocationOfStorage()) < MAX_DISTANCE
+                            && !pendingParcels.contains(parcel))
+                        pendingParcels.add(parcel);
+
                 }
-                if (pendingParcels.isEmpty()){
+                if (pendingParcels.isEmpty()) {
                     noDataTextView.setVisibility(View.VISIBLE);
                     parcelRecyclerView.setVisibility(View.GONE);
-                }else{
+                } else {
                     noDataTextView.setVisibility(View.GONE);
                     parcelRecyclerView.setVisibility(View.VISIBLE);
                 }
 
                 if (parcelRecyclerView.getAdapter() == null) {
                     parcelRecyclerView.setAdapter(new FriendsParcelsRecyclerViewAdapter(pendingParcels, member));
-                } else parcelRecyclerView.getAdapter().notifyDataSetChanged();
+                } else parcelRecyclerView.getAdapter().
+
+                        notifyDataSetChanged();
             }
 
             @Override
