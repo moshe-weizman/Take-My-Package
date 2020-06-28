@@ -20,7 +20,7 @@ public class Member implements Serializable {
     private Uri imageLocalUri;
     private String imageFirebaseUri;
 
-    //---------------------------------------------------------------------------------------------------------------------
+    //------------------------------------constructors----------------------------------------------------
     public Member() {
     }
 
@@ -34,7 +34,7 @@ public class Member implements Serializable {
         this.password = password;
     }
 
-    //---------------------------------------------------------------------------------------------------------------------
+    //-------------------------------------------getters and setters------------------------------------------------------
     public String getfName() {
         return fName;
     }

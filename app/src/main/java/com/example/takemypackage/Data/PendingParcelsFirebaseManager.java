@@ -1,6 +1,7 @@
 package com.example.takemypackage.Data;
 
 import androidx.annotation.NonNull;
+
 import com.example.takemypackage.Entities.*;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -9,18 +10,29 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class PendingParcelsFirebaseManager {
     private static List<PendingParcel> pendingParcelList = new ArrayList<PendingParcel>();
 
+    /**
+     * Interface for listeners who want to add or update
+     *
+     * @param <T>
+     */
     public interface Action<T> {
         void onSuccess(T obj);
 
         void onFailure(Exception exception);
     }
 
+    /**
+     * Interface for listening for information retrieval
+     *
+     * @param <T>
+     */
     public interface NotifyDataChange<T> {
         void OnDataChanged(T obj);
 
@@ -31,13 +43,18 @@ public class PendingParcelsFirebaseManager {
      * Static reference to the parcels database
      */
     public static DatabaseReference parcelRef;
+    // Listener for changes
+    public static ChildEventListener parcelRefChildEventListener;
 
     static {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         parcelRef = database.getReference("PendingParcel");
     }
 
-    public static ChildEventListener parcelRefChildEventListener;
+    /**
+     * function to listener to information retrieval and changes
+     * @param notifyDataChange
+     */
     public static void NotifyToParcelList(final NotifyDataChange<List<PendingParcel>> notifyDataChange) {
         if (notifyDataChange != null) {
             if (parcelRefChildEventListener != null) {
@@ -101,14 +118,24 @@ public class PendingParcelsFirebaseManager {
             parcelRef.addChildEventListener(parcelRefChildEventListener);
         }
     }
+    //---------------------------------------------------------------------------------------
 
+    /**
+     * function to stop Listener when the fragment terminated
+     */
     public static void stopNotifyToPendingList() {
         if (parcelRefChildEventListener != null) {
             parcelRef.removeEventListener(parcelRefChildEventListener);
             parcelRefChildEventListener = null;
         }
     }
-
+//---------------------------------------------------------------------------------------
+    /**
+     * function to add Or Update Member To Optional Deliveries
+     * @param pendingParcel
+     * @param deliveryPerson
+     * @param action
+     */
     public static void addOrUpdateMemberToOptionalDeliveries(PendingParcel pendingParcel, DeliveryPerson deliveryPerson, final Action<String> action) {
         DatabaseReference DeliveryPersonRef = parcelRef.child(pendingParcel.getParcelDetails().getRecipientPhone()).child(pendingParcel.getParcelDetails().getParcelID()).child("optionalDeliveries");
 
@@ -126,7 +153,13 @@ public class PendingParcelsFirebaseManager {
         });
 
     }
+//---------------------------------------------------------------------------------------
 
+    /**
+     * function to delete Pending Parcel
+     * @param pendingParcel
+     * @param action
+     */
     public static void deletePendingParcel(PendingParcel pendingParcel, final Action<String> action) {
         Parcel parcel = pendingParcel.getParcelDetails();
         parcelRef.child(parcel.getRecipientPhone()).child(parcel.getParcelID()).removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
@@ -142,8 +175,13 @@ public class PendingParcelsFirebaseManager {
         });
 
     }
+//---------------------------------------------------------------------------------------
 
-
+    /**
+     * function to delete ALL Pending Parcels
+     * @param phone
+     * @param action
+     */
     public static void deleteAllPedingsParcelsOfMember(String phone, final Action<String> action) {
         parcelRef.child(phone).removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override

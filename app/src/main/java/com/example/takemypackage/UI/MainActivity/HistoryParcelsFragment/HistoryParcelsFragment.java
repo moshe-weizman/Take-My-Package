@@ -60,7 +60,7 @@ public class HistoryParcelsFragment extends Fragment {
                 }
                 if (parcelRecyclerView.getAdapter() == null) {
                     parcelRecyclerView.setAdapter(new HistoryParcelsRecyclerViewAdapter(historyParcelList));
-                } else parcelRecyclerView.getAdapter().notifyDataSetChanged();
+                } else parcelRecyclerView.getAdapter().notifyDataSetChanged();// If there is an adapter already
             }
 
             @Override
@@ -70,7 +70,9 @@ public class HistoryParcelsFragment extends Fragment {
         });
         return view;
     }
-
+    /**
+     *function that action  when fragment terminated
+     */
     public void onDestroyView() {
         super.onDestroyView();
         HistroryParcelsFirebaseManager.stopNotifyToHistoryList();

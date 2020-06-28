@@ -32,8 +32,7 @@ import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the  factory method to
- * create an instance of this fragment.
+ *fragment of Friends Parcels
  */
 public class FriendsParcelsFragment extends Fragment {
     private RecyclerView parcelRecyclerView;
@@ -86,7 +85,7 @@ public class FriendsParcelsFragment extends Fragment {
 
                 if (parcelRecyclerView.getAdapter() == null) {
                     parcelRecyclerView.setAdapter(new FriendsParcelsRecyclerViewAdapter(pendingParcels, member));
-                } else parcelRecyclerView.getAdapter().
+                } else parcelRecyclerView.getAdapter().// If there is an adapter already
 
                         notifyDataSetChanged();
             }
@@ -99,18 +98,35 @@ public class FriendsParcelsFragment extends Fragment {
         return view;
     }
 
+    /**
+     *function that action  when fragment terminated
+     */
     public void onDestroyView() {
         super.onDestroyView();
         PendingParcelsFirebaseManager.stopNotifyToPendingList();
         super.onDestroy();
     }
 
+    /**
+     * function to get Distance from to points
+     * @param context
+     * @param locA
+     * @param locB
+     * @return
+     */
     static public float getDistance(Context context, String locA, String locB) {
         Location locationA = setLatLon(context, locA, "pointA");
         Location locationB = setLatLon(context, locB, "pointB");
         return locationA.distanceTo(locationB) / 1000;
     }
 
+    /**
+     * function to get Lan and lat on address
+     * @param context
+     * @param loc
+     * @param pnt
+     * @return
+     */
     static private Location setLatLon(Context context, String loc, String pnt) {
         Geocoder geocoder = new Geocoder(context);
         Location location = new Location(pnt);

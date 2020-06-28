@@ -30,11 +30,11 @@ import static com.example.takemypackage.UI.Login.LoginActivity.LoginActivity.MEM
 public class ProfileEditFragment extends Fragment {
     private LoadingDialog loadingDialog;
     private FirebaseAuth mAuth;
-    FirebaseUser user;
-    Member member;
-    Member newMember;
-    Button buttonUpdate, buttonDelete;
-    EditText editTextPIN, editTextAddress, editTextEmail, editTextFirstName, editTextLastName;
+    private FirebaseUser user;
+    private Member member;
+    private  Member newMember;
+    private Button buttonUpdate, buttonDelete;
+    private EditText editTextPIN, editTextAddress, editTextEmail, editTextFirstName, editTextLastName;
 
     public ProfileEditFragment() {
     }
@@ -108,6 +108,10 @@ public class ProfileEditFragment extends Fragment {
         return view;
     }
 
+    /**
+     * Initialize variables
+     * @param view
+     */
     private void init(View view) {
         Intent intent = getActivity().getIntent();
         loadingDialog = new LoadingDialog(getActivity());

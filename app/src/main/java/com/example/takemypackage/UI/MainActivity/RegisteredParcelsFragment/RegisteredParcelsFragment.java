@@ -37,9 +37,17 @@ public class RegisteredParcelsFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-
+        Intent intent = this.getActivity().getIntent();
+        member = (Member) intent.getSerializableExtra(MEMBER_KEY);
+        registeredParcels = new ArrayList<>();
         View view = inflater.inflate(R.layout.fragment_friends_parcels, container, false);
-        init(view);
+        registeredParcelsRecyclerView = view.findViewById(R.id.parcelRecyclerView);
+        noDataTextView = view.findViewById(R.id.noDataTextView);
+        noDataTextView.setText("No package is waiting for you yet");
+        noDataTextView.setVisibility(View.GONE);
+        registeredParcelsRecyclerView.setHasFixedSize(true);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this.getContext());
+        registeredParcelsRecyclerView.setLayoutManager(layoutManager);
 
 
         PendingParcelsFirebaseManager.NotifyToParcelList(new PendingParcelsFirebaseManager.NotifyDataChange<List<PendingParcel>>() {
@@ -75,18 +83,6 @@ public class RegisteredParcelsFragment extends Fragment {
         return view;
     }
 
-    private void init(View view) {
-        Intent intent = this.getActivity().getIntent();
-        member = (Member) intent.getSerializableExtra(MEMBER_KEY);
-        registeredParcels = new ArrayList<>();
-        registeredParcelsRecyclerView = view.findViewById(R.id.parcelRecyclerView);
-        noDataTextView = view.findViewById(R.id.noDataTextView);
-        noDataTextView.setText("No package is waiting for you yet");
-        noDataTextView.setVisibility(View.GONE);
-        registeredParcelsRecyclerView.setHasFixedSize(true);
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this.getContext());
-        registeredParcelsRecyclerView.setLayoutManager(layoutManager);
-    }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {

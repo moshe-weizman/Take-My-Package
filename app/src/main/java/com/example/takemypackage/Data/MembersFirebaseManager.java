@@ -20,13 +20,19 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
 public class MembersFirebaseManager {
+
+    /**
+     * Interface for listeners who want to add or update
+     * @param <T>
+     */
     public interface Action<T> {
         void onSuccess(T obj);
 
         void onFailure(Exception exception);
     }
-
+    //Reference to firebase on  members
     public static DatabaseReference memberRef;
+    //Reference to storage in firebase
     public static StorageReference imagesRef;
 
     static {
@@ -35,6 +41,11 @@ public class MembersFirebaseManager {
         imagesRef = FirebaseStorage.getInstance().getReference();
     }
 
+    /**
+     * add member to firebase and listner if the action is successful
+     * @param member
+     * @param action
+     */
     public static void addMemberToFirebase(final Member member, final Action<String> action) {
         memberRef.child(member.getPhone()).setValue(member).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
@@ -50,6 +61,12 @@ public class MembersFirebaseManager {
         });
     }
 
+    /**
+     * Update User Profile and listner if the action is successful
+     * @param phoneOldMember
+     * @param newMember
+     * @param action
+     */
     public static void UpdateUserProfile(final String phoneOldMember, final Member newMember, final Action<String> action) {
 
         memberRef.child(phoneOldMember).setValue(newMember).addOnSuccessListener(new OnSuccessListener<Void>() {
@@ -64,6 +81,11 @@ public class MembersFirebaseManager {
         });
     }
 
+    /**
+     * delete Member from firebase
+     * @param phoneMember
+     * @param action
+     */
     public static void deleteMember(final String phoneMember, final Action<String> action) {
         memberRef.child(phoneMember).removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
@@ -77,7 +99,12 @@ public class MembersFirebaseManager {
             }
         });
     }
-
+//-----------------------------------------------------------------------------
+    /**
+     * add Image Member to the storage of firebase
+     * @param member
+     * @param action
+     */
     public static void addImageMember(final Member member, final Action<String> action) {
         if (member.getImageLocalUri() != null) {
             // upload image

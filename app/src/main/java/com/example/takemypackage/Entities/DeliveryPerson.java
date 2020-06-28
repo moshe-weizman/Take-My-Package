@@ -6,7 +6,7 @@ public class DeliveryPerson {
     private boolean authorized;
     private String imageFirebaseUri;
 
-
+    //------------------------------------constructors----------------------------------------------------
     public DeliveryPerson() {
     }
 
@@ -21,6 +21,7 @@ public class DeliveryPerson {
         imageFirebaseUri = member.getImageFirebaseUri();
     }
 
+    //-------------------------------------------getters and setters------------------------------------------------------
     public String getImageFirebaseUri() {
         return imageFirebaseUri;
     }

@@ -12,6 +12,8 @@ public class PendingParcel {
     private HashMap<String, DeliveryPerson> optionalDeliveries;
     private Parcel parcelDetails;
 
+    //------------------------------------constructors----------------------------------------------------
+
     public PendingParcel() {
         this.optionalDeliveries = new HashMap<>();
     }
@@ -20,6 +22,9 @@ public class PendingParcel {
         parcelDetails = _parcelDetails;
         optionalDeliveries = new HashMap<>();
     }
+
+    //-------------------------------------------getters and setters------------------------------------------------------
+
     public HashMap<String, DeliveryPerson> getOptionalDeliveries() {
         return optionalDeliveries;
     }

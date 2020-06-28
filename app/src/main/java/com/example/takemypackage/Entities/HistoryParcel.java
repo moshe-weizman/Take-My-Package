@@ -8,6 +8,7 @@ public class HistoryParcel {
     private DeliveryPerson deliveryPerson;
     private Parcel parcelDetails;
     private Date dateCollected;
+//------------------------------------constructors----------------------------------------------------
 
     public HistoryParcel() {
     }
@@ -23,6 +24,7 @@ public class HistoryParcel {
         deliveryPerson = _deliveryPerson;
         dateCollected = _dateCollected;
     }
+//-------------------------------------------getters and setters------------------------------------------------------
 
     public DeliveryPerson getDeliveryPerson() {
         return deliveryPerson;

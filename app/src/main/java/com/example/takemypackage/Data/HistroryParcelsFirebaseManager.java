@@ -18,17 +18,31 @@ import java.util.List;
 public class HistroryParcelsFirebaseManager {
     private static List<HistoryParcel> historyParcelList = new ArrayList<HistoryParcel>();
 
+    /**
+     * Interface for listeners who want to add or update
+     *
+     * @param <T>
+     */
     public interface Action<T> {
         void onSuccess(T obj);
+
         void onFailure(Exception exception);
     }
 
+    /**
+     * Interface for listening for information retrieval
+     *
+     * @param <T>
+     */
     public interface NotifyDataChange<T> {
         void OnDataChanged(T obj);
+
         void onFailure(Exception exception);
     }
 
+    //Reference to firebase on History parcels
     public static DatabaseReference historyParcelsRef;
+    // Listener for changes
     public static ChildEventListener historyParcelRefChildEventListener;
 
     static {
@@ -36,6 +50,11 @@ public class HistroryParcelsFirebaseManager {
         historyParcelsRef = database.getReference("HistoryParcels");
     }
 
+    /**
+     * function to add Parcel to History with listener
+     * @param historyParcel
+     * @param action
+     */
     public static void addParcelToHistory(final HistoryParcel historyParcel, final Action<String> action) {
         Parcel parcel = historyParcel.getParcelDetails();
         historyParcelsRef.child(parcel.getRecipientPhone()).child(parcel.getParcelID()).setValue(historyParcel).addOnSuccessListener(new OnSuccessListener<Void>() {
@@ -51,6 +70,11 @@ public class HistroryParcelsFirebaseManager {
         });
     }
 
+    /**
+     * function to listener to information retrieval and changes
+     * @param userPhone
+     * @param notifyDataChange
+     */
     public static void NotifyToHistoryParcelList(final String userPhone, final NotifyDataChange<List<HistoryParcel>> notifyDataChange) {
         if (notifyDataChange != null) {
             if (historyParcelRefChildEventListener != null) {
@@ -91,7 +115,10 @@ public class HistroryParcelsFirebaseManager {
             historyParcelsRef.addChildEventListener(historyParcelRefChildEventListener);
         }
     }
-
+//-------------------------------------------------------------------------------------
+    /**
+     * function to stop Listener when the fragment terminated
+     */
     public static void stopNotifyToHistoryList() {
         if (historyParcelRefChildEventListener != null) {
             historyParcelsRef.removeEventListener(historyParcelRefChildEventListener);
