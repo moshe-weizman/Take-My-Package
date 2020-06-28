@@ -1,3 +1,11 @@
+/*
+Java Workshop 2020
+First Application
+25/06/2020
+Moshe Weizman 305343931
+Aharon Packter 201530508
+ */
+
 package com.example.takemypackage.UI.MainActivity.HistoryParcelsFragment;
 
 import android.view.LayoutInflater;

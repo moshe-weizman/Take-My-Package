@@ -1,11 +1,14 @@
+/*
+Java Workshop 2020
+First Application
+25/06/2020
+Moshe Weizman 305343931
+Aharon Packter 201530508
+ */
+
 package com.example.takemypackage.Entities;
 
-
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.Dictionary;
 import java.util.HashMap;
-import java.util.List;
 
 public class PendingParcel {
 
