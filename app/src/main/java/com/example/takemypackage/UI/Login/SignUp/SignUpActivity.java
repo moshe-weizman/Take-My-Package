@@ -10,6 +10,7 @@ package com.example.takemypackage.UI.Login.SignUp;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -18,6 +19,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
+
 import com.example.takemypackage.Data.MembersFirebaseManager;
 import com.example.takemypackage.Entities.Member;
 import com.example.takemypackage.R;
@@ -60,6 +62,7 @@ public class SignUpActivity extends AppCompatActivity {
 
         });
     }
+//------------------------------------------------------------------------
 
     private void addMember() {
         try {
@@ -80,6 +83,7 @@ public class SignUpActivity extends AppCompatActivity {
             Toast.makeText(getBaseContext(), "Error \n", Toast.LENGTH_LONG).show();
         }
     }
+//------------------------------------------------------------------------
 
     private void init() {
         urlImageView = findViewById(R.id.urlImageView);
@@ -94,6 +98,7 @@ public class SignUpActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         member = new Member();
     }
+//------------------------------------------------------------------------
 
     private void register(String email, String password) {
         mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
@@ -113,6 +118,7 @@ public class SignUpActivity extends AppCompatActivity {
             }
         });
     }
+//------------------------------------------------------------------------
 
     private void addImage() {
         member.setImageLocalUri((Uri) urlImageView.getTag());
@@ -130,6 +136,7 @@ public class SignUpActivity extends AppCompatActivity {
             }
         });
     }
+//------------------------------------------------------------------------
 
     private void selectImage() {
         Intent intent = new Intent();
@@ -137,6 +144,7 @@ public class SignUpActivity extends AppCompatActivity {
         intent.setAction(Intent.ACTION_GET_CONTENT);
         startActivityForResult(Intent.createChooser(intent, "Select Picture"), 1);
     }
+//------------------------------------------------------------------------
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {

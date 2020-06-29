@@ -30,6 +30,7 @@ public class LoadingDialog {
         alertDialog = builder.create();
         alertDialog.show();
     }
+//------------------------------------------------------------------------
 
     public void dismissDialog() {
         alertDialog.dismiss();

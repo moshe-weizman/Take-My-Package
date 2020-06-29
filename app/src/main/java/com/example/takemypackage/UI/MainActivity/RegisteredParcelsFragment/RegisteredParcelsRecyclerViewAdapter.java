@@ -58,12 +58,14 @@ public class RegisteredParcelsRecyclerViewAdapter extends RecyclerView.Adapter<R
          deliveryPersonsRecyclerView.setHasFixedSize(true);
       }
    }
+//------------------------------------------------------------------------
 
    public RegisteredParcelsRecyclerViewAdapter(List<PendingParcel> registeredParcels, Member member, Context context) {
       _registeredParcels = registeredParcels;
       _member = member;
       this.context = context;
    }
+//------------------------------------------------------------------------
 
    @NonNull
    @Override
@@ -95,6 +97,7 @@ public class RegisteredParcelsRecyclerViewAdapter extends RecyclerView.Adapter<R
          }
       });
    }
+//------------------------------------------------------------------------
 
    @Override
    public int getItemCount() {

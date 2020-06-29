@@ -35,12 +35,14 @@ public class HistoryParcelsFragment extends Fragment {
 
     public HistoryParcelsFragment() {
     }
+//------------------------------------------------------------------------
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         historyParcelList = new ArrayList<>();
     }
+//------------------------------------------------------------------------
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -78,6 +80,8 @@ public class HistoryParcelsFragment extends Fragment {
         });
         return view;
     }
+    //------------------------------------------------------------------------
+
     /**
      *function that action  when fragment terminated
      */

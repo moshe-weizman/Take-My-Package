@@ -72,6 +72,7 @@ public class MainActivity extends AppCompatActivity {
         Glide.with(getBaseContext()).load(member.getImageFirebaseUri()).centerCrop().override(150, 150).into(imageViewNav);
         textName.setText(member.getfName() +"  "+ member.getlName());
     }
+//------------------------------------------------------------------------
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -94,6 +95,7 @@ public class MainActivity extends AppCompatActivity {
                     }
                 });
     }
+//------------------------------------------------------------------------
 
     public void selectDrawerItem(MenuItem menuItem) {
         // Create a new fragment and specify the fragment to show based on nav item clicked
@@ -125,6 +127,7 @@ public class MainActivity extends AppCompatActivity {
         // Close the navigation drawer
         mDrawer.closeDrawers();
     }
+//------------------------------------------------------------------------
 
     private void signOut() {
         auth.signOut();

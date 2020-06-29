@@ -39,10 +39,12 @@ public class HistoryParcelsRecyclerViewAdapter extends RecyclerView.Adapter<Hist
             textViewFragile = itemView.findViewById(R.id.fragileTextView);
         }
     }
+//------------------------------------------------------------------------
 
     public HistoryParcelsRecyclerViewAdapter(List<HistoryParcel> _historyParcelList) {
         this.historyParcelList = _historyParcelList;
     }
+//------------------------------------------------------------------------
 
     @NonNull
     @Override
@@ -50,6 +52,7 @@ public class HistoryParcelsRecyclerViewAdapter extends RecyclerView.Adapter<Hist
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.listed_history_parcel_itemview, parent, false);
         return new HistoryParcelsViewHolder(view);
     }
+//------------------------------------------------------------------------
 
     @Override
     public void onBindViewHolder(@NonNull final HistoryParcelsViewHolder holder, int position) {
@@ -61,6 +64,7 @@ public class HistoryParcelsRecyclerViewAdapter extends RecyclerView.Adapter<Hist
         holder.textViewFragile.setVisibility(historyParcel.getParcelDetails().isFragile() ? View.VISIBLE : View.INVISIBLE);
         holder.textViewDate.setText(historyParcel.getDateCollected().toString());
     }
+//------------------------------------------------------------------------
 
     @Override
     public int getItemCount() {

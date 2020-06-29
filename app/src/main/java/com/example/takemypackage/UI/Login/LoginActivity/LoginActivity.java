@@ -103,6 +103,7 @@ public class LoginActivity extends AppCompatActivity {
                 }
             }
         });
+//------------------------------------------------------------------------
 
         textViewSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -112,6 +113,7 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
     }
+//------------------------------------------------------------------------
 
     private void init() {
         loadingDialog = new LoadingDialog(LoginActivity.this);
@@ -123,6 +125,7 @@ public class LoginActivity extends AppCompatActivity {
         // Initialize Firebase Auth
         mAuth = FirebaseAuth.getInstance();
     }
+//------------------------------------------------------------------------
 
     private void singIn(String email, String password) {
         mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
@@ -130,7 +133,6 @@ public class LoginActivity extends AppCompatActivity {
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
                     // Sign in success, update UI with the signed-in user's information
-                    FirebaseUser user = mAuth.getCurrentUser();
                     Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                     intent.putExtra(MEMBER_KEY, memberLogin);
                     loadingDialog.dismissDialog();

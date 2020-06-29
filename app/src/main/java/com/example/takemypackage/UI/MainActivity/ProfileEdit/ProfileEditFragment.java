@@ -46,6 +46,7 @@ public class ProfileEditFragment extends Fragment {
 
     public ProfileEditFragment() {
     }
+//------------------------------------------------------------------------
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -115,6 +116,7 @@ public class ProfileEditFragment extends Fragment {
         });
         return view;
     }
+//------------------------------------------------------------------------
 
     /**
      * Initialize variables

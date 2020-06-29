@@ -51,12 +51,14 @@ public class FriendsParcelsFragment extends Fragment {
 
     public FriendsParcelsFragment() {
     }
+//------------------------------------------------------------------------
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         pendingParcels = new ArrayList<>();
     }
+//------------------------------------------------------------------------
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -105,6 +107,7 @@ public class FriendsParcelsFragment extends Fragment {
         });
         return view;
     }
+//------------------------------------------------------------------------
 
     /**
      *function that action  when fragment terminated
@@ -114,6 +117,7 @@ public class FriendsParcelsFragment extends Fragment {
         PendingParcelsFirebaseManager.stopNotifyToPendingList();
         super.onDestroy();
     }
+//------------------------------------------------------------------------
 
     /**
      * function to get Distance from to points
@@ -127,9 +131,10 @@ public class FriendsParcelsFragment extends Fragment {
         Location locationB = setLatLon(context, locB, "pointB");
         return locationA.distanceTo(locationB) / 1000;
     }
+//------------------------------------------------------------------------
 
     /**
-     * function to get Lan and lat on address
+     * function to get long and lat on address
      * @param context
      * @param loc
      * @param pnt

@@ -41,6 +41,7 @@ public class RegisteredParcelsFragment extends Fragment {
     public RegisteredParcelsFragment() {
 
     }
+//------------------------------------------------------------------------
 
     @Nullable
     @Override
@@ -91,11 +92,12 @@ public class RegisteredParcelsFragment extends Fragment {
         return view;
     }
 
-
+//------------------------------------------------------------------------
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     }
+//------------------------------------------------------------------------
 
     public void onDestroyView() {
         super.onDestroyView();

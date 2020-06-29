@@ -42,6 +42,7 @@ public class FriendsParcelsRecyclerViewAdapter extends RecyclerView.Adapter<Frie
         this.pendingParcels = pendingParcels;
         this.member = member;
     }
+    //------------------------------------------------------------------------
 
     @NonNull
     @Override
@@ -49,6 +50,7 @@ public class FriendsParcelsRecyclerViewAdapter extends RecyclerView.Adapter<Frie
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.listed_parcel_friends_itemview, parent, false);
         return new FriendsParcelsViewHolder(view);
     }
+//------------------------------------------------------------------------
 
     @Override
     public void onBindViewHolder(@NonNull final FriendsParcelsViewHolder holder, int position) {
@@ -121,6 +123,7 @@ public class FriendsParcelsRecyclerViewAdapter extends RecyclerView.Adapter<Frie
             }
         });
     }
+//------------------------------------------------------------------------
 
     private void memberHasOffered(FriendsParcelsViewHolder holder, PendingParcel pendingParcel) {
         if (pendingParcel.getOptionalDeliveries().get(member.getPhone()).getAuthorized()) {
@@ -130,6 +133,7 @@ public class FriendsParcelsRecyclerViewAdapter extends RecyclerView.Adapter<Frie
         holder.buttonIWantToTakeIt.setEnabled(false);
         holder.buttonIWantToTakeIt.setText("Waiting for a Permission...");
     }
+//------------------------------------------------------------------------
 
 
     @Override

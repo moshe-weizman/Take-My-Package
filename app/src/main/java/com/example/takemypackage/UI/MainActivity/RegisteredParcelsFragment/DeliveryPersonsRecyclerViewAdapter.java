@@ -54,6 +54,7 @@ public class DeliveryPersonsRecyclerViewAdapter extends RecyclerView.Adapter<Del
             imageViewDeliveryPerson = itemView.findViewById(R.id.imageViewDeliveryPerson);
         }
     }
+//------------------------------------------------------------------------
 
     public DeliveryPersonsRecyclerViewAdapter(PendingParcel pendingParcel, HashMap<String, DeliveryPerson> deliveryPersonList, Member member) {
         Collection mapValues = deliveryPersonList.values();
@@ -61,6 +62,7 @@ public class DeliveryPersonsRecyclerViewAdapter extends RecyclerView.Adapter<Del
         this.member = member;
         this.pendingParcel = pendingParcel;
     }
+//------------------------------------------------------------------------
 
     @NonNull
     @Override
@@ -69,6 +71,7 @@ public class DeliveryPersonsRecyclerViewAdapter extends RecyclerView.Adapter<Del
         context = parent.getContext();
         return new DeliveryPersonsViewHolder(view);
     }
+//------------------------------------------------------------------------
 
     @Override
     public void onBindViewHolder(@NonNull final DeliveryPersonsViewHolder holder, int position) {
@@ -100,6 +103,7 @@ public class DeliveryPersonsRecyclerViewAdapter extends RecyclerView.Adapter<Del
         });
 
     }
+//------------------------------------------------------------------------
 
     @Override
     public int getItemCount() {

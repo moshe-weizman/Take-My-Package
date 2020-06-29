@@ -50,6 +50,7 @@ public class MyBroadcastService extends Service {
       PendingParcelsFirebaseManager.parcelRef.child(usersPhone).addChildEventListener(newPackagesEventListener());
       return START_REDELIVER_INTENT;
    }
+//------------------------------------------------------------------------
 
    @NotNull
    private ChildEventListener newPackagesEventListener() {
@@ -91,6 +92,7 @@ public class MyBroadcastService extends Service {
       }
       return listener;
    }
+//------------------------------------------------------------------------
 
    @Override
    public void onDestroy() {
